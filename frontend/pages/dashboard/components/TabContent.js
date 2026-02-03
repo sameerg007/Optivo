@@ -3,6 +3,7 @@
 import React, { useMemo } from 'react';
 import styles from '../dashboard.module.css';
 import { TAB_CONTENT } from '../config';
+import ExpenseTracker from './ExpenseTracker/ExpenseTracker';
 
 const TabContent = ({ activeTab }) => {
     const tabData = useMemo(() => {
@@ -20,8 +21,14 @@ const TabContent = ({ activeTab }) => {
 
     return (
         <div className={styles.tabContent}>
-            <h2>{tabData.title}</h2>
-            <p>{tabData.description}</p>
+            {activeTab === 'tab1' ? (
+                <ExpenseTracker />
+            ) : (
+                <>
+                    <h2>{tabData.title}</h2>
+                    <p>{tabData.description}</p>
+                </>
+            )}
         </div>
     );
 };
