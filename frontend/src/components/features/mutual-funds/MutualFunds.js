@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import styles from './mutualFunds.module.css';
 import MarketIndices from './MarketIndices';
+import Button from '@/components/common/Button';
 import { MF_CATEGORIES, SAMPLE_MUTUAL_FUNDS } from './config';
 
 /**
@@ -142,9 +143,13 @@ export default function MutualFunds() {
                                     </div>
                                 </div>
 
-                                <button className={styles.investButton}>
+                                <Button
+                                    variant="primary"
+                                    size="small"
+                                    className={styles.investButton}
+                                >
                                     Invest Now
-                                </button>
+                                </Button>
                             </div>
                         ))
                     ) : (

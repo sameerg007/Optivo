@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import styles from './forgotPassword.module.css';
 import { Logger } from '@/services';
 import { validateEmail } from '@/utils/validators';
+import Button from '@/components/common/Button';
 
 const MAX_RESET_ATTEMPTS = 5;
 const LOCKOUT_DURATION = 15 * 60 * 1000;
@@ -133,13 +134,15 @@ export default function ForgotPasswordPage() {
                             </div>
                         )}
 
-                        <button
+                        <Button
                             type="submit"
-                            className={styles.submitButton}
+                            variant="primary"
+                            fullWidth
+                            loading={loading}
                             disabled={loading}
                         >
-                            {loading ? 'Sending...' : 'Send Reset Link'}
-                        </button>
+                            Send Reset Link
+                        </Button>
                     </div>
                 </form>
 

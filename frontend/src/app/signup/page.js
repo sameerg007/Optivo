@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import styles from './signUp.module.css';
 import { AuthService, Logger } from '@/services';
 import { validateEmail } from '@/utils/validators';
+import Button from '@/components/common/Button';
 
 // Password requirements
 const PASSWORD_REQUIREMENTS = {
@@ -271,13 +272,15 @@ export default function SignUpPage() {
                             </div>
                         )}
 
-                        <button
+                        <Button
                             type="submit"
-                            className={styles.submitButton}
+                            variant="primary"
+                            fullWidth
+                            loading={loading}
                             disabled={loading}
                         >
-                            {loading ? 'Creating Account...' : 'Sign Up'}
-                        </button>
+                            Sign Up
+                        </Button>
                     </div>
                 </form>
 

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import styles from './login.module.css';
 import { AuthService, Logger } from '@/services';
 import { validateEmail, validatePassword } from '@/utils/validators';
+import Button from '@/components/common/Button';
 
 // Constants
 const LOGIN_TIMEOUT = 30000;
@@ -171,13 +172,15 @@ export default function LoginPage() {
                             </div>
                         )}
 
-                        <button
+                        <Button
                             type="submit"
-                            className={styles.submitButton}
+                            variant="primary"
+                            fullWidth
+                            loading={loading}
                             disabled={loading}
                         >
-                            {loading ? 'Signing In...' : 'Sign In'}
-                        </button>
+                            Sign In
+                        </Button>
                     </div>
                 </form>
 
