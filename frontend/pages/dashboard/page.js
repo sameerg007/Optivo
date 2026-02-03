@@ -42,18 +42,27 @@ export default function Dashboard() {
     // Ref to track authentication check
     const authCheckRef = useRef(false);
 
-    // Check authentication on mount
+    // Check authentication on mount and remove the dev mode dependency in this when apis are integrated
     useEffect(() => {
         if (authCheckRef.current) return;
         authCheckRef.current = true;
 
         try {
             const token = localStorage?.getItem('authToken');
-            if (!token) {
+            const isDev = process.env.NODE_ENV === 'development';
+            
+            if (!token && !isDev) {
                 logger.warn('No authentication token found');
                 router.push('/login');
                 return;
             }
+            
+            // In dev mode, create a mock token if it doesn't exist
+            if (!token && isDev) {
+                localStorage?.setItem('authToken', 'mock-dev-token');
+                logger.info('Dev mode: Mock token created for testing');
+            }
+            
             setIsAuthenticated(true);
             logger.info('User authenticated');
         } catch (err) {
