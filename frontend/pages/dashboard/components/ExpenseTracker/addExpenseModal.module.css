@@ -174,6 +174,158 @@
     text-align: center;
 }
 
+/* Bill Upload Styles */
+.hiddenInput {
+    display: none;
+}
+
+.uploadZone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.75rem 1rem;
+    border: 2px dashed rgba(15, 23, 42, 0.12);
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.02);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.uploadZone:hover {
+    border-color: rgba(15, 23, 42, 0.25);
+    background: rgba(15, 23, 42, 0.04);
+}
+
+.uploadZoneDragOver {
+    border-color: #0f172a;
+    background: rgba(15, 23, 42, 0.06);
+    transform: scale(1.01);
+}
+
+.uploadIcon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.05);
+    border-radius: 12px;
+    margin-bottom: 0.875rem;
+    color: #64748b;
+}
+
+.uploadIcon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.uploadText {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0 0 0.25rem;
+    text-align: center;
+}
+
+.uploadLink {
+    color: #0f172a;
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: rgba(15, 23, 42, 0.3);
+    text-underline-offset: 2px;
+}
+
+.uploadHint {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    margin: 0;
+}
+
+/* Preview Styles */
+.previewContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.02);
+}
+
+.imagePreview {
+    width: 100%;
+    max-height: 180px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.pdfPreview {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(220, 38, 38, 0.04);
+    border-radius: 10px;
+    border: 1px solid rgba(220, 38, 38, 0.1);
+}
+
+.pdfIcon {
+    width: 32px;
+    height: 32px;
+    color: #dc2626;
+    flex-shrink: 0;
+}
+
+.pdfName {
+    font-size: 0.875rem;
+    color: #0f172a;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.previewActions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.fileName {
+    font-size: 0.75rem;
+    color: #64748b;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+}
+
+.removeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(220, 38, 38, 0.08);
+    color: #dc2626;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.removeButton:hover {
+    background: rgba(220, 38, 38, 0.15);
+}
+
+.removeButton svg {
+    width: 16px;
+    height: 16px;
+}
+
 /* Buttons */
 .buttonGroup {
     display: grid;
@@ -279,6 +431,15 @@
     .label {
         font-size: 0.85rem;
     }
+
+    .uploadZone {
+        padding: 1.5rem 0.875rem;
+    }
+
+    .uploadIcon {
+        width: 44px;
+        height: 44px;
+    }
 }
 
 /* Tablets (481px - 768px) */
@@ -326,6 +487,24 @@
     .submitButton {
         padding: 0.8rem 1.2rem;
         font-size: 0.9rem;
+    }
+
+    .uploadZone {
+        padding: 1.25rem 0.75rem;
+    }
+
+    .uploadIcon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 0.625rem;
+    }
+
+    .uploadText {
+        font-size: 0.8125rem;
+    }
+
+    .imagePreview {
+        max-height: 150px;
     }
 }
 
@@ -390,5 +569,64 @@
     .submitButton {
         padding: 0.7rem 1rem;
         font-size: 0.85rem;
+    }
+
+    .uploadZone {
+        padding: 1rem 0.625rem;
+    }
+
+    .uploadIcon {
+        width: 36px;
+        height: 36px;
+        margin-bottom: 0.5rem;
+    }
+
+    .uploadIcon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .uploadText {
+        font-size: 0.75rem;
+    }
+
+    .uploadHint {
+        font-size: 0.6875rem;
+    }
+
+    .previewContainer {
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .imagePreview {
+        max-height: 120px;
+    }
+
+    .pdfPreview {
+        padding: 0.75rem;
+    }
+
+    .pdfIcon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .pdfName {
+        font-size: 0.8125rem;
+    }
+
+    .fileName {
+        font-size: 0.6875rem;
+    }
+
+    .removeButton {
+        width: 28px;
+        height: 28px;
+    }
+
+    .removeButton svg {
+        width: 14px;
+        height: 14px;
     }
 }
