@@ -1,215 +1,128 @@
-.summaryCard {
-    position: relative;
-    background: #ffffff;
-    border: 1px solid rgba(15, 23, 42, 0.08);
-    border-radius: 20px;
-    padding: 2rem 2.5rem;
-    overflow: hidden;
+/* SummaryCard - Dark Professional Theme (Zerodha Style) */
+
+.card {
+  background: #1e222d;
+  border: 1px solid #2a2e39;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  transition: all 0.15s ease;
 }
 
-.gradientBg {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 40%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.04) 0%, rgba(139, 92, 246, 0.02) 100%);
-    opacity: 1;
+.card:hover {
+  border-color: #363a45;
 }
 
-.cardContent {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1.75rem;
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.cardTitle {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #6a6d78;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
 }
 
-.title {
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: #64748b;
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+.cardIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  background: #262932;
 }
 
-.percentage {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #0f172a;
-    background: rgba(15, 23, 42, 0.05);
-    padding: 0.5rem 1rem;
-    border-radius: 100px;
-    letter-spacing: -0.01em;
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
-.totalSpent {
-    display: flex;
-    flex-direction: column;
-    gap: 0.375rem;
+.cardValue {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #d1d4dc;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
 }
 
-.label {
-    font-size: 0.75rem;
-    color: #94a3b8;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    font-weight: 500;
+.cardSubtext {
+  font-size: 0.75rem;
+  color: #6a6d78;
+  margin: 0;
 }
 
-.amount {
-    font-size: 3rem;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 0;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
+/* Trend Indicator */
+.trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.125rem 0.375rem;
+  border-radius: 3px;
+  margin-top: 0.5rem;
 }
 
-.statsRow {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(15, 23, 42, 0.06);
+.trendUp {
+  color: #26a69a;
+  background: rgba(38, 166, 154, 0.12);
 }
 
-.stat {
-    display: flex;
-    flex-direction: column;
-    gap: 0.375rem;
+.trendDown {
+  color: #ef5350;
+  background: rgba(239, 83, 80, 0.12);
 }
 
-.statLabel {
-    font-size: 0.6875rem;
-    color: #94a3b8;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    font-weight: 500;
+.trendIcon {
+  width: 12px;
+  height: 12px;
 }
 
-.statValue {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #0f172a;
-    margin: 0;
-    letter-spacing: -0.02em;
+/* Card Variants */
+.cardSpent .cardValue {
+  color: #ef5350;
 }
 
-.statValue.positive {
-    color: #059669;
+.cardBudget .cardValue {
+  color: #26a69a;
 }
 
-.statValue.negative {
-    color: #dc2626;
+.cardRemaining .cardValue {
+  color: #2962ff;
 }
 
-.divider {
-    width: 1px;
-    background: rgba(15, 23, 42, 0.06);
-    height: auto;
-}
-
-/* Responsive Design */
-
-/* Tablets (768px - 1024px) */
-@media (max-width: 1024px) {
-    .summaryCard {
-        padding: 1.75rem 2rem;
-    }
-
-    .amount {
-        font-size: 2.5rem;
-    }
-
-    .statValue {
-        font-size: 1.25rem;
-    }
-}
-
-/* Tablets (481px - 768px) */
+/* Responsive */
 @media (max-width: 768px) {
-    .summaryCard {
-        padding: 1.5rem;
-    }
+  .card {
+    padding: 0.875rem 1rem;
+  }
 
-    .title {
-        font-size: 0.75rem;
-    }
+  .cardValue {
+    font-size: 1.25rem;
+  }
 
-    .percentage {
-        font-size: 0.8125rem;
-        padding: 0.4rem 0.875rem;
-    }
-
-    .amount {
-        font-size: 2.25rem;
-    }
-
-    .statsRow {
-        gap: 1rem;
-        padding-top: 1.25rem;
-    }
-
-    .statValue {
-        font-size: 1.125rem;
-    }
+  .cardIcon {
+    width: 28px;
+    height: 28px;
+    font-size: 0.875rem;
+  }
 }
 
-/* Mobile (< 481px) */
 @media (max-width: 480px) {
-    .summaryCard {
-        padding: 1.25rem;
-        border-radius: 16px;
-    }
+  .card {
+    padding: 0.75rem;
+  }
 
-    .cardContent {
-        gap: 1.25rem;
-    }
-
-    .header {
-        gap: 0.5rem;
-    }
-
-    .title {
-        font-size: 0.6875rem;
-    }
-
-    .percentage {
-        font-size: 0.75rem;
-        padding: 0.375rem 0.75rem;
-    }
-
-    .totalSpent {
-        gap: 0.25rem;
-    }
-
-    .label {
-        font-size: 0.6875rem;
-    }
-
-    .amount {
-        font-size: 1.875rem;
-    }
-
-    .statsRow {
-        grid-template-columns: 1fr auto 1fr;
-        gap: 0.75rem;
-        padding-top: 1rem;
-    }
-
-    .statLabel {
-        font-size: 0.625rem;
-    }
-
-    .statValue {
-        font-size: 1rem;
-    }
+  .cardValue {
+    font-size: 1.125rem;
+  }
 }

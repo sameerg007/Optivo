@@ -1,54 +1,56 @@
+/* Card - Dark Professional Theme (Zerodha Style) */
+
 .card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
+  background: #1e222d;
+  border: 1px solid #2a2e39;
+  border-radius: 6px;
 }
 
 /* Padding variants */
 .padding-none {
-    padding: 0;
+  padding: 0;
 }
 
 .padding-small {
-    padding: 0.75rem;
+  padding: 0.75rem;
 }
 
 .padding-medium {
-    padding: 1.25rem;
+  padding: 1.25rem;
 }
 
 .padding-large {
-    padding: 2rem;
+  padding: 1.75rem;
 }
 
 /* Shadow variants */
 .shadow-none {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 .shadow-small {
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .shadow-medium {
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .shadow-large {
-    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* Clickable */
 .clickable {
-    cursor: pointer;
-    transition: all 0.2s ease;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .clickable:hover {
-    border-color: #cbd5e1;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+  border-color: #363a45;
+  background: #262932;
 }
 
 .clickable:active {
-    transform: scale(0.98);
+  transform: scale(0.99);
 }
