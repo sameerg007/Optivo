@@ -143,8 +143,8 @@ export default function Login() {
                     return;
                 }
 
-                const data = await response.json().catch(() => ({}));
-                const errorMsg = data.message || 'Login failed. Please check your credentials.';
+                const data = await response?.json?.().catch(() => ({}));
+                const errorMsg = data?.message || 'Login failed. Please check your credentials.';
                 setError(errorMsg);
                 logger.warn('Login failed', { status: response.status, email: email.substring(0, 3) + '***' });
                 return;
@@ -154,14 +154,14 @@ export default function Login() {
             loginAttemptsRef.current = 0;
             lockoutTimeRef.current = null;
 
-            const data = await response.json();
+            const data = await response?.json?.();
 
             // Store token securely (use httpOnly cookies in production)
-            if (data.token) {
+            if (data?.token) {
                 // localStorage is used here as example; httpOnly cookies recommended
-                localStorage.setItem('authToken', data.token);
-                if (rememberMe && data.refreshToken) {
-                    localStorage.setItem('refreshToken', data.refreshToken);
+                localStorage?.setItem('authToken', data.token);
+                if (rememberMe && data?.refreshToken) {
+                    localStorage?.setItem('refreshToken', data.refreshToken);
                 }
             }
 
@@ -172,11 +172,11 @@ export default function Login() {
 
         } catch (err) {
             // Handle abort and timeout errors
-            if (err.name === 'AbortError') {
+            if (err?.name === 'AbortError') {
                 setError('Login request timed out. Please try again.');
                 logger.error('Login timeout', err);
             } else {
-                const errorMessage = err instanceof Error ? err.message : 'An unexpected error occurred. Please try again.';
+                const errorMessage = err instanceof Error ? err?.message : 'An unexpected error occurred. Please try again.';
                 setError(errorMessage);
                 logger.error('Login error', err);
             }
@@ -200,12 +200,12 @@ export default function Login() {
 
     // Prevent form submission while loading
     const handleEmailChange = useCallback((e) => {
-        setEmail(e.target.value);
+        setEmail(e?.target?.value || '');
         if (error) setError(''); // Clear error on input change
     }, [error]);
 
     const handlePasswordChange = useCallback((e) => {
-        setPassword(e.target.value);
+        setPassword(e?.target?.value || '');
         if (error) setError(''); // Clear error on input change
     }, [error]);
 
@@ -227,7 +227,7 @@ export default function Login() {
                                 id="email"
                                 type="email"
                                 placeholder="Email Address"
-                                value={email}
+                                value={email || ''}
                                 onChange={handleEmailChange}
                                 disabled={loading}
                                 autoComplete="email"
@@ -241,7 +241,7 @@ export default function Login() {
                                 id="password"
                                 type="password"
                                 placeholder="Password"
-                                value={password}
+                                value={password || ''}
                                 onChange={handlePasswordChange}
                                 disabled={loading}
                                 autoComplete="current-password"
@@ -293,7 +293,7 @@ export default function Login() {
                         role="button"
                         tabIndex={0}
                         onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
+                            if (e?.key === 'Enter' || e?.key === ' ') {
                                 handleSignUp();
                             }
                         }}
