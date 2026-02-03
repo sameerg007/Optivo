@@ -4,6 +4,8 @@ import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react'
 import styles from './addExpenseModal.module.css';
 import { CATEGORIES, PAYMENT_MODES, DEFAULT_SAVED_CARDS, CARDS_STORAGE_KEY } from './config';
 import AddCardModal from './AddCardModal';
+import { useVoiceInput } from '@/hooks/useVoiceInput';
+import { parseVoiceInput } from './voiceParser';
 
 export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
     const [formData, setFormData] = useState({
@@ -26,6 +28,73 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
     const [savedCards, setSavedCards] = useState(DEFAULT_SAVED_CARDS);
     const [isAddCardModalOpen, setIsAddCardModalOpen] = useState(false);
     const [addCardType, setAddCardType] = useState('credit');
+
+    // Voice input state
+    const [showVoiceOverlay, setShowVoiceOverlay] = useState(false);
+    const [voiceParseResult, setVoiceParseResult] = useState(null);
+
+    // Handle voice result
+    const handleVoiceResult = useCallback((transcript) => {
+        const parsed = parseVoiceInput(transcript);
+        setVoiceParseResult(parsed);
+
+        // Auto-fill form with parsed data
+        // Default payment mode to UPI if not detected from voice
+        setFormData(prev => ({
+            ...prev,
+            ...(parsed.category && { category: parsed.category }),
+            ...(parsed.amount && { amount: parsed.amount.toString() }),
+            ...(parsed.description && { description: parsed.description }),
+            paymentMode: parsed.paymentMode || 'upi'
+        }));
+
+        // Clear any errors for filled fields
+        setErrors(prev => {
+            const newErrors = { ...prev };
+            if (parsed.amount) delete newErrors.amount;
+            if (parsed.description) delete newErrors.description;
+            return newErrors;
+        });
+
+        // Close overlay after a short delay
+        setTimeout(() => {
+            setShowVoiceOverlay(false);
+        }, 1500);
+    }, []);
+
+    // Voice input hook
+    const {
+        isListening,
+        transcript,
+        interimTranscript,
+        error: voiceError,
+        isSupported: isVoiceSupported,
+        startListening,
+        stopListening,
+        reset: resetVoice
+    } = useVoiceInput({
+        language: 'en-IN',
+        onResult: handleVoiceResult
+    });
+
+    // Handle voice button click
+    const handleVoiceButtonClick = useCallback(() => {
+        if (isListening) {
+            stopListening();
+        } else {
+            setShowVoiceOverlay(true);
+            setVoiceParseResult(null);
+            resetVoice();
+            startListening();
+        }
+    }, [isListening, startListening, stopListening, resetVoice]);
+
+    // Close voice overlay
+    const handleCloseVoiceOverlay = useCallback(() => {
+        stopListening();
+        setShowVoiceOverlay(false);
+        setVoiceParseResult(null);
+    }, [stopListening]);
 
     // Load saved cards from localStorage on mount
     useEffect(() => {
@@ -286,14 +355,96 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
                 {/* Header */}
                 <div className={styles.modalHeader}>
                     <h2 className={styles.title}>Add Expense</h2>
-                    <button
-                        className={styles.closeButton}
-                        onClick={onClose}
-                        aria-label="Close modal"
-                    >
-                        ✕
-                    </button>
+                    <div className={styles.headerActions}>
+                        {isVoiceSupported && (
+                            <button
+                                type="button"
+                                className={`${styles.voiceButton} ${isListening ? styles.voiceButtonActive : ''}`}
+                                onClick={handleVoiceButtonClick}
+                                aria-label={isListening ? 'Stop listening' : 'Add expense by voice'}
+                                title="Add expense by voice"
+                            >
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                    <line x1="12" x2="12" y1="19" y2="22"/>
+                                </svg>
+                                {isListening && <span className={styles.voicePulse}></span>}
+                            </button>
+                        )}
+                        <button
+                            className={styles.closeButton}
+                            onClick={onClose}
+                            aria-label="Close modal"
+                        >
+                            ✕
+                        </button>
+                    </div>
                 </div>
+
+                {/* Voice Input Overlay */}
+                {showVoiceOverlay && (
+                    <div className={styles.voiceOverlay}>
+                        <button
+                            className={styles.voiceOverlayClose}
+                            onClick={handleCloseVoiceOverlay}
+                            aria-label="Close voice input"
+                        >
+                            ✕
+                        </button>
+                        
+                        <div className={styles.voiceVisual}>
+                            <div className={`${styles.voiceMicIcon} ${isListening ? styles.voiceMicActive : ''}`}>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                    <line x1="12" x2="12" y1="19" y2="22"/>
+                                </svg>
+                            </div>
+                            {isListening && (
+                                <div className={styles.voiceWaves}>
+                                    <span></span><span></span><span></span><span></span><span></span>
+                                </div>
+                            )}
+                        </div>
+
+                        <p className={styles.voiceStatus}>
+                            {isListening ? 'Listening...' : voiceParseResult ? 'Got it!' : 'Starting...'}
+                        </p>
+
+                        <p className={styles.voiceTranscript}>
+                            {interimTranscript || transcript || 'Say something like "Spent 500 rupees on lunch"'}
+                        </p>
+
+                        {voiceParseResult && (
+                            <div className={styles.voiceParsed}>
+                                {voiceParseResult.category && (
+                                    <span className={styles.voiceParsedItem}>
+                                        {CATEGORIES[voiceParseResult.category]?.icon} {CATEGORIES[voiceParseResult.category]?.name}
+                                    </span>
+                                )}
+                                {voiceParseResult.amount && (
+                                    <span className={styles.voiceParsedItem}>
+                                        ₹{voiceParseResult.amount}
+                                    </span>
+                                )}
+                                {voiceParseResult.paymentMode && (
+                                    <span className={styles.voiceParsedItem}>
+                                        {PAYMENT_MODES[voiceParseResult.paymentMode]?.icon} {PAYMENT_MODES[voiceParseResult.paymentMode]?.name}
+                                    </span>
+                                )}
+                            </div>
+                        )}
+
+                        {voiceError && (
+                            <p className={styles.voiceError}>{voiceError}</p>
+                        )}
+
+                        <p className={styles.voiceHint}>
+                            {isListening ? 'Tap to stop' : 'Tap mic to try again'}
+                        </p>
+                    </div>
+                )}
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className={styles.form}>
