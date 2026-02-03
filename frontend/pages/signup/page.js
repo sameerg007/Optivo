@@ -4,6 +4,7 @@ import React, { useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Typography } from '@mui/material';
 import styles from './signUp.module.css';
+import TermsModal from '../termsModal/TermsModal';
 
 // Constants
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -53,6 +54,7 @@ export default function SignUp() {
     const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
     const [passwordStrength, setPasswordStrength] = useState({});
+    const [showTermsModal, setShowTermsModal] = useState(false);
 
     // Refs for abuse prevention
     const signupAttemptsRef = useRef(0);
@@ -99,6 +101,14 @@ export default function SignUp() {
     // Handle input changes
     const handleInputChange = useCallback((e) => {
         const { name, value, type, checked } = e?.target || {};
+        
+        // Open modal for terms checkbox instead of directly checking
+        if (name === 'agreeToTerms' && !formData.agreeToTerms) {
+            e.preventDefault();
+            setShowTermsModal(true);
+            return;
+        }
+        
         setFormData(prev => ({
             ...prev,
             [name]: type === 'checkbox' ? checked : value,
@@ -113,7 +123,7 @@ export default function SignUp() {
             const strength = validatePasswordStrength(value);
             setPasswordStrength(strength);
         }
-    }, [error, success, validatePasswordStrength]);
+    }, [error, success, validatePasswordStrength, formData.agreeToTerms]);
 
     // Handle signup
     const handleSignUp = useCallback(async (e) => {
@@ -270,6 +280,15 @@ export default function SignUp() {
             logger.error('Login redirect error', err);
         }
     }, [router]);
+
+    // Handle agreeing to terms
+    const handleAgreeToTerms = useCallback(() => {
+        setFormData(prev => ({
+            ...prev,
+            agreeToTerms: true,
+        }));
+        setShowTermsModal(false);
+    }, []);
 
     return (
         <div className={styles.container}>
@@ -434,6 +453,13 @@ export default function SignUp() {
                     </span>
                 </div>
             </div>
+
+            {/* Terms Modal */}
+            <TermsModal 
+                isOpen={showTermsModal}
+                onClose={() => setShowTermsModal(false)}
+                onAgree={handleAgreeToTerms}
+            />
         </div>
     );
 }
