@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useCallback, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { Typography } from '@mui/material';
 import styles from './login.module.css';
 
@@ -31,6 +32,7 @@ const logger = {
 };
 
 export default function Login() {
+    const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
@@ -168,7 +170,7 @@ export default function Login() {
             logger.info('Login successful', { email: email.substring(0, 3) + '***' });
 
             // Redirect on success
-            window.location.href = '/dashboard';
+            router.push('/dashboard');
 
         } catch (err) {
             // Handle abort and timeout errors
@@ -190,13 +192,13 @@ export default function Login() {
     const handleSignUp = useCallback(() => {
         try {
             logger.info('Redirecting to sign up page');
-            window.location.href = '/signup';
+            router.push('/signup');
         } catch (err) {
-            const errorMessage = err instanceof Error ? err.message : 'Failed to redirect. Please try again.';
+            const errorMessage = err instanceof Error ? err?.message : 'Failed to redirect. Please try again.';
             setError(errorMessage);
             logger.error('Sign up redirect error', err);
         }
-    }, []);
+    }, [router]);
 
     // Prevent form submission while loading
     const handleEmailChange = useCallback((e) => {
