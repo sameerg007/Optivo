@@ -4,6 +4,7 @@ import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react'
 import styles from './addExpenseModal.module.css';
 import { CATEGORIES, PAYMENT_MODES, DEFAULT_SAVED_CARDS, CARDS_STORAGE_KEY } from './config';
 import AddCardModal from './AddCardModal';
+import Button from '@/components/common/Button';
 import { useVoiceInput } from '@/hooks/useVoiceInput';
 import { parseVoiceInput } from './voiceParser';
 
@@ -711,21 +712,24 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
 
                     {/* Buttons */}
                     <div className={styles.buttonGroup}>
-                        <button
+                        <Button
                             type="button"
+                            variant="secondary"
                             onClick={onClose}
-                            className={styles.cancelButton}
                             disabled={isSubmitting}
+                            className={styles.cancelButton}
                         >
                             Cancel
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                             type="submit"
-                            className={styles.submitButton}
+                            variant="primary"
+                            loading={isSubmitting}
                             disabled={isSubmitting || requiresCardButNoneAvailable}
+                            className={styles.submitButton}
                         >
-                            {isSubmitting ? 'Adding...' : 'Add Expense'}
-                        </button>
+                            Add Expense
+                        </Button>
                     </div>
                 </form>
             </div>

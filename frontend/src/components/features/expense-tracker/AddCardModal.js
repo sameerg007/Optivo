@@ -3,6 +3,7 @@
 import React, { useState, useCallback } from 'react';
 import styles from './addCardModal.module.css';
 import { CARD_NETWORKS } from './config';
+import Button from '@/components/common/Button';
 
 // Card color options
 const CARD_COLORS = [
@@ -236,21 +237,24 @@ export default function AddCardModal({ isOpen, onClose, onAddCard, cardType }) {
 
                     {/* Buttons */}
                     <div className={styles.buttonGroup}>
-                        <button
+                        <Button
                             type="button"
+                            variant="secondary"
                             onClick={handleClose}
-                            className={styles.cancelButton}
                             disabled={isSubmitting}
+                            className={styles.cancelButton}
                         >
                             Cancel
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                             type="submit"
-                            className={styles.submitButton}
+                            variant="primary"
+                            loading={isSubmitting}
                             disabled={isSubmitting}
+                            className={styles.submitButton}
                         >
-                            {isSubmitting ? 'Adding...' : 'Add Card'}
-                        </button>
+                            Add Card
+                        </Button>
                     </div>
                 </form>
             </div>
