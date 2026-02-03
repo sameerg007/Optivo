@@ -1,0 +1,236 @@
+.container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+}
+
+.formWrapper {
+    background: #16213e;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(147, 51, 234, 0.1);
+    padding: 60px 50px;
+    max-width: 450px;
+    width: 100%;
+    border: 1px solid rgba(147, 51, 234, 0.2);
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #9333ea 0%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #c5c5d5;
+    font-size: 13px;
+    margin-bottom: 36px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.inputField {
+    position: relative;
+    margin-bottom: 0;
+}
+
+.inputField input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(147, 51, 234, 0.3);
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background: rgba(255, 255, 255, 0.05);
+    color: #e8e8f0;
+}
+
+.inputField input:focus {
+    outline: none;
+    border-color: #9333ea;
+    box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+}
+
+.inputField input::placeholder {
+    color: #9090a0;
+}
+
+.passwordRequirements {
+    margin-top: 8px;
+    padding: 10px;
+    background: rgba(147, 51, 234, 0.05);
+    border-radius: 6px;
+    border-left: 3px solid #9333ea;
+}
+
+.requirementItem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #b0b0c0;
+    margin-bottom: 4px;
+}
+
+.requirementItem:last-child {
+    margin-bottom: 0;
+}
+
+.requirementIcon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 10px;
+}
+
+.requirementIcon.met {
+    background: #10b981;
+    color: white;
+}
+
+.requirementIcon.unmet {
+    background: rgba(147, 51, 234, 0.3);
+    color: #9333ea;
+}
+
+.errorMessage {
+    color: #ff6b6b;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 12px;
+    font-weight: 400;
+}
+
+.termsCheckbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 20px 0;
+    font-size: 13px;
+}
+
+.checkbox {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    accent-color: #9333ea;
+    flex-shrink: 0;
+}
+
+.termsText {
+    color: #c5c5d5;
+    line-height: 1.4;
+}
+
+.termsLink {
+    color: #9333ea;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.termsLink:hover {
+    color: #c084fc;
+}
+
+.submitButton {
+    width: 100%;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: none;
+    letter-spacing: normal;
+    margin-top: 16px;
+}
+
+.submitButton:hover:not(:disabled) {
+    background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+    box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4);
+}
+
+.submitButton:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.submitButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.footerText {
+    text-align: center;
+    font-size: 13px;
+    color: #c5c5d5;
+    margin-top: 24px;
+}
+
+.footerLink {
+    color: #9333ea;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.footerLink:hover {
+    color: #c084fc;
+}
+
+.successMessage {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #10b981;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .formWrapper {
+        padding: 40px 24px;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .inputField input {
+        padding: 11px 12px;
+        font-size: 14px;
+    }
+
+    .submitButton {
+        padding: 11px 14px;
+        font-size: 13px;
+    }
+}
