@@ -4,37 +4,14 @@ import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Typography } from '@mui/material';
 import styles from './dashboard.module.css';
-
-// Constants
-const IS_PRODUCTION = process.env.NODE_ENV === 'production';
-
-// Logger utility for production
-const logger = {
-    info: (message, data) => {
-        if (!IS_PRODUCTION) {
-            console.log(`[INFO] ${message}`, data);
-        }
-    },
-    error: (message, error) => {
-        console.error(`[ERROR] ${message}`, error);
-    },
-    warn: (message, data) => {
-        if (!IS_PRODUCTION) {
-            console.warn(`[WARN] ${message}`, data);
-        }
-    }
-};
-
-// Tab data
-const TABS = [
-    { id: 'tab1', label: 'Tab 1' },
-    { id: 'tab2', label: 'Tab 2' },
-    { id: 'tab3', label: 'Tab 3' },
-];
+import { TAB_CONTENT, DEFAULT_ACTIVE_TAB } from './config';
+import { authService, logger } from './utils';
+import TabNavigation from './components/TabNavigation';
+import TabContent from './components/TabContent';
 
 export default function Dashboard() {
     const router = useRouter();
-    const [activeTab, setActiveTab] = useState('ExpenseTracker');
+    const [activeTab, setActiveTab] = useState(DEFAULT_ACTIVE_TAB);
     const [error, setError] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -42,14 +19,14 @@ export default function Dashboard() {
     // Ref to track authentication check
     const authCheckRef = useRef(false);
 
-    // Check authentication on mount and remove the dev mode dependency in this when apis are integrated
+    // Check authentication on mount
     useEffect(() => {
         if (authCheckRef.current) return;
         authCheckRef.current = true;
 
         try {
-            const token = localStorage?.getItem('authToken');
-            const isDev = process.env.NODE_ENV === 'development';
+            let token = authService.getAuthToken();
+            const isDev = authService.isDevelopment();
             
             if (!token && !isDev) {
                 logger.warn('No authentication token found');
@@ -57,10 +34,8 @@ export default function Dashboard() {
                 return;
             }
             
-            // In dev mode, create a mock token if it doesn't exist
             if (!token && isDev) {
-                localStorage?.setItem('authToken', 'mock-dev-token');
-                logger.info('Dev mode: Mock token created for testing');
+                token = authService.createMockToken();
             }
             
             setIsAuthenticated(true);
@@ -92,13 +67,8 @@ export default function Dashboard() {
     const handleLogout = useCallback(async () => {
         try {
             setLoading(true);
-            logger.info('Logout initiated');
-            
-            // Clear local storage
-            localStorage?.removeItem('authToken');
-            localStorage?.removeItem('refreshToken');
-            
-            // Redirect to login
+            authService.clearAuthTokens();
+            logger.info('Logout successful');
             router.push('/login');
         } catch (err) {
             const errorMessage = err instanceof Error ? err?.message : 'Logout failed';
@@ -109,35 +79,7 @@ export default function Dashboard() {
         }
     }, [router]);
 
-    // Render tab content based on active tab
-    const renderTabContent = useCallback(() => {
-        switch (activeTab) {
-            case 'tab1':
-                return (
-                    <div className={styles.tabContent}>
-                        <h2>Expense Tracker</h2>
-                        <p>This is the content for Expense Tracker. Backend integration will be added here.</p>
-                    </div>
-                );
-            case 'tab2':
-                return (
-                    <div className={styles.tabContent}>
-                        <h2>Mutual Funds</h2>
-                        <p>This is the content for Mutual Funds. Backend integration will be added here.</p>
-                    </div>
-                );
-            case 'tab3':
-                return (
-                    <div className={styles.tabContent}>
-                        <h2>Profile</h2>
-                        <p>This is the content for Profile. Backend integration will be added here.</p>
-                    </div>
-                );
-            default:
-                return null;
-        }
-    }, [activeTab]);
-
+    // Loading state
     if (loading) {
         return (
             <div className={styles.container}>
@@ -148,12 +90,15 @@ export default function Dashboard() {
         );
     }
 
+    // Not authenticated state
     if (!isAuthenticated) {
         return null;
     }
 
+    // Main render
     return (
         <div className={styles.container}>
+            {/* Header */}
             <div className={styles.header}>
                 <div className={styles.headerContent}>
                     <Typography variant="h5" className={styles.headerTitle}>
@@ -170,33 +115,20 @@ export default function Dashboard() {
                 </div>
             </div>
 
+            {/* Error Message */}
             {error && (
                 <div className={styles.errorMessage} role="alert">
                     ⚠️ {error}
                 </div>
             )}
 
+            {/* Main Content */}
             <div className={styles.mainContent}>
-                {renderTabContent()}
+                <TabContent activeTab={activeTab} />
             </div>
 
-            {/* Footer with Tabs */}
-            <div className={styles.footer}>
-                <div className={styles.tabNavigation}>
-                    {TABS.map((tab) => (
-                        <button
-                            key={tab.id}
-                            type="button"
-                            className={`${styles.tabButton} ${activeTab === tab.id ? styles.active : ''}`}
-                            onClick={() => handleTabChange(tab.id)}
-                            aria-selected={activeTab === tab.id}
-                            role="tab"
-                        >
-                            {tab.label}
-                        </button>
-                    ))}
-                </div>
-            </div>
+            {/* Tab Navigation Footer */}
+            <TabNavigation activeTab={activeTab} onTabChange={handleTabChange} />
         </div>
     );
 }
