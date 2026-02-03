@@ -150,7 +150,7 @@ export default function ExpenseTracker() {
                             />
 
                             {/* Spending Trend Line Graph */}
-                            <SpendingTrend expenses={expenses} />
+                            <SpendingTrend expenses={expenses} categories={CATEGORIES} />
                         </div>
 
                         {/* Right Section - Transactions */}

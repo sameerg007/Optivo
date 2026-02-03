@@ -13,6 +13,12 @@
     margin-bottom: 0.25rem;
 }
 
+.headerLeft {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .title {
     font-size: 0.9375rem;
     font-weight: 600;
@@ -102,6 +108,51 @@
     font-size: 0.8125rem;
     font-weight: 600;
     color: #0f172a;
+}
+
+/* Chart Toggle */
+.chartToggle {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: rgba(15, 23, 42, 0.04);
+    padding: 0.25rem;
+    border-radius: 8px;
+}
+
+.toggleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggleButton svg {
+    width: 16px;
+    height: 16px;
+}
+
+.toggleButton:hover {
+    color: #64748b;
+    background: rgba(15, 23, 42, 0.06);
+}
+
+.toggleActive {
+    background: #ffffff;
+    color: #6366f1;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.1);
+}
+
+.toggleActive:hover {
+    color: #6366f1;
+    background: #ffffff;
 }
 
 /* Responsive */
