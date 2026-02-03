@@ -3,18 +3,21 @@ export const TAB_CONTENT = {
     tab1: {
         id: 'tab1',
         label: 'Tab 1',
+        icon: '💰',
         title: 'Expense Tracker',
         description: 'This is the content for Expense Tracker. Backend integration will be added here.'
     },
     tab2: {
         id: 'tab2',
         label: 'Tab 2',
+        icon: '📈',
         title: 'Mutual Funds',
         description: 'This is the content for Mutual Funds. Backend integration will be added here.'
     },
     tab3: {
         id: 'tab3',
         label: 'Tab 3',
+        icon: '👤',
         title: 'Profile',
         description: 'This is the content for Profile. Backend integration will be added here.'
     }

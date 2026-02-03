@@ -16,8 +16,10 @@ const TabNavigation = ({ activeTab, onTabChange }) => {
                         onClick={() => onTabChange(tab.id)}
                         aria-selected={activeTab === tab.id}
                         role="tab"
+                        title={tab.label}
                     >
-                        {tab.label}
+                        <span className={styles.tabIcon}>{tab.icon}</span>
+                        <span className={styles.tabLabel}>{tab.label}</span>
                     </button>
                 ))}
             </div>
