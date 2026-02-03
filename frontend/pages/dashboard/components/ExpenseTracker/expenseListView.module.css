@@ -1,9 +1,13 @@
-/* ListView Styles */
+/* ExpenseListView - Enterprise Styling */
 .listViewContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 20px;
+    padding: 1.75rem 2rem;
 }
 
 /* Header */
@@ -11,22 +15,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 0.5rem;
+    padding: 0;
 }
 
 .title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #1f2937;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #64748b;
     margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
 }
 
 .count {
-    font-size: 0.875rem;
-    color: #6b7280;
-    background: #f3f4f6;
-    padding: 0.25rem 0.75rem;
-    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #64748b;
+    background: rgba(15, 23, 42, 0.04);
+    padding: 0.375rem 0.875rem;
+    border-radius: 100px;
+    letter-spacing: -0.01em;
 }
 
 /* Expense Stack */
@@ -40,33 +48,34 @@
 .dateGroup {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.625rem;
 }
 
 .dateHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 0.75rem;
-    background: #f9fafb;
-    border-radius: 8px;
+    padding: 0.625rem 0.875rem;
+    background: rgba(15, 23, 42, 0.02);
+    border-radius: 10px;
     position: sticky;
     top: 0;
     z-index: 1;
 }
 
 .dateLabel {
-    font-size: 0.8125rem;
+    font-size: 0.6875rem;
     font-weight: 600;
-    color: #4b5563;
+    color: #64748b;
     text-transform: uppercase;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.06em;
 }
 
 .dateTotal {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     font-weight: 600;
-    color: #ef4444;
+    color: #dc2626;
+    letter-spacing: -0.01em;
 }
 
 /* Expense List */
@@ -81,16 +90,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
+    padding: 0.875rem 1rem;
+    background: transparent;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    border-radius: 14px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    animation: slideIn 0.3s ease forwards;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: slideIn 0.25s ease forwards;
     animation-delay: var(--delay, 0s);
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
 }
 
 @keyframes slideIn {
@@ -101,13 +110,12 @@
 }
 
 .expenseCard:hover {
-    border-color: #d1d5db;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transform: translateX(4px);
+    background: rgba(15, 23, 42, 0.02);
+    border-color: rgba(15, 23, 42, 0.1);
 }
 
 .expenseCard:active {
-    transform: scale(0.99);
+    transform: scale(0.995);
 }
 
 /* Expense Left Section */
@@ -118,16 +126,17 @@
 }
 
 .iconWrapper {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: rgba(15, 23, 42, 0.03);
 }
 
 .icon {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
 }
 
 .expenseInfo {
@@ -137,14 +146,15 @@
 }
 
 .expenseName {
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     font-weight: 500;
-    color: #1f2937;
+    color: #0f172a;
+    letter-spacing: -0.01em;
 }
 
 .categoryName {
-    font-size: 0.8125rem;
-    color: #6b7280;
+    font-size: 0.75rem;
+    color: #94a3b8;
 }
 
 /* Expense Right Section */
@@ -156,14 +166,15 @@
 }
 
 .amount {
-    font-size: 1rem;
+    font-size: 0.9375rem;
     font-weight: 600;
-    color: #ef4444;
+    color: #0f172a;
+    letter-spacing: -0.01em;
 }
 
 .time {
-    font-size: 0.75rem;
-    color: #9ca3af;
+    font-size: 0.6875rem;
+    color: #94a3b8;
 }
 
 /* Empty State */
@@ -177,55 +188,62 @@
 }
 
 .emptyIcon {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
+    opacity: 0.5;
 }
 
 .emptyState p {
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 500;
-    color: #4b5563;
-    margin: 0 0 0.5rem 0;
+    color: #334155;
+    margin: 0 0 0.375rem 0;
+    letter-spacing: -0.01em;
 }
 
 .emptyHint {
-    font-size: 0.875rem;
-    color: #9ca3af;
+    font-size: 0.8125rem;
+    color: #94a3b8;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .header {
-        padding: 0 0.25rem;
+    .listViewContainer {
+        padding: 1.5rem;
+        border-radius: 16px;
     }
 
     .title {
-        font-size: 1.125rem;
+        font-size: 0.75rem;
     }
 
     .expenseCard {
-        padding: 0.875rem;
+        padding: 0.75rem 0.875rem;
     }
 
     .iconWrapper {
-        width: 40px;
-        height: 40px;
+        width: 38px;
+        height: 38px;
     }
 
     .icon {
-        font-size: 1.125rem;
+        font-size: 1rem;
     }
 
     .expenseName {
-        font-size: 0.875rem;
+        font-size: 0.8125rem;
     }
 
     .amount {
-        font-size: 0.9375rem;
+        font-size: 0.875rem;
     }
 }
 
 @media (max-width: 480px) {
+    .listViewContainer {
+        padding: 1.25rem;
+    }
+
     .expenseCard {
         padding: 0.75rem;
     }
@@ -237,26 +255,26 @@
     }
 
     .icon {
-        font-size: 1rem;
+        font-size: 0.9375rem;
     }
 
     .expenseLeft {
-        gap: 0.75rem;
+        gap: 0.625rem;
     }
 
     .expenseName {
-        font-size: 0.8125rem;
-    }
-
-    .categoryName {
         font-size: 0.75rem;
     }
 
+    .categoryName {
+        font-size: 0.6875rem;
+    }
+
     .amount {
-        font-size: 0.875rem;
+        font-size: 0.8125rem;
     }
 
     .time {
-        font-size: 0.6875rem;
+        font-size: 0.625rem;
     }
 }

@@ -7,11 +7,11 @@ export default function BudgetStatus({ spent, budget, percentage }) {
     const remaining = budget - spent;
     const isOverBudget = remaining < 0;
 
-    // Get status color based on percentage
+    // Get status color based on percentage - professional palette
     const getStatusColor = () => {
-        if (percentage <= 50) return '#6BCB77'; // Green
-        if (percentage <= 80) return '#FFA502'; // Orange
-        return '#FF6B6B'; // Red
+        if (percentage <= 50) return '#059669'; // Emerald
+        if (percentage <= 80) return '#d97706'; // Amber
+        return '#dc2626'; // Red
     };
 
     const statusColor = getStatusColor();
