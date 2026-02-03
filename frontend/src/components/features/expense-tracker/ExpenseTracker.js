@@ -6,6 +6,7 @@ import SummaryCard from './SummaryCard';
 import CategoryBreakdown from './CategoryBreakdown';
 import RecentTransactions from './RecentTransactions';
 import BudgetStatus from './BudgetStatus';
+import SpendingTrend from './SpendingTrend';
 import AddExpenseModal from './AddExpenseModal';
 import ExpenseListView from './ExpenseListView';
 import { EXPENSE_DATA, CATEGORIES } from './config';
@@ -147,6 +148,9 @@ export default function ExpenseTracker() {
                                 selectedCategory={selectedCategory}
                                 categories={CATEGORIES}
                             />
+
+                            {/* Spending Trend Line Graph */}
+                            <SpendingTrend expenses={expenses} />
                         </div>
 
                         {/* Right Section - Transactions */}
