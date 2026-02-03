@@ -210,19 +210,213 @@
 @media (max-width: 480px) {
   .formWrapper {
     padding: 40px 24px;
+    max-width: 100%;
+    border-radius: 8px;
   }
 
   .title {
     font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    margin-bottom: 24px;
+  }
+
+  .formGroup {
+    gap: 14px;
+    margin-bottom: 20px;
   }
 
   .inputField input {
     padding: 11px 12px;
     font-size: 14px;
+    border-radius: 6px;
+  }
+
+  .inputField input::placeholder {
+    font-size: 13px;
+  }
+
+  .passwordOptions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .rememberMe {
+    gap: 6px;
+  }
+
+  .rememberMe input,
+  .rememberMe label {
+    font-size: 12px;
+  }
+
+  .forgotPassword {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .errorMessage {
+    padding: 10px 12px;
+    font-size: 12px;
+    border-radius: 6px;
   }
 
   .submitButton {
     padding: 11px 14px;
     font-size: 13px;
+    border-radius: 6px;
+  }
+
+  .footerText {
+    font-size: 12px;
+    margin-top: 16px;
+  }
+
+  .footerLink {
+    font-size: 12px;
+  }
+}
+
+/* Small tablets and large phones (480px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .container {
+    padding: 24px;
+  }
+
+  .formWrapper {
+    padding: 50px 40px;
+    max-width: 100%;
+    border-radius: 10px;
+  }
+
+  .title {
+    font-size: 26px;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    margin-bottom: 28px;
+  }
+
+  .formGroup {
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+
+  .inputField input {
+    padding: 11px 13px;
+    font-size: 14px;
+    border-radius: 7px;
+  }
+
+  .passwordOptions {
+    gap: 16px;
+  }
+
+  .rememberMe {
+    gap: 6px;
+  }
+
+  .rememberMe label {
+    font-size: 12px;
+  }
+
+  .forgotPassword {
+    font-size: 12px;
+  }
+
+  .submitButton {
+    padding: 11px 16px;
+    font-size: 13px;
+    border-radius: 7px;
+  }
+
+  .footerText {
+    font-size: 13px;
+  }
+}
+
+/* Tablets (768px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 24px;
+  }
+
+  .formWrapper {
+    padding: 60px 45px;
+    max-width: 420px;
+    border-radius: 11px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    margin-bottom: 32px;
+  }
+
+  .formGroup {
+    gap: 19px;
+    margin-bottom: 28px;
+  }
+
+  .inputField input {
+    padding: 12px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+
+  .submitButton {
+    padding: 12px 16px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+}
+
+/* Desktop and large screens (1024px+) */
+@media (min-width: 1025px) {
+  .container {
+    padding: 20px;
+  }
+
+  .formWrapper {
+    padding: 60px 50px;
+    max-width: 450px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .formGroup {
+    gap: 20px;
+  }
+
+  .inputField input {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .inputField input:focus {
+    box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.15);
+  }
+
+  .submitButton:hover:not(:disabled) {
+    box-shadow: 0 8px 24px rgba(147, 51, 234, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .footerLink:hover {
+    text-decoration: underline;
   }
 }
