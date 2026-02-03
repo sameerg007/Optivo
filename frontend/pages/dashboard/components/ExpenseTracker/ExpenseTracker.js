@@ -6,11 +6,13 @@ import SummaryCard from './SummaryCard';
 import CategoryBreakdown from './CategoryBreakdown';
 import RecentTransactions from './RecentTransactions';
 import BudgetStatus from './BudgetStatus';
+import AddExpenseModal from './AddExpenseModal';
 import { EXPENSE_DATA, CATEGORIES } from './config';
 
 export default function ExpenseTracker() {
     const [expenses, setExpenses] = useState(EXPENSE_DATA);
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Calculate summary metrics
     const summary = useMemo(() => {
@@ -50,12 +52,22 @@ export default function ExpenseTracker() {
     // Handle add expense
     const handleAddExpense = useCallback((newExpense) => {
         setExpenses((prev) => [newExpense, ...prev]);
+        setSelectedCategory(null); // Reset filter
     }, []);
 
     // Handle category filter
     const handleCategorySelect = useCallback((category) => {
         setSelectedCategory(selectedCategory === category ? null : category);
     }, [selectedCategory]);
+
+    // Handle modal
+    const handleOpenModal = useCallback(() => {
+        setIsModalOpen(true);
+    }, []);
+
+    const handleCloseModal = useCallback(() => {
+        setIsModalOpen(false);
+    }, []);
 
     return (
         <div className={styles.expenseTrackerContainer}>
@@ -99,9 +111,20 @@ export default function ExpenseTracker() {
             </div>
 
             {/* Add Expense Button */}
-            <button className={styles.addExpenseButton} title="Add new expense">
+            <button 
+                className={styles.addExpenseButton} 
+                onClick={handleOpenModal}
+                title="Add new expense"
+            >
                 <span className={styles.plusIcon}>+</span>
             </button>
+
+            {/* Add Expense Modal */}
+            <AddExpenseModal 
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+                onAddExpense={handleAddExpense}
+            />
         </div>
     );
 }
