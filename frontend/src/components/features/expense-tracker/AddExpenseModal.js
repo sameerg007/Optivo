@@ -2,14 +2,16 @@
 
 import React, { useState, useCallback, useRef } from 'react';
 import styles from './addExpenseModal.module.css';
-import { CATEGORIES } from './config';
+import { CATEGORIES, PAYMENT_MODES, SAVED_CARDS } from './config';
 
 export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
     const [formData, setFormData] = useState({
         category: 'food',
         amount: '',
         description: '',
-        date: new Date().toISOString().split('T')[0]
+        date: new Date().toISOString().split('T')[0],
+        paymentMode: 'upi',
+        selectedCard: ''
     });
 
     const [errors, setErrors] = useState({});
@@ -162,6 +164,10 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
                     minute: '2-digit',
                     hour12: false
                 }),
+                paymentMode: formData.paymentMode,
+                selectedCard: (formData.paymentMode === 'credit_card' || formData.paymentMode === 'debit_card') 
+                    ? formData.selectedCard 
+                    : null,
                 bill: billImage ? {
                     name: billImage.name,
                     type: billImage.type,
@@ -177,7 +183,9 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
                 category: 'food',
                 amount: '',
                 description: '',
-                date: new Date().toISOString().split('T')[0]
+                date: new Date().toISOString().split('T')[0],
+                paymentMode: 'upi',
+                selectedCard: ''
             });
             setBillImage(null);
             setBillPreview(null);
@@ -286,6 +294,72 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
                             <span className={styles.errorText}>{errors.date}</span>
                         )}
                     </div>
+
+                    {/* Payment Mode */}
+                    <div className={styles.formGroup}>
+                        <label htmlFor="paymentMode" className={styles.label}>
+                            Payment Mode
+                        </label>
+                        <div className={styles.paymentModeGrid}>
+                            {Object.entries(PAYMENT_MODES).map(([key, mode]) => (
+                                <button
+                                    key={key}
+                                    type="button"
+                                    className={`${styles.paymentModeButton} ${formData.paymentMode === key ? styles.paymentModeActive : ''}`}
+                                    onClick={() => {
+                                        setFormData(prev => ({
+                                            ...prev,
+                                            paymentMode: key,
+                                            selectedCard: ''
+                                        }));
+                                    }}
+                                    style={{
+                                        '--mode-color': mode.color
+                                    }}
+                                >
+                                    <span className={styles.paymentModeIcon}>{mode.icon}</span>
+                                    <span className={styles.paymentModeName}>{mode.name}</span>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Card Selection - Only show for credit/debit card */}
+                    {(formData.paymentMode === 'credit_card' || formData.paymentMode === 'debit_card') && (
+                        <div className={styles.formGroup}>
+                            <label htmlFor="selectedCard" className={styles.label}>
+                                Select {formData.paymentMode === 'credit_card' ? 'Credit' : 'Debit'} Card
+                            </label>
+                            <div className={styles.cardSelectionGrid}>
+                                {(formData.paymentMode === 'credit_card' ? SAVED_CARDS.credit : SAVED_CARDS.debit).map((card) => (
+                                    <button
+                                        key={card.id}
+                                        type="button"
+                                        className={`${styles.cardOption} ${formData.selectedCard === card.id ? styles.cardOptionActive : ''}`}
+                                        onClick={() => {
+                                            setFormData(prev => ({
+                                                ...prev,
+                                                selectedCard: card.id
+                                            }));
+                                        }}
+                                        style={{
+                                            '--card-color': card.color
+                                        }}
+                                    >
+                                        <div className={styles.cardIcon}>💳</div>
+                                        <div className={styles.cardDetails}>
+                                            <span className={styles.cardName}>{card.name}</span>
+                                            <span className={styles.cardNumber}>•••• {card.lastFour}</span>
+                                        </div>
+                                        <span className={styles.cardNetwork}>{card.network}</span>
+                                    </button>
+                                ))}
+                            </div>
+                            {errors.selectedCard && (
+                                <span className={styles.errorText}>{errors.selectedCard}</span>
+                            )}
+                        </div>
+                    )}
 
                     {/* Bill Upload */}
                     <div className={styles.formGroup}>

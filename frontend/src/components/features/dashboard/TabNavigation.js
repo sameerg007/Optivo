@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import styles from '../dashboard.module.css';
-import { TABS } from '../config';
+import styles from './dashboard.module.css';
+import { TABS } from '@/config/dashboard.config';
 
 const TabNavigation = ({ activeTab, onTabChange }) => {
     return (
