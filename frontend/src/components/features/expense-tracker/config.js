@@ -12,24 +12,22 @@ export const CATEGORIES = {
 // Payment Modes Configuration
 export const PAYMENT_MODES = {
     cash: { name: 'Cash', icon: '💵', color: '#22c55e' },
-    credit_card: { name: 'Credit Card', icon: '💳', color: '#8b5cf6' },
-    debit_card: { name: 'Debit Card', icon: '💳', color: '#3b82f6' },
+    credit_card: { name: 'Credit Card', icon: '💳', color: '#8b5cf6', requiresCard: true },
+    debit_card: { name: 'Debit Card', icon: '💳', color: '#3b82f6', requiresCard: true },
     upi: { name: 'UPI', icon: '📱', color: '#f97316' },
     cheque: { name: 'Cheque', icon: '📝', color: '#64748b' }
 };
 
-// User's Saved Cards (this would typically come from backend/user profile)
-export const SAVED_CARDS = {
-    credit: [
-        { id: 'cc1', name: 'HDFC Credit Card', lastFour: '4532', network: 'Visa', color: '#1e40af' },
-        { id: 'cc2', name: 'ICICI Amazon Pay', lastFour: '8921', network: 'Mastercard', color: '#7c3aed' },
-        { id: 'cc3', name: 'SBI Card Elite', lastFour: '6745', network: 'Visa', color: '#0369a1' }
-    ],
-    debit: [
-        { id: 'dc1', name: 'HDFC Debit Card', lastFour: '1234', network: 'Visa', color: '#0f766e' },
-        { id: 'dc2', name: 'SBI Debit Card', lastFour: '5678', network: 'RuPay', color: '#1d4ed8' },
-        { id: 'dc3', name: 'Axis Debit Card', lastFour: '9012', network: 'Mastercard', color: '#be185d' }
-    ]
+// Card Networks
+export const CARD_NETWORKS = ['Visa', 'Mastercard', 'RuPay', 'American Express', 'Diners Club'];
+
+// Storage key for saved cards
+export const CARDS_STORAGE_KEY = 'optivo_saved_cards';
+
+// Default empty saved cards structure
+export const DEFAULT_SAVED_CARDS = {
+    credit: [],
+    debit: []
 };
 
 export const EXPENSE_DATA = [

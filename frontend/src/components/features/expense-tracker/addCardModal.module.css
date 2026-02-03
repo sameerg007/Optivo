@@ -1,0 +1,300 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1100;
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modalContent {
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 24px;
+    padding: 1.75rem 2rem;
+    max-width: 420px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin: 0;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    font-size: 1.125rem;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+    background: rgba(15, 23, 42, 0.05);
+    color: #0f172a;
+}
+
+/* Card Preview */
+.cardPreview {
+    background: linear-gradient(135deg, var(--card-color) 0%, color-mix(in srgb, var(--card-color) 70%, black) 100%);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    color: white;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.cardType {
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+}
+
+.cardNumber {
+    font-size: 1.125rem;
+    font-family: 'SF Mono', 'Monaco', monospace;
+    letter-spacing: 0.15em;
+    margin: 0.75rem 0;
+}
+
+.cardBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.cardName {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+    max-width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cardNetwork {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* Form */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+.label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.input,
+.select {
+    padding: 0.75rem 0.875rem;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.02);
+    color: #0f172a;
+    font-size: 0.875rem;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.input::placeholder {
+    color: #94a3b8;
+}
+
+.input:focus,
+.select:focus {
+    outline: none;
+    border-color: rgba(15, 23, 42, 0.2);
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.05);
+}
+
+.inputError {
+    border-color: rgba(220, 38, 38, 0.4);
+}
+
+.select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.25rem;
+}
+
+.errorText {
+    font-size: 0.6875rem;
+    color: #dc2626;
+    font-weight: 500;
+}
+
+.submitError {
+    padding: 0.75rem;
+    background: rgba(220, 38, 38, 0.06);
+    border: 1px solid rgba(220, 38, 38, 0.15);
+    border-radius: 8px;
+    color: #dc2626;
+    font-size: 0.8125rem;
+    text-align: center;
+}
+
+/* Color Grid */
+.colorGrid {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.colorOption {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: var(--option-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.colorOption:hover {
+    transform: scale(1.1);
+}
+
+.colorOptionActive {
+    border-color: #0f172a;
+    box-shadow: 0 0 0 2px white, 0 0 0 4px var(--option-color);
+}
+
+/* Buttons */
+.buttonGroup {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.cancelButton,
+.submitButton {
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cancelButton {
+    background: rgba(15, 23, 42, 0.04);
+    color: #64748b;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.cancelButton:hover:not(:disabled) {
+    background: rgba(15, 23, 42, 0.08);
+    color: #334155;
+}
+
+.submitButton {
+    background: #0f172a;
+    color: white;
+}
+
+.submitButton:hover:not(:disabled) {
+    background: #1e293b;
+}
+
+.submitButton:disabled,
+.cancelButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .modalContent {
+        padding: 1.25rem 1.5rem;
+        width: 95%;
+    }
+
+    .cardPreview {
+        min-height: 120px;
+        padding: 1rem 1.25rem;
+    }
+
+    .cardNumber {
+        font-size: 1rem;
+    }
+
+    .colorOption {
+        width: 28px;
+        height: 28px;
+    }
+}
