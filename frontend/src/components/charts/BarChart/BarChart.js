@@ -2,6 +2,7 @@
 
 import React, { useMemo } from 'react';
 import { AgCharts } from 'ag-charts-react';
+import '@/components/charts/config/chartRegistry'; // Register AG Charts modules
 import { defaultChartTheme, chartColors } from '../config/chartTheme';
 import styles from './BarChart.module.css';
 
