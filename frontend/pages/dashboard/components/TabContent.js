@@ -21,7 +21,7 @@ const TabContent = ({ activeTab }) => {
 
     return (
         <div className={styles.tabContent}>
-            {activeTab === 'tab1' ? (
+            {activeTab === 'expense_tracker' ? (
                 <ExpenseTracker />
             ) : (
                 <>
