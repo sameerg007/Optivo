@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useMemo } from 'react';
-import styles from '../dashboard.module.css';
-import { TAB_CONTENT } from '../config';
-import ExpenseTracker from './ExpenseTracker/ExpenseTracker';
+import styles from './dashboard.module.css';
+import { TAB_CONTENT } from '@/config/dashboard.config';
+import ExpenseTracker from '@/components/features/expense-tracker/ExpenseTracker';
 
 const TabContent = ({ activeTab }) => {
     const tabData = useMemo(() => {

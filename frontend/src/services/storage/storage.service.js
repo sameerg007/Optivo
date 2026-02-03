@@ -3,110 +3,136 @@
  * Handles localStorage operations with safe access
  */
 
-import logger from './logger.service';
-import { STORAGE_KEYS } from '../constants';
+const STORAGE_KEYS = {
+    AUTH_TOKEN: 'authToken',
+    REFRESH_TOKEN: 'refreshToken',
+    USER_DATA: 'userData',
+    USER_PREFERENCES: 'userPreferences',
+    THEME: 'theme'
+};
 
-class StorageService {
+const isDevelopment = process.env.NODE_ENV === 'development';
+
+const StorageService = {
     /**
      * Set item in localStorage
      */
-    setItem(key, value) {
+    set(key, value) {
         try {
-            const serialized = JSON.stringify(value);
-            localStorage.setItem(key, serialized);
-            logger.debug('StorageService', `Item set: ${key}`);
+            if (typeof window === 'undefined') return;
+            localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value));
+            if (isDevelopment) console.debug(`[Storage] Set: ${key}`);
         } catch (error) {
-            logger.error('StorageService', `Failed to set item: ${key}`, error);
+            console.error(`[Storage] Failed to set: ${key}`, error);
         }
-    }
+    },
 
     /**
      * Get item from localStorage
      */
-    getItem(key) {
+    get(key) {
         try {
-            const item = localStorage.getItem(key);
-            return item ? JSON.parse(item) : null;
+            if (typeof window === 'undefined') return null;
+            return localStorage.getItem(key);
         } catch (error) {
-            logger.error('StorageService', `Failed to get item: ${key}`, error);
+            console.error(`[Storage] Failed to get: ${key}`, error);
             return null;
         }
-    }
+    },
+
+    /**
+     * Get and parse JSON item from localStorage
+     */
+    getJSON(key) {
+        try {
+            const item = this.get(key);
+            return item ? JSON.parse(item) : null;
+        } catch (error) {
+            console.error(`[Storage] Failed to parse: ${key}`, error);
+            return null;
+        }
+    },
 
     /**
      * Remove item from localStorage
      */
-    removeItem(key) {
+    remove(key) {
         try {
+            if (typeof window === 'undefined') return;
             localStorage.removeItem(key);
-            logger.debug('StorageService', `Item removed: ${key}`);
+            if (isDevelopment) console.debug(`[Storage] Removed: ${key}`);
         } catch (error) {
-            logger.error('StorageService', `Failed to remove item: ${key}`, error);
+            console.error(`[Storage] Failed to remove: ${key}`, error);
         }
-    }
+    },
 
     /**
      * Clear all localStorage items
      */
     clear() {
         try {
+            if (typeof window === 'undefined') return;
             localStorage.clear();
-            logger.debug('StorageService', 'localStorage cleared');
+            if (isDevelopment) console.debug('[Storage] Cleared');
         } catch (error) {
-            logger.error('StorageService', 'Failed to clear localStorage', error);
+            console.error('[Storage] Failed to clear', error);
         }
-    }
+    },
 
     /**
      * Check if key exists
      */
-    hasItem(key) {
+    has(key) {
+        if (typeof window === 'undefined') return false;
         return localStorage.getItem(key) !== null;
-    }
+    },
 
     // Auth Token Methods
     setAuthToken(token) {
-        this.setItem(STORAGE_KEYS.AUTH_TOKEN, token);
-    }
+        this.set(STORAGE_KEYS.AUTH_TOKEN, token);
+    },
 
     getAuthToken() {
-        return this.getItem(STORAGE_KEYS.AUTH_TOKEN);
-    }
+        return this.get(STORAGE_KEYS.AUTH_TOKEN);
+    },
 
     removeAuthToken() {
-        this.removeItem(STORAGE_KEYS.AUTH_TOKEN);
-    }
+        this.remove(STORAGE_KEYS.AUTH_TOKEN);
+    },
 
     // User Data Methods
     setUserData(userData) {
-        this.setItem(STORAGE_KEYS.USER_DATA, userData);
-    }
+        this.set(STORAGE_KEYS.USER_DATA, userData);
+    },
 
     getUserData() {
-        return this.getItem(STORAGE_KEYS.USER_DATA);
-    }
+        return this.getJSON(STORAGE_KEYS.USER_DATA);
+    },
 
     removeUserData() {
-        this.removeItem(STORAGE_KEYS.USER_DATA);
-    }
+        this.remove(STORAGE_KEYS.USER_DATA);
+    },
 
     // User Preferences Methods
     setUserPreferences(preferences) {
-        this.setItem(STORAGE_KEYS.USER_PREFERENCES, preferences);
-    }
+        this.set(STORAGE_KEYS.USER_PREFERENCES, preferences);
+    },
 
     getUserPreferences() {
-        return this.getItem(STORAGE_KEYS.USER_PREFERENCES);
-    }
+        return this.getJSON(STORAGE_KEYS.USER_PREFERENCES);
+    },
 
     // Theme Methods
     setTheme(theme) {
-        this.setItem(STORAGE_KEYS.THEME, theme);
-    }
+        this.set(STORAGE_KEYS.THEME, theme);
+    },
 
     getTheme() {
-        return this.getItem(STORAGE_KEYS.THEME) || 'dark';
-    }
-}
+        return this.get(STORAGE_KEYS.THEME) || 'dark';
+    },
 
-export default new StorageService();
+    // Storage Keys export
+    KEYS: STORAGE_KEYS
+};
+
+export default StorageService;
