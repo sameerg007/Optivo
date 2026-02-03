@@ -6,6 +6,51 @@
     padding: 0;
 }
 
+/* View Toggle */
+.viewToggleWrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: -0.5rem;
+}
+
+.viewToggle {
+    display: flex;
+    background: #f3f4f6;
+    border-radius: 10px;
+    padding: 4px;
+    gap: 4px;
+}
+
+.toggleBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggleBtn:hover {
+    color: #4b5563;
+}
+
+.toggleBtn.active {
+    background: #ffffff;
+    color: #9333ea;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.toggleIcon {
+    width: 18px;
+    height: 18px;
+}
+
 /* Summary Section */
 .summarySection {
     width: 100%;
@@ -88,6 +133,16 @@
     .plusIcon {
         font-size: 1.8rem;
     }
+
+    .toggleBtn {
+        padding: 0.5rem 0.875rem;
+        font-size: 0.8125rem;
+    }
+
+    .toggleIcon {
+        width: 16px;
+        height: 16px;
+    }
 }
 
 /* Tablets (481px - 768px) */
@@ -95,6 +150,10 @@
     .expenseTrackerContainer {
         gap: 1rem;
         padding: 0;
+    }
+
+    .viewToggleWrapper {
+        justify-content: center;
     }
 
     .mainGrid {
@@ -123,6 +182,23 @@
     .expenseTrackerContainer {
         gap: 0.8rem;
         padding: 0;
+    }
+
+    .viewToggleWrapper {
+        justify-content: center;
+        margin-bottom: 0;
+    }
+
+    .viewToggle {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .toggleBtn {
+        flex: 1;
+        justify-content: center;
+        padding: 0.625rem 0.75rem;
+        font-size: 0.8125rem;
     }
 
     .mainGrid {
