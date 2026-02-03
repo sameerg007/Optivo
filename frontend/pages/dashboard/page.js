@@ -34,7 +34,7 @@ const TABS = [
 
 export default function Dashboard() {
     const router = useRouter();
-    const [activeTab, setActiveTab] = useState('tab1');
+    const [activeTab, setActiveTab] = useState('ExpenseTracker');
     const [error, setError] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -115,22 +115,22 @@ export default function Dashboard() {
             case 'tab1':
                 return (
                     <div className={styles.tabContent}>
-                        <h2>Tab 1 Content</h2>
-                        <p>This is the content for Tab 1. Backend integration will be added here.</p>
+                        <h2>Expense Tracker</h2>
+                        <p>This is the content for Expense Tracker. Backend integration will be added here.</p>
                     </div>
                 );
             case 'tab2':
                 return (
                     <div className={styles.tabContent}>
-                        <h2>Tab 2 Content</h2>
-                        <p>This is the content for Tab 2. Backend integration will be added here.</p>
+                        <h2>Mutual Funds</h2>
+                        <p>This is the content for Mutual Funds. Backend integration will be added here.</p>
                     </div>
                 );
             case 'tab3':
                 return (
                     <div className={styles.tabContent}>
-                        <h2>Tab 3 Content</h2>
-                        <p>This is the content for Tab 3. Backend integration will be added here.</p>
+                        <h2>Profile</h2>
+                        <p>This is the content for Profile. Backend integration will be added here.</p>
                     </div>
                 );
             default:
