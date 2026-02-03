@@ -1,0 +1,29 @@
+/* DonutChart Styles */
+.chartContainer {
+    width: 100%;
+    background: var(--chart-bg, #ffffff);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.emptyState {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--chart-bg, #f9fafb);
+    border-radius: 8px;
+    color: var(--text-muted, #6b7280);
+    font-size: 14px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .chartContainer {
+        --chart-bg: #1f2937;
+    }
+
+    .emptyState {
+        --chart-bg: #1f2937;
+        --text-muted: #9ca3af;
+    }
+}

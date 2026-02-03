@@ -59,19 +59,19 @@ export const EXPENSE_CATEGORIES = {
 // Dashboard Tabs
 export const DASHBOARD_TABS = {
     EXPENSE_TRACKER: {
-        id: 'tab1',
+        id: 'expense_tracker',
         label: 'Expense Tracker',
         icon: '💰',
         route: '/dashboard?tab=expense-tracker'
     },
     MUTUAL_FUNDS: {
-        id: 'tab2',
+        id: 'mutual_funds',
         label: 'Mutual Funds',
         icon: '📈',
         route: '/dashboard?tab=mutual-funds'
     },
     PROFILE: {
-        id: 'tab3',
+        id: 'profile',
         label: 'Profile',
         icon: '👤',
         route: '/dashboard?tab=profile'

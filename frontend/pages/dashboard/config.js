@@ -1,22 +1,22 @@
 // Dashboard Configuration and Constants
 export const TAB_CONTENT = {
-    tab1: {
-        id: 'tab1',
-        label: 'Tab 1',
+    expense_tracker: {
+        id: 'expense_tracker',
+        label: 'Expense Tracker',
         icon: '💰',
         title: 'Expense Tracker',
         description: 'This is the content for Expense Tracker. Backend integration will be added here.'
     },
-    tab2: {
-        id: 'tab2',
-        label: 'Tab 2',
+    mutual_funds: {
+        id: 'mutual_funds',
+        label: 'Mutual Funds',
         icon: '📈',
         title: 'Mutual Funds',
         description: 'This is the content for Mutual Funds. Backend integration will be added here.'
     },
-    tab3: {
-        id: 'tab3',
-        label: 'Tab 3',
+    profile: {
+        id: 'profile',
+        label: 'Profile',
         icon: '👤',
         title: 'Profile',
         description: 'This is the content for Profile. Backend integration will be added here.'
@@ -25,7 +25,7 @@ export const TAB_CONTENT = {
 
 export const TABS = Object.values(TAB_CONTENT);
 
-export const DEFAULT_ACTIVE_TAB = 'tab1';
+export const DEFAULT_ACTIVE_TAB = 'expense_tracker';
 
 // API Endpoints (for future backend integration)
 export const API_ENDPOINTS = {
