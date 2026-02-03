@@ -1,1312 +1,410 @@
-.modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(15, 23, 42, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    backdrop-filter: blur(8px);
-    animation: fadeIn 0.2s ease;
-}
+/* AddExpenseModal - Dark Professional Theme (Zerodha Style) */
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
 }
 
 .modalContent {
-    background: #ffffff;
-    border: 1px solid rgba(15, 23, 42, 0.08);
-    border-radius: 24px;
-    padding: 2rem 2.25rem;
-    max-width: 480px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 
-        0 25px 50px -12px rgba(15, 23, 42, 0.25),
-        0 0 0 1px rgba(15, 23, 42, 0.05);
-    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #1e222d;
+  border: 1px solid #2a2e39;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(24px) scale(0.96);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* Modal Header */
+/* Header */
 .modalHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.75rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
-}
-
-.headerActions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #2a2e39;
 }
 
 .title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #0f172a;
-    margin: 0;
-    letter-spacing: -0.02em;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #d1d4dc;
+  margin: 0;
 }
 
 .closeButton {
-    background: none;
-    border: none;
-    font-size: 1.25rem;
-    color: #94a3b8;
-    cursor: pointer;
-    padding: 0;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    transition: all 0.2s ease;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6a6d78;
+  font-size: 1.125rem;
+  transition: all 0.15s ease;
 }
 
 .closeButton:hover {
-    background: rgba(15, 23, 42, 0.05);
-    color: #0f172a;
+  background: #262932;
+  color: #d1d4dc;
 }
 
 /* Form */
 .form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .formGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #64748b;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #9598a1;
 }
 
 .input,
-.select {
-    padding: 0.875rem 1rem;
-    border: 1px solid rgba(15, 23, 42, 0.1);
-    border-radius: 12px;
-    background: rgba(15, 23, 42, 0.02);
-    color: #0f172a;
-    font-size: 0.9375rem;
-    font-family: inherit;
-    transition: all 0.2s ease;
-}
-
-.input::placeholder {
-    color: #94a3b8;
+.select,
+.textarea {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid #363a45;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: #d1d4dc;
+  background: #262932;
+  transition: border-color 0.15s ease;
 }
 
 .input:focus,
-.select:focus {
-    outline: none;
-    border-color: rgba(15, 23, 42, 0.2);
-    background: #ffffff;
-    box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.05);
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #2962ff;
 }
 
-.inputError {
-    border-color: rgba(220, 38, 38, 0.4);
-    background: rgba(220, 38, 38, 0.02);
-}
-
-.inputError:focus {
-    border-color: rgba(220, 38, 38, 0.6);
-    background: #ffffff;
-    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.08);
+.input::placeholder,
+.textarea::placeholder {
+  color: #6a6d78;
 }
 
 .select {
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.875rem center;
-    background-size: 1rem;
-    padding-right: 2.5rem;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236a6d78' d='M3 4.5L6 7.5L9 4.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
 }
 
-.select option {
-    background: #ffffff;
-    color: #0f172a;
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.inputError {
+  border-color: #ef5350;
 }
 
 .errorText {
-    font-size: 0.75rem;
-    color: #dc2626;
-    font-weight: 500;
+  font-size: 0.6875rem;
+  color: #ef5350;
+  margin-top: 0.25rem;
 }
 
-/* Payment Mode Styles */
+/* Voice Input */
+.voiceInputWrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.voiceInputWrapper .input {
+  flex: 1;
+}
+
+.voiceButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid #363a45;
+  background: #262932;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6a6d78;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.voiceButton:hover {
+  background: #363a45;
+  color: #d1d4dc;
+}
+
+.voiceButton.recording {
+  background: #ef5350;
+  border-color: #ef5350;
+  color: #ffffff;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.voiceButton svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Category Grid */
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.categoryOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.75rem 0.5rem;
+  border: 1px solid #363a45;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.categoryOption:hover {
+  background: #262932;
+}
+
+.categoryOptionActive {
+  border-color: #2962ff;
+  background: rgba(41, 98, 255, 0.1);
+}
+
+.categoryIcon {
+  font-size: 1.25rem;
+}
+
+.categoryName {
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: #9598a1;
+  text-align: center;
+}
+
+/* Payment Mode */
 .paymentModeGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
 }
 
-.paymentModeButton {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.375rem;
-    padding: 0.75rem 0.5rem;
-    border: 1px solid rgba(15, 23, 42, 0.1);
-    border-radius: 12px;
-    background: rgba(15, 23, 42, 0.02);
-    cursor: pointer;
-    transition: all 0.2s ease;
+.paymentOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.625rem 0.5rem;
+  border: 1px solid #363a45;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
-.paymentModeButton:hover {
-    border-color: rgba(15, 23, 42, 0.2);
-    background: rgba(15, 23, 42, 0.04);
+.paymentOption:hover:not(:disabled) {
+  background: #262932;
 }
 
-.paymentModeActive {
-    border-color: var(--mode-color, #0f172a);
-    background: color-mix(in srgb, var(--mode-color, #0f172a) 8%, transparent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mode-color, #0f172a) 12%, transparent);
+.paymentOption:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
-.paymentModeIcon {
-    font-size: 1.25rem;
-    line-height: 1;
+.paymentOptionActive {
+  border-color: #2962ff;
+  background: rgba(41, 98, 255, 0.1);
 }
 
-.paymentModeName {
-    font-size: 0.6875rem;
-    font-weight: 500;
-    color: #64748b;
-    text-align: center;
-    white-space: nowrap;
+.paymentIcon {
+  font-size: 1rem;
 }
 
-.paymentModeActive .paymentModeName {
-    color: var(--mode-color, #0f172a);
+.paymentName {
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: #9598a1;
 }
 
-/* Card Selection Styles */
-.cardSelectionGrid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+/* Card Selector */
+.cardSelector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .cardOption {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.875rem 1rem;
-    border: 1px solid rgba(15, 23, 42, 0.1);
-    border-radius: 12px;
-    background: rgba(15, 23, 42, 0.02);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid #363a45;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .cardOption:hover {
-    border-color: rgba(15, 23, 42, 0.2);
-    background: rgba(15, 23, 42, 0.04);
+  background: #262932;
 }
 
 .cardOptionActive {
-    border-color: var(--card-color, #0f172a);
-    background: color-mix(in srgb, var(--card-color, #0f172a) 6%, transparent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--card-color, #0f172a) 10%, transparent);
+  border-color: #2962ff;
+  background: rgba(41, 98, 255, 0.1);
 }
 
-.cardIcon {
-    font-size: 1.5rem;
-    line-height: 1;
-    flex-shrink: 0;
-}
-
-.cardDetails {
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
-    flex: 1;
-    min-width: 0;
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
 }
 
 .cardName {
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: #0f172a;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #d1d4dc;
 }
 
 .cardNumber {
-    font-size: 0.6875rem;
-    color: #64748b;
-    font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
-    letter-spacing: 0.05em;
+  font-size: 0.6875rem;
+  color: #6a6d78;
+  font-variant-numeric: tabular-nums;
 }
 
-.cardNetwork {
-    font-size: 0.625rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #94a3b8;
-    background: rgba(15, 23, 42, 0.05);
-    padding: 0.25rem 0.5rem;
-    border-radius: 6px;
-    letter-spacing: 0.04em;
-    flex-shrink: 0;
+.addCardBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 1px dashed #363a45;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  color: #6a6d78;
+  font-size: 0.8125rem;
+  transition: all 0.15s ease;
 }
 
-.cardOptionActive .cardNetwork {
-    background: color-mix(in srgb, var(--card-color, #0f172a) 15%, transparent);
-    color: var(--card-color, #0f172a);
+.addCardBtn:hover {
+  border-color: #2962ff;
+  color: #2962ff;
 }
 
+/* Submit Error */
 .submitError {
-    padding: 0.875rem 1rem;
-    background: rgba(220, 38, 38, 0.06);
-    border: 1px solid rgba(220, 38, 38, 0.15);
-    border-radius: 10px;
-    color: #dc2626;
-    font-size: 0.875rem;
-    text-align: center;
+  padding: 0.75rem;
+  background: rgba(239, 83, 80, 0.1);
+  border: 1px solid rgba(239, 83, 80, 0.2);
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  color: #ef5350;
 }
 
-/* Bill Upload Styles */
-.hiddenInput {
-    display: none;
-}
-
-.uploadZone {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1.75rem 1rem;
-    border: 2px dashed rgba(15, 23, 42, 0.12);
-    border-radius: 14px;
-    background: rgba(15, 23, 42, 0.02);
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.uploadZone:hover {
-    border-color: rgba(15, 23, 42, 0.25);
-    background: rgba(15, 23, 42, 0.04);
-}
-
-.uploadZoneDragOver {
-    border-color: #0f172a;
-    background: rgba(15, 23, 42, 0.06);
-    transform: scale(1.01);
-}
-
-.uploadIcon {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(15, 23, 42, 0.05);
-    border-radius: 12px;
-    margin-bottom: 0.875rem;
-    color: #64748b;
-}
-
-.uploadIcon svg {
-    width: 24px;
-    height: 24px;
-}
-
-.uploadText {
-    font-size: 0.875rem;
-    color: #64748b;
-    margin: 0 0 0.25rem;
-    text-align: center;
-}
-
-.uploadLink {
-    color: #0f172a;
-    font-weight: 500;
-    text-decoration: underline;
-    text-decoration-color: rgba(15, 23, 42, 0.3);
-    text-underline-offset: 2px;
-}
-
-.uploadHint {
-    font-size: 0.75rem;
-    color: #94a3b8;
-    margin: 0;
-}
-
-/* Preview Styles */
-.previewContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 0.75rem;
-    border: 1px solid rgba(15, 23, 42, 0.1);
-    border-radius: 14px;
-    background: rgba(15, 23, 42, 0.02);
-}
-
-.imagePreview {
-    width: 100%;
-    max-height: 180px;
-    object-fit: contain;
-    border-radius: 10px;
-    background: #ffffff;
-}
-
-.pdfPreview {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem;
-    background: rgba(220, 38, 38, 0.04);
-    border-radius: 10px;
-    border: 1px solid rgba(220, 38, 38, 0.1);
-}
-
-.pdfIcon {
-    width: 32px;
-    height: 32px;
-    color: #dc2626;
-    flex-shrink: 0;
-}
-
-.pdfName {
-    font-size: 0.875rem;
-    color: #0f172a;
-    font-weight: 500;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.previewActions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-}
-
-.fileName {
-    font-size: 0.75rem;
-    color: #64748b;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    flex: 1;
-}
-
-.removeButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border: none;
-    border-radius: 8px;
-    background: rgba(220, 38, 38, 0.08);
-    color: #dc2626;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
-}
-
-.removeButton:hover {
-    background: rgba(220, 38, 38, 0.15);
-}
-
-.removeButton svg {
-    width: 16px;
-    height: 16px;
-}
-
-/* Buttons */
+/* Button Group */
 .buttonGroup {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.875rem;
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(15, 23, 42, 0.06);
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
 }
 
 .cancelButton,
 .submitButton {
-    padding: 0.875rem 1.25rem;
-    border: none;
-    border-radius: 12px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    letter-spacing: -0.01em;
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .cancelButton {
-    background: rgba(15, 23, 42, 0.04);
-    color: #64748b;
-    border: 1px solid rgba(15, 23, 42, 0.08);
+  background: transparent;
+  color: #9598a1;
+  border: 1px solid #363a45;
 }
 
 .cancelButton:hover:not(:disabled) {
-    background: rgba(15, 23, 42, 0.08);
-    border-color: rgba(15, 23, 42, 0.12);
-    color: #334155;
+  background: #262932;
+  color: #d1d4dc;
 }
 
 .submitButton {
-    background: #0f172a;
-    color: white;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1);
+  background: #2962ff;
+  color: #ffffff;
+  border: none;
 }
 
 .submitButton:hover:not(:disabled) {
-    background: #1e293b;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+  background: #1e53e4;
 }
 
-.submitButton:active:not(:disabled) {
-    transform: scale(0.98);
+.submitButton:disabled,
+.cancelButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
-.cancelButton:disabled,
-.submitButton:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* Custom scrollbar */
-.modalContent::-webkit-scrollbar {
-    width: 4px;
-}
-
-.modalContent::-webkit-scrollbar-track {
-    background: rgba(15, 23, 42, 0.03);
-    border-radius: 100px;
-}
-
-.modalContent::-webkit-scrollbar-thumb {
-    background: rgba(15, 23, 42, 0.12);
-    border-radius: 100px;
-}
-
-.modalContent::-webkit-scrollbar-thumb:hover {
-    background: rgba(15, 23, 42, 0.2);
-}
-
-/* Responsive Design */
-
-/* Tablets (768px - 1024px) */
-@media (max-width: 1024px) {
-    .modalContent {
-        padding: 1.5rem;
-        max-width: 450px;
-    }
-
-    .modalHeader {
-        margin-bottom: 1.5rem;
-        padding-bottom: 0.8rem;
-    }
-
-    .title {
-        font-size: 1.2rem;
-    }
-
-    .form {
-        gap: 1.2rem;
-    }
-
-    .input,
-    .select {
-        padding: 0.8rem 0.9rem;
-        font-size: 0.95rem;
-    }
-
-    .label {
-        font-size: 0.85rem;
-    }
-
-    .uploadZone {
-        padding: 1.5rem 0.875rem;
-    }
-
-    .uploadIcon {
-        width: 44px;
-        height: 44px;
-    }
-
-    .paymentModeGrid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.5rem;
-    }
-
-    .paymentModeButton {
-        padding: 0.625rem 0.375rem;
-    }
-
-    .paymentModeIcon {
-        font-size: 1.125rem;
-    }
-
-    .paymentModeName {
-        font-size: 0.625rem;
-    }
-
-    .cardOption {
-        padding: 0.75rem 0.875rem;
-    }
-
-    .cardName {
-        font-size: 0.75rem;
-    }
-}
-
-/* Tablets (481px - 768px) */
-@media (max-width: 768px) {
-    .modalContent {
-        padding: 1.2rem;
-        max-width: 90%;
-        width: 100%;
-    }
-
-    .modalHeader {
-        margin-bottom: 1.2rem;
-        padding-bottom: 0.8rem;
-    }
-
-    .title {
-        font-size: 1.1rem;
-    }
-
-    .form {
-        gap: 1rem;
-    }
-
-    .formGroup {
-        gap: 0.5rem;
-    }
-
-    .input,
-    .select {
-        padding: 0.75rem 0.85rem;
-        font-size: 0.9rem;
-    }
-
-    .label {
-        font-size: 0.8rem;
-    }
-
-    .buttonGroup {
-        gap: 0.8rem;
-        margin-top: 1.2rem;
-        padding-top: 1.2rem;
-    }
-
-    .cancelButton,
-    .submitButton {
-        padding: 0.8rem 1.2rem;
-        font-size: 0.9rem;
-    }
-
-    .uploadZone {
-        padding: 1.25rem 0.75rem;
-    }
-
-    .uploadIcon {
-        width: 40px;
-        height: 40px;
-        margin-bottom: 0.625rem;
-    }
-
-    .uploadText {
-        font-size: 0.8125rem;
-    }
-
-    .imagePreview {
-        max-height: 150px;
-    }
-
-    .paymentModeGrid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.375rem;
-    }
-
-    .paymentModeButton {
-        padding: 0.5rem 0.25rem;
-    }
-
-    .paymentModeIcon {
-        font-size: 1rem;
-    }
-
-    .paymentModeName {
-        font-size: 0.5625rem;
-    }
-
-    .cardOption {
-        padding: 0.625rem 0.75rem;
-        gap: 0.5rem;
-    }
-
-    .cardIcon {
-        font-size: 1.25rem;
-    }
-
-    .cardName {
-        font-size: 0.6875rem;
-    }
-
-    .cardNumber {
-        font-size: 0.625rem;
-    }
-
-    .cardNetwork {
-        font-size: 0.5625rem;
-        padding: 0.1875rem 0.375rem;
-    }
-}
-
-/* Mobile (< 481px) */
+/* Responsive */
 @media (max-width: 480px) {
-    .modalContent {
-        padding: 1rem;
-        width: 95%;
-        max-width: none;
-    }
-
-    .modalHeader {
-        margin-bottom: 1rem;
-        padding-bottom: 0.8rem;
-    }
-
-    .title {
-        font-size: 1rem;
-    }
-
-    .closeButton {
-        width: 32px;
-        height: 32px;
-        font-size: 1.3rem;
-    }
-
-    .form {
-        gap: 0.9rem;
-    }
-
-    .formGroup {
-        gap: 0.4rem;
-    }
-
-    .input,
-    .select {
-        padding: 0.7rem 0.8rem;
-        font-size: 0.9rem;
-    }
-
-    .label {
-        font-size: 0.75rem;
-    }
-
-    .errorText {
-        font-size: 0.75rem;
-    }
-
-    .submitError {
-        padding: 0.7rem 0.9rem;
-        font-size: 0.85rem;
-    }
-
-    .buttonGroup {
-        grid-template-columns: 1fr 1fr;
-        gap: 0.6rem;
-        margin-top: 1rem;
-        padding-top: 1rem;
-    }
-
-    .cancelButton,
-    .submitButton {
-        padding: 0.7rem 1rem;
-        font-size: 0.85rem;
-    }
-
-    .uploadZone {
-        padding: 1rem 0.625rem;
-    }
-
-    .uploadIcon {
-        width: 36px;
-        height: 36px;
-        margin-bottom: 0.5rem;
-    }
-
-    .uploadIcon svg {
-        width: 20px;
-        height: 20px;
-    }
-
-    .uploadText {
-        font-size: 0.75rem;
-    }
-
-    .uploadHint {
-        font-size: 0.6875rem;
-    }
-
-    .previewContainer {
-        padding: 0.5rem;
-        gap: 0.5rem;
-    }
-
-    .imagePreview {
-        max-height: 120px;
-    }
-
-    .pdfPreview {
-        padding: 0.75rem;
-    }
-
-    .pdfIcon {
-        width: 28px;
-        height: 28px;
-    }
-
-    .pdfName {
-        font-size: 0.8125rem;
-    }
-
-    .fileName {
-        font-size: 0.6875rem;
-    }
-
-    .removeButton {
-        width: 28px;
-        height: 28px;
-    }
-
-    .removeButton svg {
-        width: 14px;
-        height: 14px;
-    }
-
-    .paymentModeGrid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.25rem;
-    }
-
-    .paymentModeButton {
-        padding: 0.5rem 0.25rem;
-        border-radius: 10px;
-    }
-
-    .paymentModeIcon {
-        font-size: 0.9375rem;
-    }
-
-    .paymentModeName {
-        font-size: 0.5rem;
-    }
-
-    .cardSelectionGrid {
-        gap: 0.375rem;
-    }
-
-    .cardOption {
-        padding: 0.5rem 0.625rem;
-        gap: 0.5rem;
-        border-radius: 10px;
-    }
-
-    .cardIcon {
-        font-size: 1.125rem;
-    }
-
-    .cardName {
-        font-size: 0.625rem;
-    }
-
-    .cardNumber {
-        font-size: 0.5625rem;
-    }
-
-    .cardNetwork {
-        font-size: 0.5rem;
-        padding: 0.125rem 0.3125rem;
-        border-radius: 4px;
-    }
-}
-
-/* No Cards Available State */
-.noCardsContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1.5rem;
-    border: 2px dashed rgba(15, 23, 42, 0.12);
-    border-radius: 14px;
-    background: rgba(15, 23, 42, 0.02);
-    text-align: center;
-}
-
-.noCardsIcon {
-    font-size: 2.5rem;
-    line-height: 1;
-    margin-bottom: 0.75rem;
-    opacity: 0.6;
-}
-
-.noCardsText {
-    font-size: 0.9375rem;
-    font-weight: 500;
-    color: #0f172a;
-    margin: 0 0 0.25rem;
-}
-
-.noCardsSubtext {
-    font-size: 0.8125rem;
-    color: #64748b;
-    margin: 0 0 1.25rem;
-}
-
-.addCardButton {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.2);
-}
-
-.addCardButton:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
-}
-
-.addCardIcon {
-    font-size: 1.125rem;
-    font-weight: 400;
-    line-height: 1;
-}
-
-/* Add Card Button in Grid */
-.addCardInGrid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.375rem;
-    padding: 1rem;
-    border: 2px dashed rgba(15, 23, 42, 0.15);
-    border-radius: 12px;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    min-height: 70px;
-}
-
-.addCardInGrid:hover {
-    border-color: rgba(15, 23, 42, 0.3);
-    background: rgba(15, 23, 42, 0.03);
-}
-
-.addCardGridIcon {
-    font-size: 1.25rem;
-    color: #64748b;
-    line-height: 1;
-    font-weight: 300;
-}
-
-.addCardGridText {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #64748b;
-}
-
-.addCardInGrid:hover .addCardGridIcon,
-.addCardInGrid:hover .addCardGridText {
-    color: #0f172a;
-}
-
-/* Mobile responsive for no cards state */
-@media (max-width: 480px) {
-    .noCardsContainer {
-        padding: 1.5rem 1rem;
-    }
-
-    .noCardsIcon {
-        font-size: 2rem;
-    }
-
-    .noCardsText {
-        font-size: 0.875rem;
-    }
-
-    .noCardsSubtext {
-        font-size: 0.75rem;
-    }
-
-    .addCardButton {
-        padding: 0.625rem 1rem;
-        font-size: 0.8125rem;
-    }
-
-    .addCardInGrid {
-        padding: 0.75rem;
-        min-height: 60px;
-    }
-
-    .addCardGridIcon {
-        font-size: 1rem;
-    }
-
-    .addCardGridText {
-        font-size: 0.6875rem;
-    }
-}
-
-/* Voice Input Button */
-.voiceButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border: none;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    color: white;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.voiceButton svg {
-    width: 18px;
-    height: 18px;
-}
-
-.voiceButton:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
-}
-
-.voiceButtonActive {
-    background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
-    animation: voicePulseGlow 1.5s ease-in-out infinite;
-}
-
-@keyframes voicePulseGlow {
-    0%, 100% {
-        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
-    }
-}
-
-.voicePulse {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.3);
-    animation: voicePulseRipple 1s ease-out infinite;
-}
-
-@keyframes voicePulseRipple {
-    0% {
-        transform: scale(0.8);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1.5);
-        opacity: 0;
-    }
-}
-
-/* Voice Overlay */
-.voiceOverlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
-    border-radius: 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    animation: voiceOverlayIn 0.3s ease;
-    padding: 2rem;
-}
-
-@keyframes voiceOverlayIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.voiceOverlayClose {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 32px;
-    height: 32px;
-    border: none;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-}
-
-.voiceOverlayClose:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-}
-
-/* Voice Visual */
-.voiceVisual {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.voiceMicIcon {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 32px rgba(99, 102, 241, 0.4);
-    transition: all 0.3s ease;
-}
-
-.voiceMicIcon svg {
-    width: 36px;
-    height: 36px;
-    color: white;
-}
-
-.voiceMicActive {
-    background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
-    box-shadow: 0 8px 32px rgba(239, 68, 68, 0.5);
-    animation: voiceMicPulse 1s ease-in-out infinite;
-}
-
-@keyframes voiceMicPulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-}
-
-/* Voice Waves Animation */
-.voiceWaves {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    margin-top: 1rem;
-    height: 32px;
-}
-
-.voiceWaves span {
-    width: 4px;
-    height: 16px;
-    background: linear-gradient(180deg, #a78bfa 0%, #6366f1 100%);
-    border-radius: 2px;
-    animation: voiceWave 0.8s ease-in-out infinite;
-}
-
-.voiceWaves span:nth-child(1) { animation-delay: 0s; }
-.voiceWaves span:nth-child(2) { animation-delay: 0.1s; }
-.voiceWaves span:nth-child(3) { animation-delay: 0.2s; }
-.voiceWaves span:nth-child(4) { animation-delay: 0.3s; }
-.voiceWaves span:nth-child(5) { animation-delay: 0.4s; }
-
-@keyframes voiceWave {
-    0%, 100% {
-        height: 8px;
-        opacity: 0.5;
-    }
-    50% {
-        height: 28px;
-        opacity: 1;
-    }
-}
-
-/* Voice Status Text */
-.voiceStatus {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: white;
-    margin: 0 0 0.5rem;
-}
-
-.voiceTranscript {
-    font-size: 0.9375rem;
-    color: rgba(255, 255, 255, 0.7);
-    text-align: center;
-    margin: 0 0 1rem;
-    min-height: 1.5rem;
-    max-width: 300px;
-    line-height: 1.4;
-}
-
-/* Voice Parsed Results */
-.voiceParsed {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-    margin-bottom: 1rem;
-}
-
-.voiceParsedItem {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-    padding: 0.5rem 0.875rem;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    font-size: 0.875rem;
-    color: white;
-    backdrop-filter: blur(4px);
-    animation: voiceParsedIn 0.3s ease;
-}
-
-@keyframes voiceParsedIn {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Voice Error */
-.voiceError {
-    font-size: 0.875rem;
-    color: #fca5a5;
-    background: rgba(239, 68, 68, 0.2);
-    padding: 0.625rem 1rem;
-    border-radius: 8px;
-    margin: 0 0 1rem;
-    text-align: center;
-}
-
-/* Voice Hint */
-.voiceHint {
-    font-size: 0.8125rem;
-    color: rgba(255, 255, 255, 0.5);
-    margin: 0;
-}
-
-/* Mobile responsive for voice */
-@media (max-width: 480px) {
-    .voiceButton {
-        width: 32px;
-        height: 32px;
-        border-radius: 8px;
-    }
-
-    .voiceButton svg {
-        width: 16px;
-        height: 16px;
-    }
-
-    .voiceOverlay {
-        padding: 1.5rem;
-        border-radius: 20px;
-    }
-
-    .voiceMicIcon {
-        width: 64px;
-        height: 64px;
-    }
-
-    .voiceMicIcon svg {
-        width: 28px;
-        height: 28px;
-    }
-
-    .voiceStatus {
-        font-size: 1.125rem;
-    }
-
-    .voiceTranscript {
-        font-size: 0.875rem;
-        max-width: 250px;
-    }
-
-    .voiceParsedItem {
-        font-size: 0.8125rem;
-        padding: 0.375rem 0.75rem;
-    }
+  .modalContent {
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .form {
+    padding: 1.25rem;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .categoryGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .paymentModeGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

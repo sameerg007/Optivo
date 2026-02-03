@@ -185,7 +185,7 @@ export default function LoginPage() {
                 </form>
 
                 <div className={styles.footerText}>
-                    Don't have an account?{' '}
+                    Don&apos;t have an account?{' '}
                     <span
                         className={styles.footerLink}
                         onClick={handleSignUp}

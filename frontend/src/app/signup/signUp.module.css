@@ -1,496 +1,195 @@
+/* SignUp - Dark Professional Theme (Zerodha Style) */
+
 .container {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #131722;
+  padding: 1.5rem;
 }
 
 .formWrapper {
-    background: #16213e;
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(147, 51, 234, 0.1);
-    padding: 60px 50px;
-    max-width: 450px;
-    width: 100%;
-    border: 1px solid rgba(147, 51, 234, 0.2);
+  width: 100%;
+  max-width: 420px;
+  background: #1e222d;
+  border: 1px solid #2a2e39;
+  border-radius: 8px;
+  padding: 2rem;
 }
 
 .title {
-    font-size: 28px;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 8px;
-    background: linear-gradient(135deg, #9333ea 0%, #c084fc 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.5px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #d1d4dc;
+  margin: 0 0 0.5rem 0;
+  text-align: center;
 }
 
 .subtitle {
-    text-align: center;
-    color: #c5c5d5;
-    font-size: 13px;
-    margin-bottom: 36px;
-    font-weight: 400;
-    line-height: 1.5;
+  font-size: 0.875rem;
+  color: #6a6d78;
+  margin: 0 0 2rem 0;
+  text-align: center;
 }
 
+/* Form */
 .formGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .inputField {
-    position: relative;
-    margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.inputField label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #9598a1;
 }
 
 .inputField input {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid rgba(147, 51, 234, 0.3);
-    border-radius: 6px;
-    font-size: 14px;
-    font-family: inherit;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    background: rgba(255, 255, 255, 0.05);
-    color: #e8e8f0;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #363a45;
+  border-radius: 4px;
+  font-size: 0.9375rem;
+  color: #d1d4dc;
+  background: #262932;
+  transition: border-color 0.15s ease;
 }
 
 .inputField input:focus {
-    outline: none;
-    border-color: #9333ea;
-    box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+  outline: none;
+  border-color: #2962ff;
 }
 
 .inputField input::placeholder {
-    color: #9090a0;
+  color: #6a6d78;
 }
 
-.passwordRequirements {
-    margin-top: 8px;
-    padding: 10px;
-    background: rgba(147, 51, 234, 0.05);
-    border-radius: 6px;
-    border-left: 3px solid #9333ea;
+.inputField input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-.requirementItem {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: #b0b0c0;
-    margin-bottom: 4px;
+/* Error Message */
+.error {
+  padding: 0.75rem;
+  background: rgba(239, 83, 80, 0.1);
+  border: 1px solid rgba(239, 83, 80, 0.2);
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  color: #ef5350;
 }
 
-.requirementItem:last-child {
-    margin-bottom: 0;
-}
-
-.requirementIcon {
-    width: 16px;
-    height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-size: 10px;
-}
-
-.requirementIcon.met {
-    background: #10b981;
-    color: white;
-}
-
-.requirementIcon.unmet {
-    background: rgba(147, 51, 234, 0.3);
-    color: #9333ea;
-}
-
-.errorMessage {
-    color: #ff6b6b;
-    font-size: 12px;
-    margin-top: -10px;
-    margin-bottom: 12px;
-    font-weight: 400;
-}
-
+/* Terms Checkbox */
 .termsCheckbox {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    margin: 20px 0;
-    font-size: 13px;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
 }
 
-.checkbox {
-    cursor: pointer;
-    width: 18px;
-    height: 18px;
-    margin-top: 1px;
-    accent-color: #9333ea;
-    flex-shrink: 0;
+.termsCheckbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #2962ff;
+  flex-shrink: 0;
 }
 
-.termsText {
-    color: #c5c5d5;
-    line-height: 1.4;
+.termsCheckbox label {
+  font-size: 0.8125rem;
+  color: #9598a1;
+  line-height: 1.4;
 }
 
 .termsLink {
-    color: #9333ea;
-    text-decoration: none;
-    font-weight: 500;
-    cursor: pointer;
-    transition: color 0.2s ease;
+  color: #2962ff;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.15s ease;
 }
 
 .termsLink:hover {
-    color: #c084fc;
+  color: #5c85ff;
 }
 
+/* Submit Button */
 .submitButton {
-    width: 100%;
-    padding: 12px 16px;
-    background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-transform: none;
-    letter-spacing: normal;
-    margin-top: 16px;
+  margin-top: 0.5rem;
 }
 
-.submitButton:hover:not(:disabled) {
-    background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
-    box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4);
-}
-
-.submitButton:active:not(:disabled) {
-    transform: translateY(1px);
-}
-
-.submitButton:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
+/* Footer */
 .footerText {
-    text-align: center;
-    font-size: 13px;
-    color: #c5c5d5;
-    margin-top: 24px;
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6a6d78;
 }
 
 .footerLink {
-    color: #9333ea;
-    text-decoration: none;
-    font-weight: 500;
-    cursor: pointer;
-    transition: color 0.2s ease;
+  color: #2962ff;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.15s ease;
 }
 
 .footerLink:hover {
-    color: #c084fc;
+  color: #5c85ff;
 }
 
-.successMessage {
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    color: #10b981;
-    padding: 12px;
-    border-radius: 6px;
-    font-size: 13px;
-    margin-bottom: 16px;
-    text-align: center;
+/* Password Requirements */
+.passwordRequirements {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
 }
 
-/* Mobile phones (< 480px) */
+.requirement {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  color: #6a6d78;
+}
+
+.requirement.met {
+  color: #26a69a;
+}
+
+.requirementIcon {
+  width: 12px;
+  height: 12px;
+}
+
+/* Responsive */
 @media (max-width: 480px) {
-    .container {
-        padding: 16px;
-    }
+  .container {
+    padding: 1rem;
+  }
 
-    .formWrapper {
-        padding: 32px 20px;
-        max-width: 100%;
-        border-radius: 8px;
-    }
+  .formWrapper {
+    padding: 1.5rem;
+  }
 
-    .title {
-        font-size: 22px;
-        margin-bottom: 6px;
-    }
+  .formRow {
+    grid-template-columns: 1fr;
+  }
 
-    .subtitle {
-        font-size: 12px;
-        margin-bottom: 20px;
-    }
-
-    .formGroup {
-        gap: 12px;
-    }
-
-    .inputField input {
-        padding: 10px 11px;
-        font-size: 13px;
-        border-radius: 6px;
-    }
-
-    .inputField input::placeholder {
-        font-size: 12px;
-    }
-
-    .passwordRequirements {
-        padding: 10px 12px;
-        gap: 8px;
-    }
-
-    .requirementItem {
-        font-size: 11px;
-        gap: 6px;
-    }
-
-    .requirementIcon {
-        min-width: 16px;
-        font-size: 12px;
-    }
-
-    .termsCheckbox {
-        gap: 8px;
-    }
-
-    .termsCheckbox input {
-        width: 18px;
-        height: 18px;
-        min-width: 18px;
-    }
-
-    .termsText {
-        font-size: 12px;
-    }
-
-    .termsLink {
-        font-size: 12px;
-    }
-
-    .errorMessage,
-    .successMessage {
-        padding: 10px 12px;
-        font-size: 12px;
-        border-radius: 6px;
-    }
-
-    .submitButton {
-        padding: 11px 12px;
-        font-size: 13px;
-        border-radius: 6px;
-        margin-top: 6px;
-    }
-
-    .footerText {
-        font-size: 12px;
-        margin-top: 14px;
-    }
-
-    .footerLink {
-        font-size: 12px;
-    }
-}
-
-/* Small tablets (480px - 768px) */
-@media (min-width: 481px) and (max-width: 768px) {
-    .container {
-        padding: 20px;
-    }
-
-    .formWrapper {
-        padding: 45px 32px;
-        max-width: 100%;
-        border-radius: 10px;
-    }
-
-    .title {
-        font-size: 24px;
-        margin-bottom: 7px;
-    }
-
-    .subtitle {
-        font-size: 12px;
-        margin-bottom: 24px;
-    }
-
-    .formGroup {
-        gap: 14px;
-    }
-
-    .inputField input {
-        padding: 11px 12px;
-        font-size: 14px;
-        border-radius: 7px;
-    }
-
-    .passwordRequirements {
-        padding: 12px 14px;
-        gap: 10px;
-    }
-
-    .requirementItem {
-        font-size: 12px;
-    }
-
-    .requirementIcon {
-        min-width: 18px;
-    }
-
-    .termsCheckbox {
-        gap: 10px;
-    }
-
-    .termsCheckbox input {
-        width: 20px;
-        height: 20px;
-        min-width: 20px;
-    }
-
-    .termsText {
-        font-size: 13px;
-    }
-
-    .errorMessage,
-    .successMessage {
-        padding: 11px 13px;
-        font-size: 12px;
-    }
-
-    .submitButton {
-        padding: 11px 14px;
-        font-size: 13px;
-        border-radius: 7px;
-    }
-
-    .footerText {
-        font-size: 12px;
-        margin-top: 16px;
-    }
-}
-
-/* Tablets (768px - 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .container {
-        padding: 24px;
-    }
-
-    .formWrapper {
-        padding: 55px 42px;
-        max-width: 450px;
-        border-radius: 11px;
-    }
-
-    .title {
-        font-size: 26px;
-    }
-
-    .subtitle {
-        font-size: 13px;
-        margin-bottom: 30px;
-    }
-
-    .formGroup {
-        gap: 16px;
-    }
-
-    .inputField input {
-        padding: 12px 13px;
-        font-size: 14px;
-        border-radius: 8px;
-    }
-
-    .passwordRequirements {
-        padding: 12px 14px;
-        gap: 10px;
-    }
-
-    .requirementItem {
-        font-size: 13px;
-    }
-
-    .termsCheckbox {
-        gap: 10px;
-    }
-
-    .termsCheckbox input {
-        width: 20px;
-        height: 20px;
-    }
-
-    .termsText {
-        font-size: 13px;
-    }
-
-    .submitButton {
-        padding: 12px 16px;
-        font-size: 14px;
-        border-radius: 8px;
-    }
-}
-
-/* Desktop and large screens (1024px+) */
-@media (min-width: 1025px) {
-    .container {
-        padding: 20px;
-    }
-
-    .formWrapper {
-        padding: 60px 50px;
-        max-width: 480px;
-    }
-
-    .title {
-        font-size: 28px;
-    }
-
-    .subtitle {
-        font-size: 13px;
-    }
-
-    .formGroup {
-        gap: 16px;
-    }
-
-    .inputField input {
-        padding: 12px 14px;
-        font-size: 14px;
-    }
-
-    .inputField input:focus {
-        box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.15);
-    }
-
-    .passwordRequirements {
-        padding: 12px 14px;
-    }
-
-    .termsCheckbox {
-        gap: 10px;
-    }
-
-    .submitButton:hover:not(:disabled) {
-        box-shadow: 0 8px 24px rgba(147, 51, 234, 0.4);
-        transform: translateY(-2px);
-    }
-
-    .footerLink:hover {
-        text-decoration: underline;
-    }
+  .title {
+    font-size: 1.25rem;
+  }
 }

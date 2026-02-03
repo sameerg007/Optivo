@@ -1,499 +1,242 @@
+/* Dashboard - Dark Professional Theme (Zerodha Style) */
+
 .container {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
-    display: flex;
-    flex-direction: column;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  min-height: 100vh;
+  background: #131722;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
 }
 
+/* Header */
 .header {
-    background: #16213e;
-    border-bottom: 1px solid rgba(147, 51, 234, 0.2);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    padding: 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+  background: #1e222d;
+  border-bottom: 1px solid #2a2e39;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .headerContent {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.875rem 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .headerTitle {
-    font-size: 24px;
-    font-weight: 600;
-    background: linear-gradient(135deg, #9333ea 0%, #c084fc 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #d1d4dc;
+  margin: 0;
 }
 
 .logoutButton {
-    padding: 8px 16px;
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #ef5350;
+  border: 1px solid #ef5350;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .logoutButton:hover:not(:disabled) {
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
-    transform: translateY(-2px);
-}
-
-.logoutButton:active:not(:disabled) {
-    transform: translateY(0);
+  background: rgba(239, 83, 80, 0.1);
 }
 
 .logoutButton:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
+/* Error Message */
 .errorMessage {
-    padding: 12px 24px;
-    background: rgba(239, 68, 68, 0.1);
-    border-bottom: 1px solid rgba(239, 68, 68, 0.3);
-    color: #fca5a5;
-    font-size: 13px;
-    font-weight: 500;
-    margin: 0;
+  padding: 0.75rem 1.5rem;
+  background: rgba(239, 83, 80, 0.1);
+  border-bottom: 1px solid rgba(239, 83, 80, 0.3);
+  color: #ef5350;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  margin: 0;
 }
 
+/* Main Content */
 .mainContent {
-    flex: 1;
-    padding: 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-    overflow-y: auto;
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  overflow-y: auto;
 }
 
+/* Tab Content */
 .tabContent {
-    background: #16213e;
-    border-radius: 12px;
-    border: 1px solid rgba(147, 51, 234, 0.2);
-    padding: 32px 24px;
-    color: #c5c5d5;
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+  background: #1e222d;
+  border-radius: 8px;
+  border: 1px solid #2a2e39;
+  padding: 1.5rem;
+  color: #9598a1;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .tabContent h2 {
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: 600;
-    margin: 0 0 16px 0;
-    background: linear-gradient(135deg, #9333ea 0%, #c084fc 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  color: #d1d4dc;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
 }
 
 .tabContent p {
-    color: #a8a8b8;
-    font-size: 14px;
-    line-height: 1.6;
-    margin: 0;
+  color: #9598a1;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0;
 }
 
+/* Loading Spinner */
 .loadingSpinner {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #c5c5d5;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9598a1;
 }
 
 /* Footer with Tab Navigation */
 .footer {
-    background: #16213e;
-    border-top: 1px solid rgba(147, 51, 234, 0.2);
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
-    padding: 0;
-    position: sticky;
-    bottom: 0;
-    z-index: 50;
+  background: #1e222d;
+  border-top: 1px solid #2a2e39;
+  padding: 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 50;
 }
 
 .tabNavigation {
-    display: flex;
-    gap: 0;
-    padding: 0;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-    border-top: 1px solid rgba(147, 51, 234, 0.15);
+  display: flex;
+  gap: 0;
+  padding: 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .tabButton {
-    flex: 1;
-    padding: 16px 12px;
-    background: transparent;
-    color: #a8a8b8;
-    border: none;
-    border-bottom: 2px solid transparent;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+  flex: 1;
+  padding: 1rem 0.75rem;
+  background: transparent;
+  color: #6a6d78;
+  border: none;
+  border-top: 2px solid transparent;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .tabIcon {
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  font-size: 1.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .tabLabel {
-    display: none;
+  display: none;
 }
 
 .tabButton:hover {
-    color: #c5c5d5;
-    background: rgba(147, 51, 234, 0.05);
+  color: #d1d4dc;
+  background: #262932;
 }
 
 .tabButton.active {
-    color: #9333ea;
-    border-bottom-color: #9333ea;
-    background: rgba(147, 51, 234, 0.08);
+  color: #2962ff;
+  border-top-color: #2962ff;
+  background: rgba(41, 98, 255, 0.08);
 }
 
-.tabButton.active::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #9333ea, #a855f7);
-}
-
-/* Mobile phones (< 480px) */
+/* Mobile (< 480px) */
 @media (max-width: 480px) {
-    .container {
-        font-size: 14px;
-    }
+  .headerContent {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    align-items: stretch;
+  }
 
-    .header {
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    }
+  .headerTitle {
+    font-size: 1rem;
+    text-align: center;
+  }
 
-    .headerContent {
-        flex-direction: column;
-        gap: 10px;
-        padding: 12px 14px;
-        align-items: stretch;
-    }
+  .logoutButton {
+    padding: 0.625rem;
+    font-size: 0.75rem;
+    width: 100%;
+  }
 
-    .headerTitle {
-        font-size: 18px;
-        text-align: center;
-    }
+  .mainContent {
+    padding: 0.75rem;
+  }
 
-    .logoutButton {
-        padding: 10px 12px;
-        font-size: 12px;
-        border-radius: 5px;
-        width: 100%;
-    }
+  .tabContent {
+    padding: 1rem;
+    min-height: 240px;
+    border-radius: 6px;
+  }
 
-    .errorMessage {
-        padding: 10px 14px;
-        font-size: 11px;
-    }
+  .tabButton {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.6875rem;
+    gap: 0;
+    flex-direction: column;
+  }
 
-    .mainContent {
-        padding: 12px;
-        overflow-y: auto;
-    }
-
-    .tabContent {
-        padding: 16px 12px;
-        min-height: 240px;
-        border-radius: 8px;
-    }
-
-    .tabContent h2 {
-        font-size: 16px;
-        margin-bottom: 10px;
-    }
-
-    .tabContent p {
-        font-size: 12px;
-        line-height: 1.5;
-    }
-
-    .loadingSpinner {
-        font-size: 12px;
-    }
-
-    .footer {
-        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .tabNavigation {
-        border-top: 1px solid rgba(147, 51, 234, 0.15);
-    }
-
-    .tabButton {
-        padding: 10px 6px;
-        font-size: 10px;
-        letter-spacing: 0;
-        border-radius: 0;
-        gap: 0;
-    }
-
-    .tabIcon {
-        font-size: 18px;
-    }
-
-    .tabLabel {
-        display: none;
-    }
-
-    .tabButton.active::after {
-        height: 2px;
-    }
+  .tabLabel {
+    display: block;
+    font-size: 0.625rem;
+  }
 }
 
-/* Small tablets (480px - 768px) */
+/* Tablet (480px - 768px) */
 @media (min-width: 481px) and (max-width: 768px) {
-    .container {
-        font-size: 15px;
-    }
+  .tabButton {
+    padding: 0.875rem 0.5rem;
+    font-size: 0.75rem;
+    gap: 0.375rem;
+  }
 
-    .headerContent {
-        flex-direction: column;
-        gap: 12px;
-        padding: 14px 18px;
-        align-items: stretch;
-    }
-
-    .headerTitle {
-        font-size: 20px;
-        text-align: center;
-    }
-
-    .logoutButton {
-        padding: 10px 14px;
-        font-size: 12px;
-        border-radius: 6px;
-        width: 100%;
-    }
-
-    .errorMessage {
-        padding: 11px 18px;
-        font-size: 12px;
-    }
-
-    .mainContent {
-        padding: 14px;
-    }
-
-    .tabContent {
-        padding: 20px 16px;
-        min-height: 300px;
-        border-radius: 9px;
-    }
-
-    .tabContent h2 {
-        font-size: 18px;
-        margin-bottom: 12px;
-    }
-
-    .tabContent p {
-        font-size: 13px;
-        line-height: 1.5;
-    }
-
-    .tabButton {
-        padding: 12px 8px;
-        font-size: 11px;
-        letter-spacing: 0;
-        gap: 6px;
-    }
-
-    .tabIcon {
-        font-size: 18px;
-    }
-
-    .tabLabel {
-        display: inline;
-        white-space: nowrap;
-    }
+  .tabLabel {
+    display: inline;
+  }
 }
 
-/* Tablets (768px - 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .container {
-        font-size: 15px;
-    }
+/* Desktop (768px+) */
+@media (min-width: 769px) {
+  .tabButton {
+    padding: 1rem 0.75rem;
+    font-size: 0.8125rem;
+    gap: 0.5rem;
+  }
 
-    .headerContent {
-        flex-direction: row;
-        gap: 16px;
-        padding: 16px 20px;
-        align-items: center;
-    }
-
-    .headerTitle {
-        font-size: 22px;
-    }
-
-    .logoutButton {
-        padding: 10px 16px;
-        font-size: 13px;
-        border-radius: 7px;
-        white-space: nowrap;
-    }
-
-    .errorMessage {
-        padding: 12px 20px;
-        font-size: 13px;
-    }
-
-    .mainContent {
-        padding: 18px;
-    }
-
-    .tabContent {
-        padding: 28px 20px;
-        min-height: 350px;
-        border-radius: 10px;
-    }
-
-    .tabContent h2 {
-        font-size: 22px;
-        margin-bottom: 14px;
-    }
-
-    .tabContent p {
-        font-size: 13px;
-        line-height: 1.6;
-    }
-
-    .tabButton {
-        padding: 14px 10px;
-        font-size: 12px;
-        letter-spacing: 0.3px;
-        gap: 6px;
-    }
-
-    .tabIcon {
-        font-size: 20px;
-    }
-
-    .tabLabel {
-        display: inline;
-        white-space: nowrap;
-    }
-}
-
-/* Desktop and large screens (1024px+) */
-@media (min-width: 1025px) {
-    .container {
-        font-size: 16px;
-    }
-
-    .header {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    .headerContent {
-        padding: 16px 24px;
-        gap: 20px;
-    }
-
-    .headerTitle {
-        font-size: 24px;
-    }
-
-    .logoutButton {
-        padding: 8px 18px;
-        font-size: 13px;
-        border-radius: 6px;
-        white-space: nowrap;
-    }
-
-    .logoutButton:hover:not(:disabled) {
-        box-shadow: 0 6px 16px rgba(239, 68, 68, 0.5);
-        transform: translateY(-2px);
-    }
-
-    .errorMessage {
-        padding: 12px 24px;
-        font-size: 13px;
-    }
-
-    .mainContent {
-        padding: 24px;
-    }
-
-    .tabContent {
-        padding: 32px 24px;
-        min-height: 400px;
-        border-radius: 12px;
-    }
-
-    .tabContent h2 {
-        font-size: 24px;
-        margin-bottom: 16px;
-    }
-
-    .tabContent p {
-        font-size: 14px;
-        line-height: 1.6;
-    }
-
-    .footer {
-        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    .tabButton {
-        padding: 16px 12px;
-        font-size: 14px;
-        letter-spacing: 0.5px;
-        gap: 8px;
-    }
-
-    .tabIcon {
-        font-size: 20px;
-    }
-
-    .tabLabel {
-        display: inline;
-        white-space: nowrap;
-    }
-
-    .tabButton:hover {
-        box-shadow: inset 0 -2px 0 rgba(147, 51, 234, 0.2);
-    }
-
-    .tabButton.active::after {
-        height: 2px;
-    }
+  .tabLabel {
+    display: inline;
+  }
 }

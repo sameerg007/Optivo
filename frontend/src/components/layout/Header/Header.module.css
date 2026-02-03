@@ -1,56 +1,73 @@
+/* Header - Dark Professional Theme */
+
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 64px;
-    background: #ffffff;
-    border-bottom: 1px solid #e2e8f0;
-    z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: #1e222d;
+  border-bottom: 1px solid #2a2e39;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
 }
 
 .headerContent {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #0f172a;
-    margin: 0;
+.logo {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #d1d4dc;
+  text-decoration: none;
 }
 
-.actions {
-    display: flex;
-    align-items: center;
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navLink {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #9598a1;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.navLink:hover {
+  color: #d1d4dc;
+}
+
+.navLink.active {
+  color: #2962ff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header {
+    height: 52px;
+    padding: 0 1rem;
+  }
+
+  .logo {
+    font-size: 1.125rem;
+  }
+
+  .nav {
     gap: 1rem;
-}
+  }
 
-.logoutButton {
-    padding: 0.5rem 1rem;
-    background: transparent;
-    color: #64748b;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.logoutButton:hover:not(:disabled) {
-    background: #f8fafc;
-    color: #0f172a;
-    border-color: #cbd5e1;
-}
-
-.logoutButton:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  .navLink {
+    font-size: 0.8125rem;
+  }
 }
