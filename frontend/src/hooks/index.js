@@ -5,5 +5,6 @@
 
 export { useAuth } from './useAuth';
 export { useFetch } from './useFetch';
+export { useVoiceInput } from './useVoiceInput';
 
 export default {};

@@ -1,8 +1,11 @@
 'use client';
 
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import styles from './addExpenseModal.module.css';
-import { CATEGORIES, PAYMENT_MODES, SAVED_CARDS } from './config';
+import { CATEGORIES, PAYMENT_MODES, DEFAULT_SAVED_CARDS, CARDS_STORAGE_KEY } from './config';
+import AddCardModal from './AddCardModal';
+import { useVoiceInput } from '@/hooks/useVoiceInput';
+import { parseVoiceInput } from './voiceParser';
 
 export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
     const [formData, setFormData] = useState({
@@ -20,6 +23,142 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
     const [billPreview, setBillPreview] = useState(null);
     const [isDragOver, setIsDragOver] = useState(false);
     const fileInputRef = useRef(null);
+    
+    // Card management state
+    const [savedCards, setSavedCards] = useState(DEFAULT_SAVED_CARDS);
+    const [isAddCardModalOpen, setIsAddCardModalOpen] = useState(false);
+    const [addCardType, setAddCardType] = useState('credit');
+
+    // Voice input state
+    const [showVoiceOverlay, setShowVoiceOverlay] = useState(false);
+    const [voiceParseResult, setVoiceParseResult] = useState(null);
+
+    // Handle voice result
+    const handleVoiceResult = useCallback((transcript) => {
+        const parsed = parseVoiceInput(transcript);
+        setVoiceParseResult(parsed);
+
+        // Auto-fill form with parsed data
+        // Default payment mode to UPI if not detected from voice
+        setFormData(prev => ({
+            ...prev,
+            ...(parsed.category && { category: parsed.category }),
+            ...(parsed.amount && { amount: parsed.amount.toString() }),
+            ...(parsed.description && { description: parsed.description }),
+            paymentMode: parsed.paymentMode || 'upi'
+        }));
+
+        // Clear any errors for filled fields
+        setErrors(prev => {
+            const newErrors = { ...prev };
+            if (parsed.amount) delete newErrors.amount;
+            if (parsed.description) delete newErrors.description;
+            return newErrors;
+        });
+
+        // Close overlay after a short delay
+        setTimeout(() => {
+            setShowVoiceOverlay(false);
+        }, 1500);
+    }, []);
+
+    // Voice input hook
+    const {
+        isListening,
+        transcript,
+        interimTranscript,
+        error: voiceError,
+        isSupported: isVoiceSupported,
+        startListening,
+        stopListening,
+        reset: resetVoice
+    } = useVoiceInput({
+        language: 'en-IN',
+        onResult: handleVoiceResult
+    });
+
+    // Handle voice button click
+    const handleVoiceButtonClick = useCallback(() => {
+        if (isListening) {
+            stopListening();
+        } else {
+            setShowVoiceOverlay(true);
+            setVoiceParseResult(null);
+            resetVoice();
+            startListening();
+        }
+    }, [isListening, startListening, stopListening, resetVoice]);
+
+    // Close voice overlay
+    const handleCloseVoiceOverlay = useCallback(() => {
+        stopListening();
+        setShowVoiceOverlay(false);
+        setVoiceParseResult(null);
+    }, [stopListening]);
+
+    // Load saved cards from localStorage on mount
+    useEffect(() => {
+        try {
+            const stored = localStorage.getItem(CARDS_STORAGE_KEY);
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                setSavedCards(parsed);
+            }
+        } catch (err) {
+            console.error('Failed to load saved cards:', err);
+        }
+    }, []);
+
+    // Save cards to localStorage whenever they change
+    const saveCardsToStorage = useCallback((cards) => {
+        try {
+            localStorage.setItem(CARDS_STORAGE_KEY, JSON.stringify(cards));
+        } catch (err) {
+            console.error('Failed to save cards:', err);
+        }
+    }, []);
+
+    // Get current cards based on payment mode
+    const currentCards = useMemo(() => {
+        if (formData.paymentMode === 'credit_card') {
+            return savedCards.credit || [];
+        }
+        if (formData.paymentMode === 'debit_card') {
+            return savedCards.debit || [];
+        }
+        return [];
+    }, [formData.paymentMode, savedCards]);
+
+    // Check if card selection is required but no cards available
+    const requiresCardButNoneAvailable = useMemo(() => {
+        const mode = PAYMENT_MODES[formData.paymentMode];
+        return mode?.requiresCard && currentCards.length === 0;
+    }, [formData.paymentMode, currentCards]);
+
+    // Handle adding a new card
+    const handleAddCard = useCallback((newCard) => {
+        setSavedCards(prev => {
+            const cardType = newCard.type === 'credit' ? 'credit' : 'debit';
+            const updated = {
+                ...prev,
+                [cardType]: [...(prev[cardType] || []), newCard]
+            };
+            saveCardsToStorage(updated);
+            return updated;
+        });
+        
+        // Auto-select the newly added card
+        setFormData(prev => ({
+            ...prev,
+            selectedCard: newCard.id
+        }));
+    }, [saveCardsToStorage]);
+
+    // Open add card modal
+    const handleOpenAddCardModal = useCallback((type) => {
+        setAddCardType(type);
+        setIsAddCardModalOpen(true);
+    }, []);
 
     // Handle input changes
     const handleInputChange = useCallback((e) => {
@@ -134,6 +273,16 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
             newErrors.date = 'Date is required';
         }
 
+        // Validate card selection for card payment modes
+        const mode = PAYMENT_MODES[formData.paymentMode];
+        if (mode?.requiresCard) {
+            if (currentCards.length === 0) {
+                newErrors.selectedCard = `Please add a ${formData.paymentMode === 'credit_card' ? 'credit' : 'debit'} card first`;
+            } else if (!formData.selectedCard) {
+                newErrors.selectedCard = 'Please select a card';
+            }
+        }
+
         return newErrors;
     };
 
@@ -206,14 +355,96 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
                 {/* Header */}
                 <div className={styles.modalHeader}>
                     <h2 className={styles.title}>Add Expense</h2>
-                    <button
-                        className={styles.closeButton}
-                        onClick={onClose}
-                        aria-label="Close modal"
-                    >
-                        ✕
-                    </button>
+                    <div className={styles.headerActions}>
+                        {isVoiceSupported && (
+                            <button
+                                type="button"
+                                className={`${styles.voiceButton} ${isListening ? styles.voiceButtonActive : ''}`}
+                                onClick={handleVoiceButtonClick}
+                                aria-label={isListening ? 'Stop listening' : 'Add expense by voice'}
+                                title="Add expense by voice"
+                            >
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                    <line x1="12" x2="12" y1="19" y2="22"/>
+                                </svg>
+                                {isListening && <span className={styles.voicePulse}></span>}
+                            </button>
+                        )}
+                        <button
+                            className={styles.closeButton}
+                            onClick={onClose}
+                            aria-label="Close modal"
+                        >
+                            ✕
+                        </button>
+                    </div>
                 </div>
+
+                {/* Voice Input Overlay */}
+                {showVoiceOverlay && (
+                    <div className={styles.voiceOverlay}>
+                        <button
+                            className={styles.voiceOverlayClose}
+                            onClick={handleCloseVoiceOverlay}
+                            aria-label="Close voice input"
+                        >
+                            ✕
+                        </button>
+                        
+                        <div className={styles.voiceVisual}>
+                            <div className={`${styles.voiceMicIcon} ${isListening ? styles.voiceMicActive : ''}`}>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                    <line x1="12" x2="12" y1="19" y2="22"/>
+                                </svg>
+                            </div>
+                            {isListening && (
+                                <div className={styles.voiceWaves}>
+                                    <span></span><span></span><span></span><span></span><span></span>
+                                </div>
+                            )}
+                        </div>
+
+                        <p className={styles.voiceStatus}>
+                            {isListening ? 'Listening...' : voiceParseResult ? 'Got it!' : 'Starting...'}
+                        </p>
+
+                        <p className={styles.voiceTranscript}>
+                            {interimTranscript || transcript || 'Say something like "Spent 500 rupees on lunch"'}
+                        </p>
+
+                        {voiceParseResult && (
+                            <div className={styles.voiceParsed}>
+                                {voiceParseResult.category && (
+                                    <span className={styles.voiceParsedItem}>
+                                        {CATEGORIES[voiceParseResult.category]?.icon} {CATEGORIES[voiceParseResult.category]?.name}
+                                    </span>
+                                )}
+                                {voiceParseResult.amount && (
+                                    <span className={styles.voiceParsedItem}>
+                                        ₹{voiceParseResult.amount}
+                                    </span>
+                                )}
+                                {voiceParseResult.paymentMode && (
+                                    <span className={styles.voiceParsedItem}>
+                                        {PAYMENT_MODES[voiceParseResult.paymentMode]?.icon} {PAYMENT_MODES[voiceParseResult.paymentMode]?.name}
+                                    </span>
+                                )}
+                            </div>
+                        )}
+
+                        {voiceError && (
+                            <p className={styles.voiceError}>{voiceError}</p>
+                        )}
+
+                        <p className={styles.voiceHint}>
+                            {isListening ? 'Tap to stop' : 'Tap mic to try again'}
+                        </p>
+                    </div>
+                )}
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className={styles.form}>
@@ -330,31 +561,67 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
                             <label htmlFor="selectedCard" className={styles.label}>
                                 Select {formData.paymentMode === 'credit_card' ? 'Credit' : 'Debit'} Card
                             </label>
-                            <div className={styles.cardSelectionGrid}>
-                                {(formData.paymentMode === 'credit_card' ? SAVED_CARDS.credit : SAVED_CARDS.debit).map((card) => (
+                            
+                            {currentCards.length === 0 ? (
+                                /* No Cards Available - Show Add Card Prompt */
+                                <div className={styles.noCardsContainer}>
+                                    <div className={styles.noCardsIcon}>💳</div>
+                                    <p className={styles.noCardsText}>
+                                        No {formData.paymentMode === 'credit_card' ? 'credit' : 'debit'} cards saved
+                                    </p>
+                                    <p className={styles.noCardsSubtext}>
+                                        Add a card to use this payment method
+                                    </p>
                                     <button
-                                        key={card.id}
                                         type="button"
-                                        className={`${styles.cardOption} ${formData.selectedCard === card.id ? styles.cardOptionActive : ''}`}
-                                        onClick={() => {
-                                            setFormData(prev => ({
-                                                ...prev,
-                                                selectedCard: card.id
-                                            }));
-                                        }}
-                                        style={{
-                                            '--card-color': card.color
-                                        }}
+                                        className={styles.addCardButton}
+                                        onClick={() => handleOpenAddCardModal(formData.paymentMode === 'credit_card' ? 'credit' : 'debit')}
                                     >
-                                        <div className={styles.cardIcon}>💳</div>
-                                        <div className={styles.cardDetails}>
-                                            <span className={styles.cardName}>{card.name}</span>
-                                            <span className={styles.cardNumber}>•••• {card.lastFour}</span>
-                                        </div>
-                                        <span className={styles.cardNetwork}>{card.network}</span>
+                                        <span className={styles.addCardIcon}>+</span>
+                                        Add {formData.paymentMode === 'credit_card' ? 'Credit' : 'Debit'} Card
                                     </button>
-                                ))}
-                            </div>
+                                </div>
+                            ) : (
+                                /* Cards Available - Show Selection Grid */
+                                <>
+                                    <div className={styles.cardSelectionGrid}>
+                                        {currentCards.map((card) => (
+                                            <button
+                                                key={card.id}
+                                                type="button"
+                                                className={`${styles.cardOption} ${formData.selectedCard === card.id ? styles.cardOptionActive : ''}`}
+                                                onClick={() => {
+                                                    setFormData(prev => ({
+                                                        ...prev,
+                                                        selectedCard: card.id
+                                                    }));
+                                                }}
+                                                style={{
+                                                    '--card-color': card.color
+                                                }}
+                                            >
+                                                <div className={styles.cardIcon}>💳</div>
+                                                <div className={styles.cardDetails}>
+                                                    <span className={styles.cardName}>{card.name}</span>
+                                                    <span className={styles.cardNumber}>•••• {card.lastFour}</span>
+                                                </div>
+                                                <span className={styles.cardNetwork}>{card.network}</span>
+                                            </button>
+                                        ))}
+                                        
+                                        {/* Add New Card Button in Grid */}
+                                        <button
+                                            type="button"
+                                            className={styles.addCardInGrid}
+                                            onClick={() => handleOpenAddCardModal(formData.paymentMode === 'credit_card' ? 'credit' : 'debit')}
+                                        >
+                                            <span className={styles.addCardGridIcon}>+</span>
+                                            <span className={styles.addCardGridText}>Add Card</span>
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                            
                             {errors.selectedCard && (
                                 <span className={styles.errorText}>{errors.selectedCard}</span>
                             )}
@@ -455,13 +722,21 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
                         <button
                             type="submit"
                             className={styles.submitButton}
-                            disabled={isSubmitting}
+                            disabled={isSubmitting || requiresCardButNoneAvailable}
                         >
                             {isSubmitting ? 'Adding...' : 'Add Expense'}
                         </button>
                     </div>
                 </form>
             </div>
+            
+            {/* Add Card Modal */}
+            <AddCardModal
+                isOpen={isAddCardModalOpen}
+                onClose={() => setIsAddCardModalOpen(false)}
+                onAddCard={handleAddCard}
+                cardType={addCardType}
+            />
         </div>
     );
 }

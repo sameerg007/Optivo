@@ -58,6 +58,12 @@
     border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .title {
     font-size: 1.25rem;
     font-weight: 600;
@@ -865,5 +871,442 @@
         font-size: 0.5rem;
         padding: 0.125rem 0.3125rem;
         border-radius: 4px;
+    }
+}
+
+/* No Cards Available State */
+.noCardsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+    border: 2px dashed rgba(15, 23, 42, 0.12);
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.02);
+    text-align: center;
+}
+
+.noCardsIcon {
+    font-size: 2.5rem;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    opacity: 0.6;
+}
+
+.noCardsText {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #0f172a;
+    margin: 0 0 0.25rem;
+}
+
+.noCardsSubtext {
+    font-size: 0.8125rem;
+    color: #64748b;
+    margin: 0 0 1.25rem;
+}
+
+.addCardButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.2);
+}
+
+.addCardButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
+}
+
+.addCardIcon {
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1;
+}
+
+/* Add Card Button in Grid */
+.addCardInGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    padding: 1rem;
+    border: 2px dashed rgba(15, 23, 42, 0.15);
+    border-radius: 12px;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 70px;
+}
+
+.addCardInGrid:hover {
+    border-color: rgba(15, 23, 42, 0.3);
+    background: rgba(15, 23, 42, 0.03);
+}
+
+.addCardGridIcon {
+    font-size: 1.25rem;
+    color: #64748b;
+    line-height: 1;
+    font-weight: 300;
+}
+
+.addCardGridText {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #64748b;
+}
+
+.addCardInGrid:hover .addCardGridIcon,
+.addCardInGrid:hover .addCardGridText {
+    color: #0f172a;
+}
+
+/* Mobile responsive for no cards state */
+@media (max-width: 480px) {
+    .noCardsContainer {
+        padding: 1.5rem 1rem;
+    }
+
+    .noCardsIcon {
+        font-size: 2rem;
+    }
+
+    .noCardsText {
+        font-size: 0.875rem;
+    }
+
+    .noCardsSubtext {
+        font-size: 0.75rem;
+    }
+
+    .addCardButton {
+        padding: 0.625rem 1rem;
+        font-size: 0.8125rem;
+    }
+
+    .addCardInGrid {
+        padding: 0.75rem;
+        min-height: 60px;
+    }
+
+    .addCardGridIcon {
+        font-size: 1rem;
+    }
+
+    .addCardGridText {
+        font-size: 0.6875rem;
+    }
+}
+
+/* Voice Input Button */
+.voiceButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.voiceButton svg {
+    width: 18px;
+    height: 18px;
+}
+
+.voiceButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.voiceButtonActive {
+    background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+    animation: voicePulseGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes voicePulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+    }
+}
+
+.voicePulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    animation: voicePulseRipple 1s ease-out infinite;
+}
+
+@keyframes voicePulseRipple {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Voice Overlay */
+.voiceOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    animation: voiceOverlayIn 0.3s ease;
+    padding: 2rem;
+}
+
+@keyframes voiceOverlayIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.voiceOverlayClose {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.voiceOverlayClose:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* Voice Visual */
+.voiceVisual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.voiceMicIcon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(99, 102, 241, 0.4);
+    transition: all 0.3s ease;
+}
+
+.voiceMicIcon svg {
+    width: 36px;
+    height: 36px;
+    color: white;
+}
+
+.voiceMicActive {
+    background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+    box-shadow: 0 8px 32px rgba(239, 68, 68, 0.5);
+    animation: voiceMicPulse 1s ease-in-out infinite;
+}
+
+@keyframes voiceMicPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Voice Waves Animation */
+.voiceWaves {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 1rem;
+    height: 32px;
+}
+
+.voiceWaves span {
+    width: 4px;
+    height: 16px;
+    background: linear-gradient(180deg, #a78bfa 0%, #6366f1 100%);
+    border-radius: 2px;
+    animation: voiceWave 0.8s ease-in-out infinite;
+}
+
+.voiceWaves span:nth-child(1) { animation-delay: 0s; }
+.voiceWaves span:nth-child(2) { animation-delay: 0.1s; }
+.voiceWaves span:nth-child(3) { animation-delay: 0.2s; }
+.voiceWaves span:nth-child(4) { animation-delay: 0.3s; }
+.voiceWaves span:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes voiceWave {
+    0%, 100% {
+        height: 8px;
+        opacity: 0.5;
+    }
+    50% {
+        height: 28px;
+        opacity: 1;
+    }
+}
+
+/* Voice Status Text */
+.voiceStatus {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    margin: 0 0 0.5rem;
+}
+
+.voiceTranscript {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    margin: 0 0 1rem;
+    min-height: 1.5rem;
+    max-width: 300px;
+    line-height: 1.4;
+}
+
+/* Voice Parsed Results */
+.voiceParsed {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.voiceParsedItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.875rem;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    font-size: 0.875rem;
+    color: white;
+    backdrop-filter: blur(4px);
+    animation: voiceParsedIn 0.3s ease;
+}
+
+@keyframes voiceParsedIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Voice Error */
+.voiceError {
+    font-size: 0.875rem;
+    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.2);
+    padding: 0.625rem 1rem;
+    border-radius: 8px;
+    margin: 0 0 1rem;
+    text-align: center;
+}
+
+/* Voice Hint */
+.voiceHint {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+/* Mobile responsive for voice */
+@media (max-width: 480px) {
+    .voiceButton {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+    }
+
+    .voiceButton svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .voiceOverlay {
+        padding: 1.5rem;
+        border-radius: 20px;
+    }
+
+    .voiceMicIcon {
+        width: 64px;
+        height: 64px;
+    }
+
+    .voiceMicIcon svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .voiceStatus {
+        font-size: 1.125rem;
+    }
+
+    .voiceTranscript {
+        font-size: 0.875rem;
+        max-width: 250px;
+    }
+
+    .voiceParsedItem {
+        font-size: 0.8125rem;
+        padding: 0.375rem 0.75rem;
     }
 }
