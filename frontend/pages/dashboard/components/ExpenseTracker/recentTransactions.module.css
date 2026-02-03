@@ -1,0 +1,322 @@
+.transactionsCard {
+    background: #131720;
+    border: 1px solid rgba(147, 51, 234, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    height: fit-content;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #e5e7eb;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.filterBadge {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    background: rgba(147, 51, 234, 0.15);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 8px;
+    color: #a855f7;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.transactionsList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+/* Custom scrollbar */
+.transactionsList::-webkit-scrollbar {
+    width: 6px;
+}
+
+.transactionsList::-webkit-scrollbar-track {
+    background: rgba(147, 51, 234, 0.05);
+    border-radius: 3px;
+}
+
+.transactionsList::-webkit-scrollbar-thumb {
+    background: rgba(147, 51, 234, 0.2);
+    border-radius: 3px;
+}
+
+.transactionsList::-webkit-scrollbar-thumb:hover {
+    background: rgba(147, 51, 234, 0.3);
+}
+
+.dateGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.dateLabel {
+    font-size: 0.8rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    padding-left: 0.5rem;
+}
+
+.transactionItem {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(147, 51, 234, 0.05);
+    border: 1px solid rgba(147, 51, 234, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.transactionItem:hover {
+    background: rgba(147, 51, 234, 0.1);
+    border-color: rgba(168, 85, 247, 0.2);
+    transform: translateX(4px);
+}
+
+.transactionInfo {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.iconBg {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    opacity: 0.9;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.description {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #f3f4f6;
+    margin: 0;
+}
+
+.time {
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+.amount {
+    display: flex;
+    align-items: center;
+}
+
+.amountValue {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f3f4f6;
+}
+
+.empty {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: #9ca3af;
+    font-size: 0.95rem;
+}
+
+/* Responsive Design */
+
+/* Tablets (768px - 1024px) */
+@media (max-width: 1024px) {
+    .transactionsCard {
+        padding: 1.5rem;
+    }
+
+    .title {
+        font-size: 1rem;
+    }
+
+    .transactionsList {
+        max-height: 500px;
+    }
+
+    .transactionItem {
+        gap: 0.8rem;
+        padding: 0.9rem;
+    }
+
+    .iconBg {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .description {
+        font-size: 0.9rem;
+    }
+
+    .amountValue {
+        font-size: 0.95rem;
+    }
+}
+
+/* Tablets (481px - 768px) */
+@media (max-width: 768px) {
+    .transactionsCard {
+        padding: 1.2rem;
+        height: auto;
+    }
+
+    .header {
+        margin-bottom: 1.2rem;
+    }
+
+    .title {
+        font-size: 1rem;
+    }
+
+    .filterBadge {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .transactionsList {
+        gap: 1rem;
+        max-height: 400px;
+        padding-right: 0.3rem;
+    }
+
+    .dateLabel {
+        font-size: 0.75rem;
+        padding-left: 0.3rem;
+    }
+
+    .transactionItem {
+        gap: 0.7rem;
+        padding: 0.8rem;
+    }
+
+    .iconBg {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+    }
+
+    .transactionInfo {
+        gap: 0.8rem;
+    }
+
+    .description {
+        font-size: 0.85rem;
+    }
+
+    .time {
+        font-size: 0.75rem;
+    }
+
+    .amountValue {
+        font-size: 0.9rem;
+    }
+}
+
+/* Mobile (< 481px) */
+@media (max-width: 480px) {
+    .transactionsCard {
+        padding: 1rem;
+        height: auto;
+    }
+
+    .header {
+        margin-bottom: 1rem;
+        gap: 0.5rem;
+    }
+
+    .title {
+        font-size: 0.95rem;
+    }
+
+    .filterBadge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .transactionsList {
+        gap: 0.8rem;
+        max-height: 350px;
+        padding-right: 0.2rem;
+    }
+
+    .dateLabel {
+        font-size: 0.7rem;
+        padding-left: 0.2rem;
+    }
+
+    .transactionItem {
+        gap: 0.6rem;
+        padding: 0.7rem;
+    }
+
+    .iconBg {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .transactionInfo {
+        gap: 0.6rem;
+    }
+
+    .details {
+        min-width: 0;
+    }
+
+    .description {
+        font-size: 0.8rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .time {
+        font-size: 0.7rem;
+    }
+
+    .amountValue {
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    .empty {
+        padding: 1.5rem 0.5rem;
+        font-size: 0.9rem;
+    }
+}
