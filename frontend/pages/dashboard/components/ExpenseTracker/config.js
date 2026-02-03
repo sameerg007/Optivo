@@ -9,6 +9,29 @@ export const CATEGORIES = {
     other: { name: 'Other', icon: '📌', color: '#9D84B7' }
 };
 
+// Payment Modes Configuration
+export const PAYMENT_MODES = {
+    cash: { name: 'Cash', icon: '💵', color: '#22c55e' },
+    credit_card: { name: 'Credit Card', icon: '💳', color: '#8b5cf6' },
+    debit_card: { name: 'Debit Card', icon: '💳', color: '#3b82f6' },
+    upi: { name: 'UPI', icon: '📱', color: '#f97316' },
+    cheque: { name: 'Cheque', icon: '📝', color: '#64748b' }
+};
+
+// User's Saved Cards (this would typically come from backend/user profile)
+export const SAVED_CARDS = {
+    credit: [
+        { id: 'cc1', name: 'HDFC Credit Card', lastFour: '4532', network: 'Visa', color: '#1e40af' },
+        { id: 'cc2', name: 'ICICI Amazon Pay', lastFour: '8921', network: 'Mastercard', color: '#7c3aed' },
+        { id: 'cc3', name: 'SBI Card Elite', lastFour: '6745', network: 'Visa', color: '#0369a1' }
+    ],
+    debit: [
+        { id: 'dc1', name: 'HDFC Debit Card', lastFour: '1234', network: 'Visa', color: '#0f766e' },
+        { id: 'dc2', name: 'SBI Debit Card', lastFour: '5678', network: 'RuPay', color: '#1d4ed8' },
+        { id: 'dc3', name: 'Axis Debit Card', lastFour: '9012', network: 'Mastercard', color: '#be185d' }
+    ]
+};
+
 export const EXPENSE_DATA = [
     {
         id: '1',
