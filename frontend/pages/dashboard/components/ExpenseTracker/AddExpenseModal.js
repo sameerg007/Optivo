@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import styles from './addExpenseModal.module.css';
 import { CATEGORIES } from './config';
 
@@ -14,6 +14,10 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
 
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [billImage, setBillImage] = useState(null);
+    const [billPreview, setBillPreview] = useState(null);
+    const [isDragOver, setIsDragOver] = useState(false);
+    const fileInputRef = useRef(null);
 
     // Handle input changes
     const handleInputChange = useCallback((e) => {
@@ -30,6 +34,87 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
             }));
         }
     }, [errors]);
+
+    // Handle file upload
+    const handleFileUpload = useCallback((file) => {
+        if (!file) return;
+
+        // Validate file type
+        const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'application/pdf'];
+        if (!validTypes.includes(file.type)) {
+            setErrors((prev) => ({
+                ...prev,
+                bill: 'Please upload an image (JPEG, PNG, GIF, WebP) or PDF'
+            }));
+            return;
+        }
+
+        // Validate file size (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+            setErrors((prev) => ({
+                ...prev,
+                bill: 'File size must be less than 5MB'
+            }));
+            return;
+        }
+
+        setBillImage(file);
+        setErrors((prev) => ({ ...prev, bill: '' }));
+
+        // Create preview for images
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setBillPreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            // For PDF, show a placeholder
+            setBillPreview('pdf');
+        }
+    }, []);
+
+    // Handle file input change
+    const handleFileInputChange = useCallback((e) => {
+        const file = e.target.files?.[0];
+        handleFileUpload(file);
+    }, [handleFileUpload]);
+
+    // Handle drag events
+    const handleDragOver = useCallback((e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsDragOver(true);
+    }, []);
+
+    const handleDragLeave = useCallback((e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsDragOver(false);
+    }, []);
+
+    const handleDrop = useCallback((e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsDragOver(false);
+
+        const file = e.dataTransfer.files?.[0];
+        handleFileUpload(file);
+    }, [handleFileUpload]);
+
+    // Remove uploaded bill
+    const handleRemoveBill = useCallback(() => {
+        setBillImage(null);
+        setBillPreview(null);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
+    }, []);
+
+    // Trigger file input click
+    const handleUploadClick = useCallback(() => {
+        fileInputRef.current?.click();
+    }, []);
 
     // Validate form
     const validateForm = () => {
@@ -76,7 +161,13 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
                     hour: '2-digit',
                     minute: '2-digit',
                     hour12: false
-                })
+                }),
+                bill: billImage ? {
+                    name: billImage.name,
+                    type: billImage.type,
+                    size: billImage.size,
+                    preview: billPreview
+                } : null
             };
 
             onAddExpense(newExpense);
@@ -88,6 +179,8 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
                 description: '',
                 date: new Date().toISOString().split('T')[0]
             });
+            setBillImage(null);
+            setBillPreview(null);
 
             onClose();
         } catch (error) {
@@ -191,6 +284,82 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
                         />
                         {errors.date && (
                             <span className={styles.errorText}>{errors.date}</span>
+                        )}
+                    </div>
+
+                    {/* Bill Upload */}
+                    <div className={styles.formGroup}>
+                        <label className={styles.label}>
+                            Receipt / Bill (Optional)
+                        </label>
+                        <input
+                            ref={fileInputRef}
+                            type="file"
+                            accept="image/*,.pdf"
+                            onChange={handleFileInputChange}
+                            className={styles.hiddenInput}
+                        />
+                        
+                        {!billPreview ? (
+                            <div
+                                className={`${styles.uploadZone} ${isDragOver ? styles.uploadZoneDragOver : ''}`}
+                                onClick={handleUploadClick}
+                                onDragOver={handleDragOver}
+                                onDragLeave={handleDragLeave}
+                                onDrop={handleDrop}
+                            >
+                                <div className={styles.uploadIcon}>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                        <polyline points="17 8 12 3 7 8" />
+                                        <line x1="12" y1="3" x2="12" y2="15" />
+                                    </svg>
+                                </div>
+                                <p className={styles.uploadText}>
+                                    <span className={styles.uploadLink}>Click to upload</span> or drag and drop
+                                </p>
+                                <p className={styles.uploadHint}>
+                                    PNG, JPG, GIF, WebP or PDF (max 5MB)
+                                </p>
+                            </div>
+                        ) : (
+                            <div className={styles.previewContainer}>
+                                {billPreview === 'pdf' ? (
+                                    <div className={styles.pdfPreview}>
+                                        <svg className={styles.pdfIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                            <polyline points="14 2 14 8 20 8" />
+                                            <line x1="16" y1="13" x2="8" y2="13" />
+                                            <line x1="16" y1="17" x2="8" y2="17" />
+                                            <polyline points="10 9 9 9 8 9" />
+                                        </svg>
+                                        <span className={styles.pdfName}>{billImage?.name}</span>
+                                    </div>
+                                ) : (
+                                    <img
+                                        src={billPreview}
+                                        alt="Bill preview"
+                                        className={styles.imagePreview}
+                                    />
+                                )}
+                                <div className={styles.previewActions}>
+                                    <span className={styles.fileName}>{billImage?.name}</span>
+                                    <button
+                                        type="button"
+                                        onClick={handleRemoveBill}
+                                        className={styles.removeButton}
+                                        aria-label="Remove file"
+                                    >
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <line x1="18" y1="6" x2="6" y2="18" />
+                                            <line x1="6" y1="6" x2="18" y2="18" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                        {errors.bill && (
+                            <span className={styles.errorText}>{errors.bill}</span>
                         )}
                     </div>
 
