@@ -1,5 +1,3 @@
-import { profile } from "node:console";
-
 // Dashboard Configuration and Constants
 export const TAB_CONTENT = {
     expense_tracker: {
