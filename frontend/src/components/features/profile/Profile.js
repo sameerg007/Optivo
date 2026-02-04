@@ -84,22 +84,6 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-
-                    {/* Quick Stats */}
-                    <div className={styles.quickStats}>
-                        <div className={styles.statItem}>
-                            <p className={styles.statValue}>₹2.4L</p>
-                            <span className={styles.statLabel}>Total Invested</span>
-                        </div>
-                        <div className={styles.statItem}>
-                            <p className={styles.statValue}>12</p>
-                            <span className={styles.statLabel}>Active Funds</span>
-                        </div>
-                        <div className={styles.statItem}>
-                            <p className={styles.statValue}>₹18.5K</p>
-                            <span className={styles.statLabel}>This Month</span>
-                        </div>
-                    </div>
                 </div>
             </div>
 
