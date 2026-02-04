@@ -17,7 +17,7 @@ export default function BudgetStatus({ spent, budget, percentage }) {
     const statusColor = getStatusColor();
 
     return (
-        <div className={styles.budgetCard}>
+        <div className={styles.budgetCard} style={{ '--status-color': statusColor, '--progress-offset': 339.29 * (1 - percentage / 100) }}>
             <h3 className={styles.title}>Budget Status</h3>
 
             {/* Circular Progress */}
@@ -36,10 +36,6 @@ export default function BudgetStatus({ spent, budget, percentage }) {
                         cy="60"
                         r="54"
                         className={styles.progressCircle}
-                        style={{
-                            strokeDashoffset: 339.29 * (1 - percentage / 100),
-                            stroke: statusColor
-                        }}
                     />
                 </svg>
 

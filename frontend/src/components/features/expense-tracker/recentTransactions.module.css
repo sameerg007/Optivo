@@ -60,6 +60,32 @@
   background: #262932;
 }
 
+.transactionInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.iconBg {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--category-color, #262932);
+}
+
+.icon {
+  font-size: 1rem;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
 .transactionLeft {
   display: flex;
   align-items: center;

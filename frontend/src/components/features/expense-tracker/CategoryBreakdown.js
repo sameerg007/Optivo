@@ -45,6 +45,7 @@ export default function CategoryBreakdown({ expenses, onCategorySelect, selected
                             key={catKey}
                             className={`${styles.categoryItem} ${selectedCategory === catKey ? styles.active : ''}`}
                             onClick={() => onCategorySelect(catKey)}
+                            style={{ '--category-color': category.color, '--progress-width': `${percentage}%` }}
                         >
                             {/* Icon */}
                             <span className={styles.icon}>{category.icon}</span>
@@ -55,10 +56,6 @@ export default function CategoryBreakdown({ expenses, onCategorySelect, selected
                                 <div className={styles.progressBar}>
                                     <div
                                         className={styles.progress}
-                                        style={{
-                                            width: `${percentage}%`,
-                                            backgroundColor: category.color
-                                        }}
                                     />
                                 </div>
                             </div>
