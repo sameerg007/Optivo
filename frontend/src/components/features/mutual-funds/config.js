@@ -26,32 +26,32 @@ export const MARKET_INDICES = {
 export const MOCK_MARKET_DATA = {
     nifty_50: {
         value: 22456.80,
-        change: 125.45,
-        changePercent: 0.56,
+        change: 45.15,
+        changePercent: 0.20,
         high: 22520.30,
         low: 22380.15,
         open: 22400.00,
-        previousClose: 22331.35,
+        previousClose: 22411.65,
         lastUpdated: new Date().toISOString()
     },
     sensex: {
         value: 73852.94,
-        change: 412.67,
-        changePercent: 0.56,
+        change: 182.47,
+        changePercent: 0.25,
         high: 73980.50,
         low: 73620.00,
         open: 73700.00,
-        previousClose: 73440.27,
+        previousClose: 73670.47,
         lastUpdated: new Date().toISOString()
     },
     nifty_bank: {
         value: 48234.55,
-        change: -156.30,
-        changePercent: -0.32,
+        change: -72.30,
+        changePercent: -0.15,
         high: 48450.00,
         low: 48100.00,
         open: 48400.00,
-        previousClose: 48390.85,
+        previousClose: 48306.85,
         lastUpdated: new Date().toISOString()
     }
 };

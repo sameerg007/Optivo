@@ -285,7 +285,7 @@
 /* NAV */
 .navValue {
   display: block;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: #d1d4dc;
   font-variant-numeric: tabular-nums;
@@ -293,7 +293,7 @@
 
 .navChange {
   display: block;
-  font-size: 0.6875rem;
+  font-size: 0.5625rem;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
   margin-top: 0.125rem;
@@ -301,7 +301,7 @@
 
 /* Returns */
 .returnValue {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
