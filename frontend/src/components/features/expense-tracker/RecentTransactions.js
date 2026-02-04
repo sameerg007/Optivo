@@ -47,10 +47,10 @@ export default function RecentTransactions({ transactions, selectedCategory, cat
                         {trans.map((transaction) => {
                             const category = categories[transaction.category];
                             return (
-                                <div key={transaction.id} className={styles.transactionItem}>
+                                <div key={transaction.id} className={styles.transactionItem} style={{ '--category-color': category.color }}>
                                     {/* Icon and Description */}
                                     <div className={styles.transactionInfo}>
-                                        <div className={styles.iconBg} style={{ backgroundColor: category.color }}>
+                                        <div className={styles.iconBg}>
                                             <span className={styles.icon}>{category.icon}</span>
                                         </div>
                                         <div className={styles.details}>

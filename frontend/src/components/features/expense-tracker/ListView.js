@@ -67,13 +67,12 @@ export default function ListView({ expenses, categories, onExpenseClick }) {
                                         key={expense.id || `${groupIndex}-${index}`}
                                         className={styles.expenseCard}
                                         onClick={() => onExpenseClick?.(expense)}
-                                        style={{ '--delay': `${index * 0.05}s` }}
+                                        style={{ '--delay': `${index * 0.05}s`, '--category-color': category.color }}
                                     >
                                         {/* Left: Icon & Info */}
                                         <div className={styles.expenseLeft}>
                                             <div
                                                 className={styles.iconWrapper}
-                                                style={{ backgroundColor: `${category.color}15` }}
                                             >
                                                 <span className={styles.icon}>{category.icon}</span>
                                             </div>

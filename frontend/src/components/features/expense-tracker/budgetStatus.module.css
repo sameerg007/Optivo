@@ -41,7 +41,8 @@
   stroke-linecap: round;
   stroke-width: 10;
   stroke-dasharray: 339.29;
-  stroke-dashoffset: 0;
+  stroke-dashoffset: var(--progress-offset, 0);
+  stroke: var(--status-color, #2962ff);
   transition: stroke-dashoffset 0.5s ease, stroke 0.3s ease;
 }
 

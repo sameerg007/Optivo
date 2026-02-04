@@ -83,6 +83,14 @@
   overflow: hidden;
 }
 
+.progress {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  width: var(--progress-width, 0%);
+  background-color: var(--category-color, #2962ff);
+}
+
 .progressFill {
   height: 100%;
   border-radius: 2px;

@@ -117,7 +117,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #262932;
+  background: color-mix(in srgb, var(--category-color, #6B7280) 15%, transparent);
 }
 
 .icon {
