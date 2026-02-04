@@ -1,5 +1,125 @@
 /* MarketIndices - Dark Professional Theme (Zerodha Style) */
 
+/* Main Container */
+.marketIndicesContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #1e222d;
+  border: 1px solid #2a2e39;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+}
+
+/* Market Status */
+.marketStatus {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-right: 1rem;
+  border-right: 1px solid #2a2e39;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6a6d78;
+}
+
+.statusOpen {
+  background: #26a69a;
+  animation: pulse 2s infinite;
+}
+
+.statusPreOpen {
+  background: #ff9800;
+  animation: pulse 2s infinite;
+}
+
+.statusClosed {
+  background: #6a6d78;
+}
+
+.statusText {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #9598a1;
+  white-space: nowrap;
+}
+
+/* Indices List */
+.indicesList {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+/* Index Card */
+.indexCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 120px;
+}
+
+.indexName {
+  display: flex;
+  align-items: center;
+}
+
+.indexLabel {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: #6a6d78;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.indexValue {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #d1d4dc;
+  font-variant-numeric: tabular-nums;
+}
+
+.change {
+  font-size: 0.5625rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.positive {
+  color: #26a69a;
+}
+
+.negative {
+  color: #ef5350;
+}
+
+/* Divider */
+.divider {
+  width: 1px;
+  height: 32px;
+  background: #2a2e39;
+}
+
+/* Last Updated */
+.lastUpdated {
+  font-size: 0.5625rem;
+  color: #6a6d78;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* Legacy styles */
 .indicesHeader {
   background: #1e222d;
   border: 1px solid #2a2e39;
@@ -142,6 +262,40 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .marketIndicesContainer {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .marketStatus {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .indicesList {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .indexCard {
+    min-width: 100px;
+  }
+
+  .value {
+    font-size: 0.9375rem;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .lastUpdated {
+    width: 100%;
+    margin-left: 0;
+  }
+
   .indicesHeader {
     padding: 0.875rem 1rem;
   }
@@ -161,15 +315,25 @@
   .separator {
     display: none;
   }
-
-  .lastUpdated {
-    width: 100%;
-    margin-top: 0.5rem;
-    margin-left: 0;
-  }
 }
 
 @media (max-width: 480px) {
+  .marketIndicesContainer {
+    padding: 0.625rem;
+  }
+
+  .indexCard {
+    min-width: 80px;
+  }
+
+  .value {
+    font-size: 0.875rem;
+  }
+
+  .change {
+    font-size: 0.625rem;
+  }
+
   .indicesGrid {
     gap: 1rem;
   }
