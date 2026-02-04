@@ -1,11 +1,97 @@
 /* ExpenseTracker - Dark Professional Theme (Zerodha Style) */
 
+/* Main Container */
+.expenseTrackerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  background: transparent;
+  position: relative;
+  min-height: 100%;
+  padding-bottom: 80px;
+}
+
 .expenseTracker {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
   width: 100%;
   background: transparent;
+}
+
+/* View Toggle Wrapper */
+.viewToggleWrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.viewToggle {
+  display: inline-flex;
+  background: #1e222d;
+  border: 1px solid #2a2e39;
+  border-radius: 8px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.toggleBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #6a6d78;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.toggleBtn:hover {
+  color: #d1d4dc;
+  background: #262932;
+}
+
+.toggleBtn.active {
+  background: #2962ff;
+  color: #ffffff;
+}
+
+.toggleIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Summary Section */
+.summarySection {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+/* Main Grid Layout */
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/* Charts Section (Left) */
+.chartsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Transactions Section (Right) */
+.transactionsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 /* Top Section - Summary Cards */
@@ -45,7 +131,44 @@
   letter-spacing: 0.08em;
 }
 
-/* Add Expense Button */
+/* Add Expense Button - Floating Action Button (FAB) */
+.addExpenseButton {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background: #2962ff;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 2rem;
+  font-weight: 400;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(41, 98, 255, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.addExpenseButton:hover {
+  background: #1e53e4;
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(41, 98, 255, 0.5), 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.addExpenseButton:active {
+  transform: scale(0.98);
+}
+
+.plusIcon {
+  line-height: 1;
+  font-weight: 300;
+}
+
+/* Legacy Add Expense Button */
 .addExpenseBtn {
   display: flex;
   align-items: center;
@@ -79,6 +202,10 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+
   .middleSection {
     grid-template-columns: 1fr;
   }
@@ -92,9 +219,21 @@
   .cardsGrid {
     grid-template-columns: 1fr 1fr;
   }
+
+  .addExpenseButton {
+    bottom: 20px;
+    right: 20px;
+    width: 52px;
+    height: 52px;
+    font-size: 1.75rem;
+  }
 }
 
 @media (max-width: 480px) {
+  .expenseTrackerContainer {
+    gap: 1rem;
+  }
+
   .expenseTracker {
     gap: 1rem;
   }
@@ -105,6 +244,15 @@
 
   .cardsGrid {
     grid-template-columns: 1fr;
+  }
+
+  .addExpenseButton {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    border-radius: 10px;
   }
 
   .addExpenseBtn {
