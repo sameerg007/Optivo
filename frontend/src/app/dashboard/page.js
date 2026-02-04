@@ -76,22 +76,6 @@ export default function DashboardPage() {
         }
     }, []);
 
-    // Handle logout
-    const handleLogout = useCallback(async () => {
-        try {
-            setLoading(true);
-            AuthService.logout();
-            Logger.info('Dashboard', 'Logout successful');
-            router.push('/login');
-        } catch (err) {
-            const errorMessage = err instanceof Error ? err?.message : 'Logout failed';
-            setError(errorMessage);
-            Logger.error('Dashboard', 'Logout error', err);
-        } finally {
-            setLoading(false);
-        }
-    }, [router]);
-
     // Loading state
     if (loading) {
         return (
@@ -115,14 +99,6 @@ export default function DashboardPage() {
             <div className={styles.header}>
                 <div className={styles.headerContent}>
                     <h1 className={styles.headerTitle}>Dashboard</h1>
-                    <button
-                        type="button"
-                        className={styles.logoutButton}
-                        onClick={handleLogout}
-                        disabled={loading}
-                    >
-                        Logout
-                    </button>
                 </div>
             </div>
 

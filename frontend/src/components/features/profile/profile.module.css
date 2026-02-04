@@ -1,0 +1,185 @@
+/* Profile - Dark Professional Theme (Zerodha Style) */
+
+.profileContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Profile Header */
+.profileHeader {
+    background: #1e222d;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid #2a2e39;
+}
+
+.avatarSection {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2962ff 0%, #1e88e5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.avatarIcon {
+    font-size: 2rem;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.userName {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #d1d4dc;
+    margin: 0;
+}
+
+.userEmail {
+    font-size: 0.875rem;
+    color: #787b86;
+    margin: 0;
+}
+
+/* Profile Content */
+.profileContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Settings Section */
+.settingsSection {
+    background: #1e222d;
+    border-radius: 12px;
+    padding: 1.25rem;
+    border: 1px solid #2a2e39;
+}
+
+.sectionTitle {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #787b86;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #2a2e39;
+}
+
+.settingsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.settingItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.875rem 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.settingItem:hover {
+    background: rgba(41, 98, 255, 0.08);
+}
+
+.settingInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.settingIcon {
+    font-size: 1.125rem;
+    width: 24px;
+    text-align: center;
+}
+
+.settingLabel {
+    font-size: 0.9375rem;
+    color: #d1d4dc;
+    font-weight: 500;
+}
+
+.settingArrow {
+    font-size: 1.25rem;
+    color: #787b86;
+    font-weight: 300;
+}
+
+/* Logout Section */
+.logoutSection {
+    padding: 0.5rem 0;
+}
+
+.logoutButton {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    background: transparent;
+    color: #ef5350;
+    border: 1px solid #ef5350;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.logoutButton:hover:not(:disabled) {
+    background: rgba(239, 83, 80, 0.1);
+    border-color: #ef5350;
+}
+
+.logoutButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .profileContainer {
+        padding: 0.75rem;
+    }
+
+    .profileHeader {
+        padding: 1.25rem;
+    }
+
+    .avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    .avatarIcon {
+        font-size: 1.75rem;
+    }
+
+    .userName {
+        font-size: 1.125rem;
+    }
+}
