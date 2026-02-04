@@ -1,0 +1,197 @@
+/* BudgetStatus - Dark Professional Theme (Zerodha Style) */
+
+.budgetCard {
+  background: #1e222d;
+  border: 1px solid #2a2e39;
+  border-radius: 6px;
+  padding: 1.25rem;
+}
+
+.title {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #6a6d78;
+  margin: 0 0 1.25rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Progress Container */
+.progressContainer {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 1.5rem;
+}
+
+.progressRing {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.bgCircle {
+  fill: none;
+  stroke: #262932;
+  stroke-width: 10;
+}
+
+.progressCircle {
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 10;
+  stroke-dasharray: 339.29;
+  stroke-dashoffset: var(--progress-offset, 0);
+  stroke: var(--status-color, #2962ff);
+  transition: stroke-dashoffset 0.5s ease, stroke 0.3s ease;
+}
+
+.centerText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.percentage {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #d1d4dc;
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  font-size: 0.625rem;
+  color: #6a6d78;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+/* Status Info */
+.statusInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: #262932;
+  border-radius: 6px;
+}
+
+.spent,
+.budget {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.amount {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #d1d4dc;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Remaining Status */
+.remainingStatus {
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.remainingStatus.safe {
+  background: rgba(38, 166, 154, 0.1);
+  border: 1px solid rgba(38, 166, 154, 0.2);
+}
+
+.remainingStatus.over {
+  background: rgba(239, 83, 80, 0.1);
+  border: 1px solid rgba(239, 83, 80, 0.2);
+}
+
+.remainingStatus .label {
+  font-size: 0.625rem;
+}
+
+.remainingStatus .amount {
+  font-size: 1.375rem;
+}
+
+.remainingStatus.safe .amount {
+  color: #26a69a;
+}
+
+.remainingStatus.over .amount {
+  color: #ef5350;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .budgetCard {
+    padding: 1rem;
+  }
+
+  .progressContainer {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 1.25rem;
+  }
+
+  .percentage {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .progressContainer {
+    width: 130px;
+    height: 130px;
+  }
+
+  .percentage {
+    font-size: 1.5rem;
+  }
+
+  .statusInfo {
+    padding: 0.875rem;
+    gap: 0.5rem;
+  }
+
+  .amount {
+    font-size: 1.125rem;
+  }
+
+  .remainingStatus {
+    padding: 0.875rem;
+  }
+
+  .remainingStatus .amount {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .progressContainer {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1rem;
+  }
+
+  .progressRing .bgCircle,
+  .progressRing .progressCircle {
+    stroke-width: 8;
+  }
+
+  .percentage {
+    font-size: 1.375rem;
+  }
+}

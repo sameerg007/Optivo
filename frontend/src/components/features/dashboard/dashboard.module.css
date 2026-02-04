@@ -1,0 +1,242 @@
+/* Dashboard - Dark Professional Theme (Zerodha Style) */
+
+.container {
+  min-height: 100vh;
+  background: #131722;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+}
+
+/* Header */
+.header {
+  background: #1e222d;
+  border-bottom: 1px solid #2a2e39;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.875rem 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.headerTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #d1d4dc;
+  margin: 0;
+}
+
+.logoutButton {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #ef5350;
+  border: 1px solid #ef5350;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.logoutButton:hover:not(:disabled) {
+  background: rgba(239, 83, 80, 0.1);
+}
+
+.logoutButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Error Message */
+.errorMessage {
+  padding: 0.75rem 1.5rem;
+  background: rgba(239, 83, 80, 0.1);
+  border-bottom: 1px solid rgba(239, 83, 80, 0.3);
+  color: #ef5350;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Main Content */
+.mainContent {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  overflow-y: auto;
+}
+
+/* Tab Content */
+.tabContent {
+  background: #1e222d;
+  border-radius: 8px;
+  border: 1px solid #2a2e39;
+  padding: 1.5rem;
+  color: #9598a1;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.tabContent h2 {
+  color: #d1d4dc;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.tabContent p {
+  color: #9598a1;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Loading Spinner */
+.loadingSpinner {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9598a1;
+}
+
+/* Footer with Tab Navigation */
+.footer {
+  background: #1e222d;
+  border-top: 1px solid #2a2e39;
+  padding: 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 50;
+}
+
+.tabNavigation {
+  display: flex;
+  gap: 0;
+  padding: 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tabButton {
+  flex: 1;
+  padding: 1rem 0.75rem;
+  background: transparent;
+  color: #6a6d78;
+  border: none;
+  border-top: 2px solid transparent;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.tabIcon {
+  font-size: 1.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabLabel {
+  display: none;
+}
+
+.tabButton:hover {
+  color: #d1d4dc;
+  background: #262932;
+}
+
+.tabButton.active {
+  color: #2962ff;
+  border-top-color: #2962ff;
+  background: rgba(41, 98, 255, 0.08);
+}
+
+/* Mobile (< 480px) */
+@media (max-width: 480px) {
+  .headerContent {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    align-items: stretch;
+  }
+
+  .headerTitle {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .logoutButton {
+    padding: 0.625rem;
+    font-size: 0.75rem;
+    width: 100%;
+  }
+
+  .mainContent {
+    padding: 0.75rem;
+  }
+
+  .tabContent {
+    padding: 1rem;
+    min-height: 240px;
+    border-radius: 6px;
+  }
+
+  .tabButton {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.6875rem;
+    gap: 0;
+    flex-direction: column;
+  }
+
+  .tabLabel {
+    display: block;
+    font-size: 0.625rem;
+  }
+}
+
+/* Tablet (480px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .tabButton {
+    padding: 0.875rem 0.5rem;
+    font-size: 0.75rem;
+    gap: 0.375rem;
+  }
+
+  .tabLabel {
+    display: inline;
+  }
+}
+
+/* Desktop (768px+) */
+@media (min-width: 769px) {
+  .tabButton {
+    padding: 1rem 0.75rem;
+    font-size: 0.8125rem;
+    gap: 0.5rem;
+  }
+
+  .tabLabel {
+    display: inline;
+  }
+}

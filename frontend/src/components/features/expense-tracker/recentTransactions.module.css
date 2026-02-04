@@ -1,0 +1,308 @@
+/* RecentTransactions - Dark Professional Theme (Zerodha Style) */
+
+.transactionsCard {
+  background: #1e222d;
+  border: 1px solid #2a2e39;
+  border-radius: 6px;
+  padding: 1.25rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.title {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #6a6d78;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.filterBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  background: rgba(41, 98, 255, 0.12);
+  border-radius: 4px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #2962ff;
+}
+
+.viewAll {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #2962ff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s ease;
+}
+
+.viewAll:hover {
+  color: #5c85ff;
+}
+
+/* Transaction List */
+.transactionList,
+.transactionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Date Group */
+.dateGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  margin-bottom: 0.75rem;
+}
+
+.dateGroup:last-child {
+  margin-bottom: 0;
+}
+
+.dateLabel {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: #4a4d58;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0;
+}
+
+/* Transaction Item */
+.transactionItem {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  gap: 0.75rem;
+}
+
+.transactionItem:hover {
+  background: #262932;
+}
+
+.transactionInfo {
+  display: contents;
+}
+
+.iconBg {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--category-color, #6B7280) 15%, transparent);
+}
+
+.icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.description {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #d1d4dc;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin: 0;
+}
+
+.time {
+  font-size: 0.625rem;
+  color: #6a6d78;
+}
+
+.receiptBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: #26a69a;
+  background: rgba(38, 166, 154, 0.12);
+  border-radius: 3px;
+}
+
+.receiptBadge svg {
+  width: 10px;
+  height: 10px;
+}
+
+.amount {
+  text-align: right;
+}
+
+.amountValue {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #ef5350;
+  font-variant-numeric: tabular-nums;
+}
+
+.transactionLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.transactionIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  background: #262932;
+}
+
+.transactionInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.transactionName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #d1d4dc;
+}
+
+.transactionCategory {
+  font-size: 0.6875rem;
+  color: #6a6d78;
+}
+
+/* Transaction Right */
+.transactionRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.125rem;
+}
+
+.transactionAmount {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #d1d4dc;
+  font-variant-numeric: tabular-nums;
+}
+
+.transactionAmount.expense {
+  color: #ef5350;
+}
+
+.transactionAmount.income {
+  color: #26a69a;
+}
+
+.transactionTime {
+  font-size: 0.625rem;
+  color: #6a6d78;
+}
+
+/* Payment Mode Badge */
+.paymentBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.625rem;
+  color: #6a6d78;
+  background: #262932;
+  padding: 0.125rem 0.375rem;
+  border-radius: 3px;
+  margin-top: 0.25rem;
+}
+
+/* Empty State */
+.empty,
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+
+.empty p {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6a6d78;
+  margin: 0;
+}
+
+.emptyIcon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  color: #363a45;
+}
+
+.emptyText {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6a6d78;
+  margin: 0 0 0.25rem 0;
+}
+
+.emptyHint {
+  font-size: 0.75rem;
+  color: #6a6d78;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .transactionsCard {
+    padding: 1rem;
+  }
+
+  .transactionIcon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.875rem;
+  }
+
+  .transactionName {
+    font-size: 0.8125rem;
+  }
+
+  .transactionAmount {
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .transactionItem {
+    padding: 0.625rem 0.5rem;
+  }
+
+  .transactionLeft {
+    gap: 0.625rem;
+  }
+}

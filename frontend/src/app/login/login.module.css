@@ -1,0 +1,147 @@
+/* Login - Dark Professional Theme (Zerodha Style) */
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #131722;
+  padding: 1.5rem;
+}
+
+.formWrapper {
+  width: 100%;
+  max-width: 380px;
+  background: #1e222d;
+  border: 1px solid #2a2e39;
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #d1d4dc;
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: #6a6d78;
+  margin: 0 0 2rem 0;
+  text-align: center;
+}
+
+/* Form */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.inputField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.inputField label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #9598a1;
+}
+
+.inputField input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #363a45;
+  border-radius: 4px;
+  font-size: 0.9375rem;
+  color: #d1d4dc;
+  background: #262932;
+  transition: border-color 0.15s ease;
+}
+
+.inputField input:focus {
+  outline: none;
+  border-color: #2962ff;
+}
+
+.inputField input::placeholder {
+  color: #6a6d78;
+}
+
+.inputField input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Forgot Password Link */
+.forgotPassword {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -0.5rem;
+}
+
+.forgotPassword a,
+.forgotPassword span {
+  font-size: 0.75rem;
+  color: #2962ff;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.forgotPassword a:hover,
+.forgotPassword span:hover {
+  color: #5c85ff;
+}
+
+/* Error Message */
+.error {
+  padding: 0.75rem;
+  background: rgba(239, 83, 80, 0.1);
+  border: 1px solid rgba(239, 83, 80, 0.2);
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  color: #ef5350;
+}
+
+/* Submit Button */
+.submitButton {
+  margin-top: 0.5rem;
+}
+
+/* Footer */
+.footerText {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6a6d78;
+}
+
+.footerLink {
+  color: #2962ff;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.footerLink:hover {
+  color: #5c85ff;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .formWrapper {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+}

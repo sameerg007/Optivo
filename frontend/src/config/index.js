@@ -5,5 +5,6 @@
 
 export { default as APP_CONFIG } from './app.config';
 export { API_ENDPOINTS } from './api.endpoints';
+export * from './dashboard.config';
 
 export default {};

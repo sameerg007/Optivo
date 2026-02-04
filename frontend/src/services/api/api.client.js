@@ -5,7 +5,9 @@
 
 import APP_CONFIG from '../../config/app.config';
 import logger from '../logger.service';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HTTP_STATUS } from '../../constants';
+import storageService from '../storage/storage.service';
 
 class APIClient {
     constructor() {
@@ -20,8 +22,6 @@ class APIClient {
      * Get Authorization header
      */
     getAuthHeader() {
-        // Import here to avoid circular dependency
-        const storageService = require('../../services/storage/storage.service').default;
         const token = storageService.getAuthToken();
         
         if (token) {
