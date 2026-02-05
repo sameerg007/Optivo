@@ -1,14 +1,48 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './profile.module.css';
+import AddCategoryModal from './AddCategoryModal';
 import { AuthService, Logger } from '@/services';
 
+
+const CATEGORY_STORAGE_KEY = 'optivo_user_categories';
+
+const defaultCategories = [
+    { name: 'Food', icon: '🍔', color: '#FF6B6B' },
+    { name: 'Transport', icon: '🚗', color: '#4ECDC4' },
+    { name: 'Entertainment', icon: '🎬', color: '#45B7D1' },
+    { name: 'Utilities', icon: '💡', color: '#FFA502' },
+    { name: 'Shopping', icon: '🛍️', color: '#FF69B4' },
+    { name: 'Health', icon: '🏥', color: '#6BCB77' },
+    { name: 'Other', icon: '📌', color: '#9D84B7' }
+];
+
 const Profile = () => {
-    const router = useRouter();
-    const [loading, setLoading] = useState(false);
-    const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+        const router = useRouter();
+        const [loading, setLoading] = useState(false);
+        const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+        const [categories, setCategories] = useState(defaultCategories);
+        const [showAddCategory, setShowAddCategory] = useState(false);
+
+        // Load categories from localStorage
+        useEffect(() => {
+            const saved = localStorage.getItem(CATEGORY_STORAGE_KEY);
+            if (saved) {
+                try {
+                    setCategories(JSON.parse(saved));
+                } catch {}
+            }
+        }, []);
+
+        // Save categories to localStorage
+        useEffect(() => {
+            localStorage.setItem(CATEGORY_STORAGE_KEY, JSON.stringify(categories));
+        }, [categories]);
+        const handleAddCategory = (cat) => {
+            setCategories((prev) => [...prev, cat]);
+        };
 
     // Handle logout
     const handleLogout = useCallback(async () => {
@@ -87,8 +121,26 @@ const Profile = () => {
                 </div>
             </div>
 
-            {/* Profile Content */}
-            <div className={styles.profileContent}>
+                        {/* Profile Content */}
+                        <div className={styles.profileContent}>
+                                {/* Categories Section */}
+                                <div className={styles.settingsSection}>
+                                    <div className={styles.sectionHeader}>
+                                        <h3 className={styles.sectionTitle}>Expense Categories</h3>
+                                        <button className={styles.addExpenseBtn} style={{marginLeft:'auto'}} onClick={()=>setShowAddCategory(true)}>
+                                            + Add Category
+                                        </button>
+                                    </div>
+                                    <div style={{display:'flex',flexWrap:'wrap',gap:'0.75rem',padding:'1rem'}}>
+                                        {categories.map((cat, idx) => (
+                                            <div key={cat.name+idx} style={{display:'flex',alignItems:'center',gap:8,background:'#262932',borderRadius:8,padding:'0.5rem 1rem',minWidth:90}}>
+                                                <span style={{fontSize:'1.25rem'}}>{cat.icon}</span>
+                                                <span style={{fontWeight:600,color:cat.color}}>{cat.name}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            <AddCategoryModal isOpen={showAddCategory} onClose={()=>setShowAddCategory(false)} onAddCategory={handleAddCategory} />
                 {/* Account Settings Section */}
                 <div className={styles.settingsSection}>
                     <div className={styles.sectionHeader}>
