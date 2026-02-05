@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useCallback, useMemo } from 'react';
-import { useCategoryStore } from './zustandStore';
+import { useCategoryStore } from '@/store/zustandStore';
 import styles from './expenseTracker.module.css';
 import SummaryCard from './SummaryCard';
 import CategoryBreakdown from './CategoryBreakdown';

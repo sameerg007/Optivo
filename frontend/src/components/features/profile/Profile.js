@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useCallback } from 'react';
-import { useCategoryStore } from '../expense-tracker/zustandStore';
+import { useCategoryStore } from '@/store/zustandStore';
 import { useRouter } from 'next/navigation';
 import styles from './profile.module.css';
 import AddCategoryModal from './AddCategoryModal';
