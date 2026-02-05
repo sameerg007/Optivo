@@ -9,7 +9,7 @@ import BudgetStatus from './BudgetStatus';
 import SpendingTrend from './SpendingTrend';
 import AddExpenseModal from './AddExpenseModal';
 import ExpenseListView from './ExpenseListView';
-import { EXPENSE_DATA, CATEGORIES } from './config';
+import { EXPENSE_DATA } from './config';
 
 // View types
 const VIEWS = {
@@ -17,11 +17,49 @@ const VIEWS = {
     LIST: 'list',
 };
 
-export default function ExpenseTracker() {
-    const [expenses, setExpenses] = useState(EXPENSE_DATA);
-    const [selectedCategory, setSelectedCategory] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [activeView, setActiveView] = useState(VIEWS.DASHBOARD);
+
+        const CATEGORY_STORAGE_KEY = 'optivo_user_categories';
+        const defaultCategories = [
+            { name: 'Food', icon: '🍔', color: '#FF6B6B' },
+            { name: 'Transport', icon: '🚗', color: '#4ECDC4' },
+            { name: 'Entertainment', icon: '🎬', color: '#45B7D1' },
+            { name: 'Utilities', icon: '💡', color: '#FFA502' },
+            { name: 'Shopping', icon: '🛍️', color: '#FF69B4' },
+            { name: 'Health', icon: '🏥', color: '#6BCB77' },
+            { name: 'Other', icon: '📌', color: '#9D84B7' }
+        ];
+
+        const [expenses, setExpenses] = useState(EXPENSE_DATA);
+        const [selectedCategory, setSelectedCategory] = useState(null);
+        const [isModalOpen, setIsModalOpen] = useState(false);
+        const [activeView, setActiveView] = useState(VIEWS.DASHBOARD);
+        const [categories, setCategories] = useState(() => {
+            if (typeof window !== 'undefined') {
+                const saved = localStorage.getItem(CATEGORY_STORAGE_KEY);
+                if (saved) {
+                    try {
+                        return JSON.parse(saved);
+                    } catch {}
+                }
+            }
+            return defaultCategories;
+        });
+
+        // Keep categories in sync with Profile tab
+        useEffect(() => {
+            const syncCategories = () => {
+                const saved = localStorage.getItem(CATEGORY_STORAGE_KEY);
+                if (saved) {
+                    try {
+                        setCategories(JSON.parse(saved));
+                    } catch {}
+                }
+            };
+            window.addEventListener('storage', syncCategories);
+            // Also check on mount
+            syncCategories();
+            return () => window.removeEventListener('storage', syncCategories);
+        }, []);
 
     // Calculate summary metrics
     const summary = useMemo(() => {
@@ -146,11 +184,11 @@ export default function ExpenseTracker() {
                                 expenses={expenses}
                                 onCategorySelect={handleCategorySelect}
                                 selectedCategory={selectedCategory}
-                                categories={CATEGORIES}
+                                categories={Object.fromEntries(categories.map(cat => [cat.name.toLowerCase(), cat]))}
                             />
 
                             {/* Spending Trend Line Graph */}
-                            <SpendingTrend expenses={expenses} categories={CATEGORIES} />
+                            <SpendingTrend expenses={expenses} categories={Object.fromEntries(categories.map(cat => [cat.name.toLowerCase(), cat]))} />
                         </div>
 
                         {/* Right Section - Transactions */}
@@ -158,7 +196,7 @@ export default function ExpenseTracker() {
                             <RecentTransactions
                                 transactions={filteredTransactions}
                                 selectedCategory={selectedCategory}
-                                categories={CATEGORIES}
+                                categories={Object.fromEntries(categories.map(cat => [cat.name.toLowerCase(), cat]))}
                             />
                         </div>
                     </div>
@@ -169,7 +207,7 @@ export default function ExpenseTracker() {
             {activeView === VIEWS.LIST && (
                 <ExpenseListView
                     expenses={expenses}
-                    categories={CATEGORIES}
+                    categories={Object.fromEntries(categories.map(cat => [cat.name.toLowerCase(), cat]))}
                     onExpenseClick={handleExpenseClick}
                 />
             )}
@@ -188,6 +226,7 @@ export default function ExpenseTracker() {
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
                 onAddExpense={handleAddExpense}
+                categories={categories}
             />
         </div>
     );
