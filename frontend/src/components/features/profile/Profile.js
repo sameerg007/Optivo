@@ -1,48 +1,23 @@
 'use client';
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useCategoryStore } from '../expense-tracker/zustandStore';
 import { useRouter } from 'next/navigation';
 import styles from './profile.module.css';
 import AddCategoryModal from './AddCategoryModal';
 import { AuthService, Logger } from '@/services';
 
 
-const CATEGORY_STORAGE_KEY = 'optivo_user_categories';
-
-const defaultCategories = [
-    { name: 'Food', icon: '🍔', color: '#FF6B6B' },
-    { name: 'Transport', icon: '🚗', color: '#4ECDC4' },
-    { name: 'Entertainment', icon: '🎬', color: '#45B7D1' },
-    { name: 'Utilities', icon: '💡', color: '#FFA502' },
-    { name: 'Shopping', icon: '🛍️', color: '#FF69B4' },
-    { name: 'Health', icon: '🏥', color: '#6BCB77' },
-    { name: 'Other', icon: '📌', color: '#9D84B7' }
-];
-
 const Profile = () => {
-        const router = useRouter();
-        const [loading, setLoading] = useState(false);
-        const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-        const [categories, setCategories] = useState(defaultCategories);
-        const [showAddCategory, setShowAddCategory] = useState(false);
-
-        // Load categories from localStorage
-        useEffect(() => {
-            const saved = localStorage.getItem(CATEGORY_STORAGE_KEY);
-            if (saved) {
-                try {
-                    setCategories(JSON.parse(saved));
-                } catch {}
-            }
-        }, []);
-
-        // Save categories to localStorage
-        useEffect(() => {
-            localStorage.setItem(CATEGORY_STORAGE_KEY, JSON.stringify(categories));
-        }, [categories]);
-        const handleAddCategory = (cat) => {
-            setCategories((prev) => [...prev, cat]);
-        };
+    const router = useRouter();
+    const [loading, setLoading] = useState(false);
+    const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+    const [showAddCategory, setShowAddCategory] = useState(false);
+    const categories = useCategoryStore((state) => state.categories);
+    const addCategory = useCategoryStore((state) => state.addCategory);
+    const handleAddCategory = (cat) => {
+        addCategory(cat);
+    };
 
     // Handle logout
     const handleLogout = useCallback(async () => {
