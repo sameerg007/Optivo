@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useCallback, useMemo } from 'react';
+import { useCategoryStore } from '@/store/zustandStore';
 import styles from './expenseTracker.module.css';
 import SummaryCard from './SummaryCard';
 import CategoryBreakdown from './CategoryBreakdown';
@@ -9,7 +10,7 @@ import BudgetStatus from './BudgetStatus';
 import SpendingTrend from './SpendingTrend';
 import AddExpenseModal from './AddExpenseModal';
 import ExpenseListView from './ExpenseListView';
-import { EXPENSE_DATA, CATEGORIES } from './config';
+import { EXPENSE_DATA } from './config';
 
 // View types
 const VIEWS = {
@@ -17,7 +18,9 @@ const VIEWS = {
     LIST: 'list',
 };
 
+
 export default function ExpenseTracker() {
+    const categories = useCategoryStore((state) => state.categories);
     const [expenses, setExpenses] = useState(EXPENSE_DATA);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -146,11 +149,11 @@ export default function ExpenseTracker() {
                                 expenses={expenses}
                                 onCategorySelect={handleCategorySelect}
                                 selectedCategory={selectedCategory}
-                                categories={CATEGORIES}
+                                categories={Object.fromEntries(categories.map(cat => [cat.name.toLowerCase(), cat]))}
                             />
 
                             {/* Spending Trend Line Graph */}
-                            <SpendingTrend expenses={expenses} categories={CATEGORIES} />
+                            <SpendingTrend expenses={expenses} categories={Object.fromEntries(categories.map(cat => [cat.name.toLowerCase(), cat]))} />
                         </div>
 
                         {/* Right Section - Transactions */}
@@ -158,7 +161,7 @@ export default function ExpenseTracker() {
                             <RecentTransactions
                                 transactions={filteredTransactions}
                                 selectedCategory={selectedCategory}
-                                categories={CATEGORIES}
+                                categories={Object.fromEntries(categories.map(cat => [cat.name.toLowerCase(), cat]))}
                             />
                         </div>
                     </div>
@@ -169,7 +172,7 @@ export default function ExpenseTracker() {
             {activeView === VIEWS.LIST && (
                 <ExpenseListView
                     expenses={expenses}
-                    categories={CATEGORIES}
+                    categories={Object.fromEntries(categories.map(cat => [cat.name.toLowerCase(), cat]))}
                     onExpenseClick={handleExpenseClick}
                 />
             )}
@@ -188,7 +191,10 @@ export default function ExpenseTracker() {
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
                 onAddExpense={handleAddExpense}
+                categories={categories}
             />
         </div>
     );
 }
+
+

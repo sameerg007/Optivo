@@ -1,0 +1,79 @@
+.modalOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(30,34,45,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modalContent {
+  background: #1e222d;
+  color: #d1d4dc;
+  border-radius: 12px;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  min-width: 320px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modalTitle {
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.modalLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.95rem;
+}
+.modalInput {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #2a2e39;
+  background: #262932;
+  color: #d1d4dc;
+  font-size: 1rem;
+}
+.modalColorInput {
+  width: 40px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+.modalButton {
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  border: none;
+  background: #2962ff;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.modalButtonCancel {
+  background: #363a45;
+  color: #d1d4dc;
+}
+.modalButton:hover {
+  background: #1e53e4;
+}
+.error {
+  color: #ef5350;
+  font-size: 0.92rem;
+  margin-top: -0.5rem;
+}

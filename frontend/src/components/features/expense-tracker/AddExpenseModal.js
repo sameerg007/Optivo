@@ -2,15 +2,16 @@
 
 import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import styles from './addExpenseModal.module.css';
-import { CATEGORIES, PAYMENT_MODES, DEFAULT_SAVED_CARDS, CARDS_STORAGE_KEY } from './config';
+import { PAYMENT_MODES, DEFAULT_SAVED_CARDS, CARDS_STORAGE_KEY } from './config';
 import AddCardModal from './AddCardModal';
 import Button from '@/components/common/Button';
 import { useVoiceInput } from '@/hooks/useVoiceInput';
 import { parseVoiceInput } from './voiceParser';
 
-export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
+// Accept categories as a prop
+export default function AddExpenseModal({ isOpen, onClose, onAddExpense, categories = [] }) {
     const [formData, setFormData] = useState({
-        category: 'food',
+        category: categories.length > 0 ? (categories[0].name?.toLowerCase?.() || categories[0].name || '') : '',
         amount: '',
         description: '',
         date: new Date().toISOString().split('T')[0],
@@ -421,7 +422,10 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
                             <div className={styles.voiceParsed}>
                                 {voiceParseResult.category && (
                                     <span className={styles.voiceParsedItem}>
-                                        {CATEGORIES[voiceParseResult.category]?.icon} {CATEGORIES[voiceParseResult.category]?.name}
+                                        {(() => {
+                                            const cat = categories.find(c => (c.name?.toLowerCase?.() || c.name) === voiceParseResult.category);
+                                            return cat ? `${cat.icon} ${cat.name}` : voiceParseResult.category;
+                                        })()}
                                     </span>
                                 )}
                                 {voiceParseResult.amount && (
@@ -461,8 +465,8 @@ export default function AddExpenseModal({ isOpen, onClose, onAddExpense }) {
                             onChange={handleInputChange}
                             className={styles.select}
                         >
-                            {Object.entries(CATEGORIES).map(([key, cat]) => (
-                                <option key={key} value={key}>
+                            {categories.map(cat => (
+                                <option key={cat.name} value={cat.name?.toLowerCase?.() || cat.name}>
                                     {cat.icon} {cat.name}
                                 </option>
                             ))}
