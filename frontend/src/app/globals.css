@@ -1,6 +1,15 @@
 @import "tailwindcss";
 
 :root {
+    /* Premium Royale Palette */
+    --color-premium-gold: #FFD700;
+    --color-premium-gold-dark: #BFA43A;
+    --color-premium-royal: #2B2D42;
+    --color-premium-royal-dark: #1A1B2F;
+    --color-premium-gradient: linear-gradient(135deg, #FFD700 0%, #BFA43A 100%);
+    --color-premium-shadow: 0 4px 24px rgba(41, 98, 255, 0.10), 0 1.5px 8px rgba(255, 215, 0, 0.10);
+    --color-premium-card: #23243a;
+    --color-premium-bg: linear-gradient(135deg, #23243a 0%, #1A1B2F 100%);
   /* Dark Theme - Zerodha Inspired */
   --color-bg-primary: #131722;
   --color-bg-secondary: #1e222d;
