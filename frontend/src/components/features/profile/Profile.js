@@ -1,14 +1,23 @@
 'use client';
 
 import React, { useState, useCallback } from 'react';
+import { useCategoryStore } from '@/store/zustandStore';
 import { useRouter } from 'next/navigation';
 import styles from './profile.module.css';
+import AddCategoryModal from './AddCategoryModal';
 import { AuthService, Logger } from '@/services';
+
 
 const Profile = () => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+    const [showAddCategory, setShowAddCategory] = useState(false);
+    const categories = useCategoryStore((state) => state.categories);
+    const addCategory = useCategoryStore((state) => state.addCategory);
+    const handleAddCategory = (cat) => {
+        addCategory(cat);
+    };
 
     // Handle logout
     const handleLogout = useCallback(async () => {
@@ -87,8 +96,26 @@ const Profile = () => {
                 </div>
             </div>
 
-            {/* Profile Content */}
-            <div className={styles.profileContent}>
+                        {/* Profile Content */}
+                        <div className={styles.profileContent}>
+                                {/* Categories Section */}
+                                <div className={styles.settingsSection}>
+                                    <div className={styles.sectionHeader}>
+                                        <h3 className={styles.sectionTitle}>Expense Categories</h3>
+                                        <button className={styles.addExpenseBtn} style={{marginLeft:'auto'}} onClick={()=>setShowAddCategory(true)}>
+                                            + Add Category
+                                        </button>
+                                    </div>
+                                    <div style={{display:'flex',flexWrap:'wrap',gap:'0.75rem',padding:'1rem'}}>
+                                        {categories.map((cat, idx) => (
+                                            <div key={cat.name+idx} style={{display:'flex',alignItems:'center',gap:8,background:'#262932',borderRadius:8,padding:'0.5rem 1rem',minWidth:90}}>
+                                                <span style={{fontSize:'1.25rem'}}>{cat.icon}</span>
+                                                <span style={{fontWeight:600,color:cat.color}}>{cat.name}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            <AddCategoryModal isOpen={showAddCategory} onClose={()=>setShowAddCategory(false)} onAddCategory={handleAddCategory} />
                 {/* Account Settings Section */}
                 <div className={styles.settingsSection}>
                     <div className={styles.sectionHeader}>

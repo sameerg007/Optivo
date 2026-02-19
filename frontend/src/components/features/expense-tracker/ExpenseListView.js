@@ -47,8 +47,8 @@ export default function ExpenseListView({ expenses, categories, onExpenseClick }
             <div className={styles.expenseStack}>
                 {groupedByDate.map((group, groupIndex) => (
                     <div key={group.label} className={styles.dateGroup}>
-                        {/* Date Header */}
-                        <div className={styles.dateHeader}>
+                        {/* Date Header - Spendee style */}
+                        <div className={styles.dateHeaderSpendee}>
                             <span className={styles.dateLabel}>{group.label}</span>
                             <span className={styles.dateTotal}>₹{group.total.toFixed(2)}</span>
                         </div>
@@ -65,19 +65,17 @@ export default function ExpenseListView({ expenses, categories, onExpenseClick }
                                 return (
                                     <div
                                         key={expense.id || `${groupIndex}-${index}`}
-                                        className={styles.expenseCard}
+                                        className={styles.expenseCardSpendee}
                                         onClick={() => onExpenseClick?.(expense)}
-                                        style={{ '--delay': `${index * 0.05}s`, '--category-color': category.color }}
+                                        style={{ '--category-color': category.color, boxShadow: '0 2px 12px 0 rgba(0,0,0,0.08)' }}
                                     >
                                         {/* Left: Icon & Info */}
-                                        <div className={styles.expenseLeft}>
-                                            <div
-                                                className={styles.iconWrapper}
-                                            >
-                                                <span className={styles.icon}>{category.icon}</span>
+                                        <div className={styles.expenseLeftSpendee}>
+                                            <div className={styles.iconWrapperSpendee} style={{ background: category.color + '22' }}>
+                                                <span className={styles.iconSpendee}>{category.icon}</span>
                                             </div>
-                                            <div className={styles.expenseInfo}>
-                                                <span className={styles.expenseName}>
+                                            <div className={styles.expenseInfoSpendee}>
+                                                <span className={styles.expenseNameSpendee}>
                                                     {expense.name || expense.description}
                                                     {expense.bill && (
                                                         <span className={styles.receiptBadge} title="Receipt attached">
@@ -88,14 +86,14 @@ export default function ExpenseListView({ expenses, categories, onExpenseClick }
                                                         </span>
                                                     )}
                                                 </span>
-                                                <span className={styles.categoryName}>{category.name}</span>
+                                                <span className={styles.categoryNameSpendee}>{category.name}</span>
                                             </div>
                                         </div>
 
                                         {/* Right: Amount & Time */}
-                                        <div className={styles.expenseRight}>
-                                            <span className={styles.amount}>-₹{expense.amount.toFixed(2)}</span>
-                                            <span className={styles.time}>{formatTime(expense.date)}</span>
+                                        <div className={styles.expenseRightSpendee}>
+                                            <span className={styles.amountSpendee}>-₹{expense.amount.toFixed(2)}</span>
+                                            <span className={styles.timeSpendee}>{formatTime(expense.date)}</span>
                                         </div>
                                     </div>
                                 );

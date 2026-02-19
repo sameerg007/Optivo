@@ -1,0 +1,12 @@
+# Node and frontend build artifacts
+node_modules/
+frontend/.next/
+frontend/out/
+frontend/.turbo/
+*.log
+frontend/.env*
+
+# Python/Backend
+backend/mutual-funds-api/venv/
+__pycache__/
+*.pyc
