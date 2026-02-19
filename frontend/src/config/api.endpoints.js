@@ -38,13 +38,6 @@ export const API_ENDPOINTS = {
         GET_SUMMARY: '/expenses/summary'
     },
 
-    // Mutual Funds Endpoints
-    FUNDS: {
-        LIST: '/funds',
-        GET: '/funds/:id',
-        GET_PORTFOLIO: '/funds/portfolio',
-        GET_PERFORMANCE: '/funds/performance'
-    }
 };
 
 export default API_ENDPOINTS;

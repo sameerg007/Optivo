@@ -11,13 +11,6 @@ export const TAB_CONTENT = {
         title: 'Expense Tracker',
         description: 'Track and manage your expenses efficiently.'
     },
-    mutual_funds: {
-        id: 'mutual_funds',
-        label: 'Mutual Funds',
-        icon: '📈',
-        title: 'Mutual Funds',
-        description: 'Monitor and manage your mutual fund investments.'
-    },
     profile: {
         id: 'profile',
         label: 'Profile',

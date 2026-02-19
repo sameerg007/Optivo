@@ -64,12 +64,6 @@ export const DASHBOARD_TABS = {
         icon: '💰',
         route: '/dashboard?tab=expense-tracker'
     },
-    MUTUAL_FUNDS: {
-        id: 'mutual_funds',
-        label: 'Mutual Funds',
-        icon: '📈',
-        route: '/dashboard?tab=mutual-funds'
-    },
     PROFILE: {
         id: 'profile',
         label: 'Profile',

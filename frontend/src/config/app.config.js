@@ -29,7 +29,6 @@ export const APP_CONFIG = {
     // Feature Flags
     FEATURES: {
         EXPENSE_TRACKER: true,
-        MUTUAL_FUNDS: true,
         USER_PROFILE: true,
         ANALYTICS: false,
         NOTIFICATIONS: false

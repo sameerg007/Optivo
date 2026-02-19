@@ -4,7 +4,6 @@ import React, { useMemo } from 'react';
 import styles from './dashboard.module.css';
 import { TAB_CONTENT } from '@/config/dashboard.config';
 import ExpenseTracker from '@/components/features/expense-tracker/ExpenseTracker';
-import MutualFunds from '@/components/features/mutual-funds/MutualFunds';
 import Profile from '@/components/features/profile/Profile';
 
 const TabContent = ({ activeTab }) => {
@@ -25,8 +24,7 @@ const TabContent = ({ activeTab }) => {
         <div className={styles.tabContent}>
             {activeTab === 'expense_tracker' ? (
                 <ExpenseTracker />
-            ) : activeTab === 'mutual_funds' ? (
-                <MutualFunds />
+            ) : null
             ) : activeTab === 'profile' ? (
                 <Profile />
             ) : (
