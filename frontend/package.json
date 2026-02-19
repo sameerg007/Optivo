@@ -7,7 +7,7 @@
     "build": "next build",
     "build:static": "next build && next export",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
