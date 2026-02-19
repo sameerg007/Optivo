@@ -4,9 +4,9 @@
 .expenseTrackerContainer {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 2rem;
   width: 100%;
-  background: transparent;
+  background: #f7f8fa;
   position: relative;
   min-height: 100%;
   padding-bottom: 80px;
@@ -29,26 +29,27 @@
 
 .viewToggle {
   display: inline-flex;
-  background: #1e222d;
-  border: 1px solid #2a2e39;
-  border-radius: 8px;
-  padding: 4px;
+  background: #fff;
+  border: 1.5px solid #e0e7ef;
+  border-radius: 16px;
+  padding: 4px 8px;
   gap: 4px;
+  box-shadow: 0 2px 8px 0 rgba(41,98,255,0.04);
 }
 
 .toggleBtn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   background: transparent;
-  color: #6a6d78;
+  color: #7b7f8a;
   border: none;
-  border-radius: 6px;
-  font-size: 0.8125rem;
-  font-weight: 500;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.18s;
 }
 
 .toggleBtn:hover {
@@ -57,8 +58,9 @@
 }
 
 .toggleBtn.active {
-  background: #2962ff;
-  color: #ffffff;
+  background: linear-gradient(135deg, #FFD700 0%, #FFB300 100%);
+  color: #23243a;
+  box-shadow: 0 2px 8px 0 rgba(255,215,0,0.10);
 }
 
 .toggleIcon {
@@ -69,14 +71,14 @@
 /* Summary Section */
 .summarySection {
   width: 100%;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 /* Main Grid Layout */
 .mainGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
+  gap: 2rem;
   align-items: start;
 }
 
@@ -84,14 +86,14 @@
 .chartsSection {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 2rem;
 }
 
 /* Transactions Section (Right) */
 .transactionsSection {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 2rem;
 }
 
 /* Top Section - Summary Cards */
@@ -172,30 +174,31 @@
 
 /* Add Expense Button - Floating Action Button (FAB) */
 .addExpenseButton {
-  width: 40px;
-  height: 40px;
-  background: #2962ff;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.25rem;
-  font-weight: 400;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #FFD700 0%, #FFB300 100%);
+  color: #23243a;
+  border: 2px solid #FFD700;
+  border-radius: 50%;
+  font-size: 2rem;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(41, 98, 255, 0.35), 0 1px 3px rgba(0, 0, 0, 0.15);
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.25), 0 2px 8px rgba(41, 98, 255, 0.10);
+  transition: all 0.2s cubic-bezier(.4,2,.3,1);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .addExpenseButton:hover {
-  background: #1e53e4;
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(41, 98, 255, 0.45), 0 2px 6px rgba(0, 0, 0, 0.2);
+  background: #FFD700;
+  color: #1A1B2F;
+  transform: scale(1.08);
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.30), 0 4px 16px rgba(41, 98, 255, 0.12);
 }
 
 .addExpenseButton:active {
-  transform: scale(0.98);
+  transform: scale(0.96);
 }
 
 .plusIcon {

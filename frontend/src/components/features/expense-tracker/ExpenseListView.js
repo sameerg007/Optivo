@@ -43,7 +43,7 @@ export default function ExpenseListView({ expenses, categories, onExpenseClick }
                 <span className={styles.count}>{expenses.length} transactions</span>
             </div>
 
-            {/* Expense Stack */}
+            {/* Expense Stack - Spendee style */}
             <div className={styles.expenseStack}>
                 {groupedByDate.map((group, groupIndex) => (
                     <div key={group.label} className={styles.dateGroup}>
@@ -53,8 +53,8 @@ export default function ExpenseListView({ expenses, categories, onExpenseClick }
                             <span className={styles.dateTotal}>₹{group.total.toFixed(2)}</span>
                         </div>
 
-                        {/* Expenses for this date */}
-                        <div className={styles.expenseList}>
+                        {/* Expenses for this date - Spendee style */}
+                        <div className={styles.expenseListSpendee}>
                             {group.expenses.map((expense, index) => {
                                 const category = categories[expense.category] || {
                                     name: expense.category,
@@ -102,9 +102,9 @@ export default function ExpenseListView({ expenses, categories, onExpenseClick }
                     </div>
                 ))}
 
-                {/* Empty State */}
+                {/* Empty State - Spendee style */}
                 {expenses.length === 0 && (
-                    <div className={styles.emptyState}>
+                    <div className={styles.emptyStateSpendee}>
                         <span className={styles.emptyIcon}>📭</span>
                         <p>No expenses yet</p>
                         <span className={styles.emptyHint}>Add your first expense to get started</span>

@@ -24,7 +24,6 @@ const TabContent = ({ activeTab }) => {
         <div className={styles.tabContent}>
             {activeTab === 'expense_tracker' ? (
                 <ExpenseTracker />
-            ) : null
             ) : activeTab === 'profile' ? (
                 <Profile />
             ) : (

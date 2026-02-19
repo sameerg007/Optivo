@@ -3,8 +3,9 @@
 /* Main Summary Card */
 .summaryCard {
   position: relative;
-  background: linear-gradient(135deg, #1e222d 0%, #262932 100%);
-  border: 1px solid #2a2e39;
+    background: var(--color-premium-bg, linear-gradient(135deg, #23243a 0%, #1A1B2F 100%));
+    border: 1.5px solid var(--color-premium-gold, #FFD700);
+    box-shadow: var(--color-premium-shadow, 0 4px 24px rgba(41, 98, 255, 0.10), 0 1.5px 8px rgba(255, 215, 0, 0.10));
   border-radius: 12px;
   padding: 1.5rem;
   overflow: hidden;
@@ -16,7 +17,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(41, 98, 255, 0.08) 0%, rgba(41, 98, 255, 0.02) 100%);
+    background: var(--color-premium-gradient, linear-gradient(135deg, #FFD70022 0%, #BFA43A11 100%));
   pointer-events: none;
 }
 
@@ -44,8 +45,8 @@
 .percentage {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #2962ff;
-  background: rgba(41, 98, 255, 0.12);
+    color: var(--color-premium-gold, #FFD700);
+    background: rgba(255, 215, 0, 0.12);
   padding: 0.25rem 0.625rem;
   border-radius: 4px;
 }
@@ -66,7 +67,8 @@
 .amount {
   font-size: 2rem;
   font-weight: 700;
-  color: #d1d4dc;
+    color: var(--color-premium-gold, #FFD700);
+    text-shadow: 0 1px 8px rgba(255, 215, 0, 0.10);
   margin: 0;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
@@ -96,22 +98,22 @@
 .statValue {
   font-size: 1rem;
   font-weight: 600;
-  color: #d1d4dc;
+    color: var(--color-premium-gold-dark, #BFA43A);
   margin: 0;
   font-variant-numeric: tabular-nums;
 }
 
 .statValue.positive {
-  color: #26a69a;
+  color: #26a69a; /* No change */
 }
 
 .statValue.negative {
-  color: #ef5350;
+  color: #ef5350; /* No change */
 }
 
 .divider {
   width: 1px;
-  background: #2a2e39;
+    background: var(--color-premium-gold-dark, #BFA43A);
 }
 
 /* Legacy card styles */

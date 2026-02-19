@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 const defaultCategories = [
   { name: 'Food', icon: '🍔', color: '#FF6B6B' },
@@ -10,8 +11,16 @@ const defaultCategories = [
   { name: 'Other', icon: '📌', color: '#9D84B7' }
 ];
 
-export const useCategoryStore = create((set) => ({
-  categories: defaultCategories,
-  addCategory: (cat) => set((state) => ({ categories: [...state.categories, cat] })),
-  resetCategories: () => set({ categories: defaultCategories })
-}));
+export const useCategoryStore = create(
+  persist(
+    (set) => ({
+      categories: defaultCategories,
+      addCategory: (cat) => set((state) => ({ categories: [...state.categories, cat] })),
+      resetCategories: () => set({ categories: defaultCategories })
+    }),
+    {
+      name: 'categories-store',
+      partialize: (state) => ({ categories: state.categories })
+    }
+  )
+);
