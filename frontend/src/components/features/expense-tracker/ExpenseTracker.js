@@ -12,11 +12,7 @@ import AddExpenseModal from './AddExpenseModal';
 import ExpenseListView from './ExpenseListView';
 import { EXPENSE_DATA } from './config';
 
-// View types
-const VIEWS = {
-    DASHBOARD: 'dashboard',
-    LIST: 'list',
-};
+
 
 
 export default function ExpenseTracker() {
@@ -24,7 +20,7 @@ export default function ExpenseTracker() {
     const [expenses, setExpenses] = useState(EXPENSE_DATA);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [activeView, setActiveView] = useState(VIEWS.DASHBOARD);
+
 
     // Calculate summary metrics
     const summary = useMemo(() => {
@@ -87,95 +83,14 @@ export default function ExpenseTracker() {
         // Can be extended to show expense details modal
     }, []);
 
+
     return (
         <div className={styles.expenseTrackerContainer}>
-            {/* View Toggle */}
-            <div className={styles.viewToggleWrapper}>
-                <div className={styles.viewToggle}>
-                    <button
-                        className={`${styles.toggleBtn} ${activeView === VIEWS.DASHBOARD ? styles.active : ''}`}
-                        onClick={() => setActiveView(VIEWS.DASHBOARD)}
-                    >
-                        <svg className={styles.toggleIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <rect x="3" y="3" width="7" height="7" rx="1" />
-                            <rect x="14" y="3" width="7" height="7" rx="1" />
-                            <rect x="3" y="14" width="7" height="7" rx="1" />
-                            <rect x="14" y="14" width="7" height="7" rx="1" />
-                        </svg>
-                        Dashboard
-                    </button>
-                    <button
-                        className={`${styles.toggleBtn} ${activeView === VIEWS.LIST ? styles.active : ''}`}
-                        onClick={() => setActiveView(VIEWS.LIST)}
-                    >
-                        <svg className={styles.toggleIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <line x1="8" y1="6" x2="21" y2="6" />
-                            <line x1="8" y1="12" x2="21" y2="12" />
-                            <line x1="8" y1="18" x2="21" y2="18" />
-                            <circle cx="4" cy="6" r="1.5" fill="currentColor" />
-                            <circle cx="4" cy="12" r="1.5" fill="currentColor" />
-                            <circle cx="4" cy="18" r="1.5" fill="currentColor" />
-                        </svg>
-                        List
-                    </button>
-                </div>
-            </div>
-
-            {/* Dashboard View */}
-            {activeView === VIEWS.DASHBOARD && (
-                <>
-                    {/* Summary Card */}
-                    <div className={styles.summarySection}>
-                        <SummaryCard
-                            totalSpent={summary.totalSpent}
-                            monthlyBudget={summary.monthlyBudget}
-                            remaining={summary.remaining}
-                        />
-                    </div>
-
-                    {/* Main Content Grid */}
-                    <div className={styles.mainGrid}>
-                        {/* Left Section - Charts */}
-                        <div className={styles.chartsSection}>
-                            {/* Budget Status */}
-                            <BudgetStatus
-                                spent={parseFloat(summary.totalSpent)}
-                                budget={summary.monthlyBudget}
-                                percentage={summary.spentPercentage}
-                            />
-
-                            {/* Category Breakdown */}
-                            <CategoryBreakdown
-                                expenses={expenses}
-                                onCategorySelect={handleCategorySelect}
-                                selectedCategory={selectedCategory}
-                                categories={Object.fromEntries(categories.map(cat => [cat.name.toLowerCase(), cat]))}
-                            />
-
-                            {/* Spending Trend Line Graph */}
-                            <SpendingTrend expenses={expenses} categories={Object.fromEntries(categories.map(cat => [cat.name.toLowerCase(), cat]))} />
-                        </div>
-
-                        {/* Right Section - Transactions */}
-                        <div className={styles.transactionsSection}>
-                            <RecentTransactions
-                                transactions={filteredTransactions}
-                                selectedCategory={selectedCategory}
-                                categories={Object.fromEntries(categories.map(cat => [cat.name.toLowerCase(), cat]))}
-                            />
-                        </div>
-                    </div>
-                </>
-            )}
-
-            {/* List View */}
-            {activeView === VIEWS.LIST && (
-                <ExpenseListView
-                    expenses={expenses}
-                    categories={Object.fromEntries(categories.map(cat => [cat.name.toLowerCase(), cat]))}
-                    onExpenseClick={handleExpenseClick}
-                />
-            )}
+            <ExpenseListView
+                expenses={expenses}
+                categories={Object.fromEntries(categories.map(cat => [cat.name.toLowerCase(), cat]))}
+                onExpenseClick={handleExpenseClick}
+            />
 
             {/* Add Expense Button */}
             <button 
