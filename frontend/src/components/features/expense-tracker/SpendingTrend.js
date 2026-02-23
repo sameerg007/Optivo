@@ -23,17 +23,17 @@ export default function SpendingTrend({ expenses = [], categories = {} }) {
     const [chartView, setChartView] = useState(CHART_VIEWS.LINE);
     // Process expenses to get daily totals for the line chart
     const trendData = useMemo(() => {
-        if (!expenses || expenses.length === 0) return [];
+        if (!expenses?.length) return [];
 
         // Group expenses by date
         const dailyTotals = {};
         
-        expenses.forEach((exp) => {
-            const date = exp.date;
+        expenses?.forEach((exp) => {
+            const date = exp?.date;
             if (!dailyTotals[date]) {
                 dailyTotals[date] = 0;
             }
-            dailyTotals[date] += exp.amount;
+            dailyTotals[date] += exp?.amount ?? 0;
         });
 
         // Convert to array and sort by date
@@ -41,7 +41,7 @@ export default function SpendingTrend({ expenses = [], categories = {} }) {
             .map(([date, amount]) => ({
                 date: formatDate(date),
                 rawDate: date,
-                amount: parseFloat(amount.toFixed(2))
+                amount: parseFloat(amount?.toFixed(2))
             }))
             .sort((a, b) => new Date(a.rawDate) - new Date(b.rawDate));
 
@@ -82,21 +82,21 @@ export default function SpendingTrend({ expenses = [], categories = {} }) {
 
     // Process expenses for pie chart (by category)
     const pieData = useMemo(() => {
-        if (!expenses || expenses.length === 0) return [];
+        if (!expenses?.length) return [];
 
         const categoryTotals = {};
-        expenses.forEach((exp) => {
-            if (!categoryTotals[exp.category]) {
-                categoryTotals[exp.category] = 0;
+        expenses?.forEach((exp) => {
+            if (!categoryTotals[exp?.category]) {
+                categoryTotals[exp?.category] = 0;
             }
-            categoryTotals[exp.category] += exp.amount;
+            categoryTotals[exp?.category] += exp?.amount ?? 0;
         });
 
         return Object.entries(categoryTotals)
             .map(([category, amount]) => ({
-                category: categories[category]?.name || category,
-                amount: parseFloat(amount.toFixed(2)),
-                color: categories[category]?.color || '#64748b'
+                category: categories?.[category]?.name || category,
+                amount: parseFloat(amount?.toFixed(2)),
+                color: categories?.[category]?.color || '#64748b'
             }))
             .sort((a, b) => b.amount - a.amount);
     }, [expenses, categories]);
@@ -205,9 +205,9 @@ export default function SpendingTrend({ expenses = [], categories = {} }) {
 
             <div className={styles.trendSummary}>
                 <span className={styles.summaryText}>{trendInfo.text}</span>
-                {trendData.length > 0 && (
+                {trendData?.length > 0 && (
                     <span className={styles.totalText}>
-                        Total: ₹{trendData.reduce((sum, d) => sum + d.amount, 0).toLocaleString('en-IN', { maximumFractionDigits: 0 })}
+                        Total: ₹{trendData?.reduce((sum, d) => sum + (d?.amount ?? 0), 0)?.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
                     </span>
                 )}
             </div>

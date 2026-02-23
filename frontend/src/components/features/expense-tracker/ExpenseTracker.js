@@ -24,15 +24,15 @@ export default function ExpenseTracker() {
 
     // Calculate summary metrics
     const summary = useMemo(() => {
-        const totalSpent = expenses.reduce((sum, exp) => sum + exp.amount, 0);
+        const totalSpent = expenses?.reduce((sum, exp) => sum + (exp?.amount ?? 0), 0);
         const monthlyBudget = 5000;
         const remaining = monthlyBudget - totalSpent;
         const spentPercentage = (totalSpent / monthlyBudget) * 100;
 
         return {
-            totalSpent: totalSpent.toFixed(2),
+            totalSpent: totalSpent?.toFixed(2),
             monthlyBudget,
-            remaining: remaining.toFixed(2),
+            remaining: remaining?.toFixed(2),
             spentPercentage: Math.min(spentPercentage, 100)
         };
     }, [expenses]);
@@ -40,11 +40,11 @@ export default function ExpenseTracker() {
     // Group expenses by category
     const expensesByCategory = useMemo(() => {
         const grouped = {};
-        expenses.forEach((exp) => {
-            if (!grouped[exp.category]) {
-                grouped[exp.category] = [];
+        expenses?.forEach((exp) => {
+            if (!grouped[exp?.category]) {
+                grouped[exp?.category] = [];
             }
-            grouped[exp.category].push(exp);
+            grouped[exp?.category].push(exp);
         });
         return grouped;
     }, [expenses]);
@@ -52,9 +52,9 @@ export default function ExpenseTracker() {
     // Get filtered transactions
     const filteredTransactions = useMemo(() => {
         if (!selectedCategory) {
-            return expenses.slice(0, 8); // Show last 8 transactions
+            return expenses?.slice(0, 8) ?? []; // Show last 8 transactions
         }
-        return expensesByCategory[selectedCategory] || [];
+        return expensesByCategory?.[selectedCategory] ?? [];
     }, [expenses, selectedCategory, expensesByCategory]);
 
     // Handle add expense
@@ -88,7 +88,7 @@ export default function ExpenseTracker() {
         <div className={styles.expenseTrackerContainer}>
             <ExpenseListView
                 expenses={expenses}
-                categories={Object.fromEntries(categories.map(cat => [cat.name.toLowerCase(), cat]))}
+                categories={Object.fromEntries(categories?.map(cat => [cat?.name?.toLowerCase?.(), cat]) ?? [])}
                 onExpenseClick={handleExpenseClick}
             />
 
