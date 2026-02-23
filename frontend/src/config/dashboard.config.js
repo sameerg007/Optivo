@@ -3,6 +3,7 @@
  * Centralized configuration for dashboard tabs and settings
  */
 
+
 export const TAB_CONTENT = {
     expense_tracker: {
         id: 'expense_tracker',
@@ -10,17 +11,10 @@ export const TAB_CONTENT = {
         icon: '💰',
         title: 'Expense Tracker',
         description: 'Track and manage your expenses efficiently.'
-    },
-    profile: {
-        id: 'profile',
-        label: 'Profile',
-        icon: '👤',
-        title: 'Profile',
-        description: 'Manage your profile and account settings.'
     }
 };
 
-export const TABS = Object.values(TAB_CONTENT);
+export const TABS = [TAB_CONTENT.expense_tracker];
 
 export const DEFAULT_ACTIVE_TAB = 'expense_tracker';
 

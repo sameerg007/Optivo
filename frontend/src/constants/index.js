@@ -62,13 +62,7 @@ export const DASHBOARD_TABS = {
         id: 'expense_tracker',
         label: 'Expense Tracker',
         icon: '💰',
-        route: '/dashboard?tab=expense-tracker'
-    },
-    PROFILE: {
-        id: 'profile',
-        label: 'Profile',
-        icon: '👤',
-        route: '/dashboard?tab=profile'
+        route: '/dashboard'
     }
 };
 
@@ -117,7 +111,6 @@ export const ROUTES = {
     SIGNUP: '/signup',
     FORGOT_PASSWORD: '/forgot-password',
     DASHBOARD: '/dashboard',
-    SETTINGS: '/settings',
     NOT_FOUND: '/404'
 };
 
